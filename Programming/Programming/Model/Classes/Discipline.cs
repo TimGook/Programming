@@ -8,11 +8,44 @@ namespace Programming.Model.Classes
 {
     class Discipline
     {
-        private string _name;
-        private int _totalNumberHours;
-        private string _grade;
-        private string _examDate;
-        private string _teacherName;
+        private static int TotalHoursPerTerm = 1320;
 
+        //Целочисленное поле часы
+        private int _hours;
+
+        public string Subject { get; set; }
+
+        public string Mark { get; set; }
+
+        public int Hours
+        {
+            get
+            {
+                return _hours;
+            }
+            set
+            {
+                if (!Validator.AssertValueInRange(value, 0, TotalHoursPerTerm))
+                {
+                    throw new ArgumentException("Неправильно указано количестов часов");
+                }
+
+                _hours = value;
+            }
+        }
+
+        //Конструктор
+        public Discipline(string subject, string mark, int hours)
+        {
+            Subject = subject;
+            Mark = mark;
+            Hours = hours;
+        }
+
+        //Конструктор без полей
+        public Discipline()
+        {
+
+        }
     }
 }

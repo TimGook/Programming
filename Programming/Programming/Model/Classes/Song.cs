@@ -8,9 +8,39 @@ namespace Programming.Model.Classes
 {
     class Song
     {
-        private string _name;
-        private string _autor;
-        private int _runnungTimeInSeconds;
-        private int _releaseDate;
+        private int _runTimeInSeconds;
+
+        public string Name { get; set; }
+
+        public string Group { get; set; }
+
+        public int RunTimeInSeconds
+        {
+            get
+            {
+                return _runTimeInSeconds;
+            }
+            set
+            {
+                if (!Validator.AssertOnPositiveValue(value))
+                {
+                    throw new ArgumentException("неправильно введёно время песни");
+                }
+                _runTimeInSeconds = value;
+            }
+        }
+
+        //Конструкторы
+        public Song(string name, string group, int runTimeInSeconds)
+        {
+            Name = name;
+            Group = group;
+            RunTimeInSeconds = runTimeInSeconds;
+        }
+
+        public Song()
+        {
+
+        }
     }
 }
