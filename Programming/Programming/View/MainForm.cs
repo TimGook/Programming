@@ -267,7 +267,7 @@ namespace Programming
                 if (Enum.IsDefined(typeof(Genre), value))
                 {
                     FilmGenreTextBox.BackColor = System.Drawing.Color.White;
-                    _currentRectangle.Color = value;
+                    _currentFilm.Genre = value;
                 }
                 else
                 {
