@@ -8,9 +8,9 @@ namespace Programming.Model.Classes
 {
     class Time
     {
-        private static int MaxHours = 24;
-        private static int MaxMinutes = 60;
-        private static int MaxSeconds = 60;
+        private const int MaxHours = 23;
+        private const int MaxMinutes = 59;
+        private const int MaxSeconds = 59;
 
         // Часы от 0 до 23
         private int _hours;
@@ -29,10 +29,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (!Validator.AssertValueInRange(value, 0, MaxHours))
-                {
-                    throw new Exception("Неправильно введены часы!");
-                }
+                Validator.AssertValueInRange(value, 0, MaxHours);
                 _hours = value;
             }
         }
@@ -45,10 +42,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (!Validator.AssertValueInRange(value, 0, MaxMinutes))
-                {
-                    throw new Exception("Неправильно введены минуты!");
-                }
+                Validator.AssertValueInRange(value, 0, MaxMinutes);
                 _minutes = value;
             }
         }
@@ -61,10 +55,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (!Validator.AssertValueInRange(value, 0, MaxSeconds))
-                {
-                    throw new Exception("Неправильно введены секунды!");
-                }
+                Validator.AssertValueInRange(value, 0, MaxSeconds);
                 _seconds = value;
             }
         }

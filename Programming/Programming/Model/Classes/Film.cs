@@ -8,13 +8,13 @@ namespace Programming.Model.Classes
 {
     internal class Film
     {
-        private static int DateFrom = 1900;
-        private static int DateTo = 2024;
+        private const int DateFrom = 1900;
+        private const int DateTo = 2023;
 
-        private static double RatingFrom = 0.0;
-        private static double RatingTo = 10.0;
+        private const double RatingFrom = 0.0;
+        private const double RatingTo = 10.0;
 
-        private static int MaxRunTimeInMinutes = 51420;
+        private const int MaxRunTimeInMinutes = 51420;
 
         // Рейтинг от 0 до 10
         private double _rating;
@@ -39,10 +39,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (!Validator.AssertValueInRange(value, DateFrom, DateTo))
-                {
-                    throw new ArgumentException("Неправильно введён год фильма!");
-                }
+                Validator.AssertValueInRange(value, DateFrom, DateTo);                
                 _releaseDate = value;
             }
         }
@@ -55,10 +52,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (!Validator.AssertValueInRange(value, 0, MaxRunTimeInMinutes))
-                {
-                    throw new ArgumentException("Длительность фильма не может быть меньше нуля.");
-                }
+                Validator.AssertValueInRange(value, 0, MaxRunTimeInMinutes);
                 _runTimeInMinutes = value;
             }
         }
@@ -71,11 +65,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (!Validator.AssertValueInRange(value, RatingFrom, RatingTo))
-                {
-                    throw new ArgumentException();
-                }
-
+                Validator.AssertValueInRange(value, RatingFrom, RatingTo);
                 _rating = value;
             }
         }

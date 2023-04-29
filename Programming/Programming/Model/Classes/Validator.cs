@@ -41,37 +41,39 @@ namespace Programming.Model.Classes
         }
 
         //Статический метод проверки на положительность числа (int32)
-        public static bool AssertOnPositiveValue(int value)
+        public static void AssertOnPositiveValue(int value)
         {
-            return value > 0;
+            if (value < 0)
+            {
+                throw new ArgumentException("Значение должно быть положительным");
+            }
         }
         
         //Статический метод проверки на положительность числа (double)
-        public static bool AssertOnPositiveValue(double value)
+        public static void AssertOnPositiveValue(double value)
         {
-            return value > 0;
+            if (value < 0)
+            {
+                throw new ArgumentException("Значение должно быть положительным");
+            }
         }
-
+        
         //Статический метод проверки на дапазон
-        public static bool AssertValueInRange(int value, int min, int max)
+        public static void AssertValueInRange(int value, int min, int max)
         {
-            if ((value < min) || (value > max))
+            if ((value <= min) || (value >= max))
             {
                 throw new ArgumentException("Число не входит в заданный диапазон.");
             }
-            // RSDN
-            return (min < value) && (max > value);
         }
 
         //Статический метод проверки на дапазон
-        public static bool AssertValueInRange(double value, double min, double max)
+        public static void AssertValueInRange(double value, double min, double max)
         {
-            if ((value < min) || (value > max))
+            if ((value <= min) || (value >= max))
             {
                 throw new ArgumentException("Число не входит в заданный диапазон.");
             }
-            // RSDN
-            return (min < value) && (max > value);
         }
 
         //Статический метод проверки на правильность ввода оценки
@@ -90,21 +92,5 @@ namespace Programming.Model.Classes
 
             return MarkIsCorrect;
         }
-
-        private bool AssertStringContainsOnlyLetters(string value)
-        {
-            bool isValid = true;
-            foreach (char c in value)
-            {
-                if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z'))
-                {
-                    isValid = false;
-                    break;
-                }
-            }
-
-            return isValid;
-        }
-
     }
 }

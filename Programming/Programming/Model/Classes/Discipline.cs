@@ -8,7 +8,7 @@ namespace Programming.Model.Classes
 {
     class Discipline
     {
-        private static int TotalHoursPerTerm = 1320;
+        private const int TotalHoursPerTerm = 1320;
 
         //Целочисленное поле часы
         private int _hours;
@@ -25,11 +25,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (!Validator.AssertValueInRange(value, 0, TotalHoursPerTerm))
-                {
-                    throw new ArgumentException("Неправильно указано количестов часов");
-                }
-
+                Validator.AssertValueInRange(value, 0, TotalHoursPerTerm);
                 _hours = value;
             }
         }

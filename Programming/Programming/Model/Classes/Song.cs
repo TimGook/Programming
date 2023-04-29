@@ -22,10 +22,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (!Validator.AssertOnPositiveValue(value))
-                {
-                    throw new ArgumentException("неправильно введёно время песни");
-                }
+                Validator.AssertOnPositiveValue(value);
                 _runTimeInSeconds = value;
             }
         }

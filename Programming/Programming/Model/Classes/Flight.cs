@@ -8,7 +8,8 @@ namespace Programming.Model.Classes
 {
     class Flight
     {
-        private static int MaxFlightTimeInMinutes;
+        private const int MaxFlightTimeInMinutes = 4000;
+
         // Целочисленное поле времени полёта
         private int _flightTime;
 
@@ -26,10 +27,7 @@ namespace Programming.Model.Classes
             }
             set
             {
-                if (!Validator.AssertValueInRange(value, 0, MaxFlightTimeInMinutes))
-                {
-                    throw new Exception("Неправильно введено время полёта!");
-                }
+                Validator.AssertValueInRange(value, 0, MaxFlightTimeInMinutes);
                 _flightTime = value;
             }
         }
