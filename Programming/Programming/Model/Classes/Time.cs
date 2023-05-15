@@ -6,21 +6,44 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Classes
 {
+    /// <summary>
+    /// Содержит информацию о времени на часах.
+    /// </summary>
     class Time
     {
-        private const int MaxHours = 23;
-        private const int MaxMinutes = 59;
-        private const int MaxSeconds = 59;
+        /// <summary>
+        /// Максимальное количестов часов.
+        /// </summary>
+        private const int MaxHours = 24;
 
-        // Часы от 0 до 23
+        /// <summary>
+        /// Максимальное количество минут.
+        /// </summary>
+        private const int MaxMinutes = 60;
+
+        /// <summary>
+        /// Максимальное количество секунд.
+        /// </summary>
+        private const int MaxSeconds = 60;
+
+        /// <summary>
+        /// Количестов часов.
+        /// </summary>
         private int _hours;
 
-        // Минуты от 0 до 59
+        /// <summary>
+        /// Количестов минут.
+        /// </summary>
         private int _minutes;
 
-        //Секунды от 0 до 59
+        /// <summary>
+        /// Количестов секунд.
+        /// </summary>
         private int _seconds;
 
+        /// <summary>
+        /// Задаёт и возвращает количество часов. Должно быть больше 0 и меньше 24.
+        /// </summary>
         public int Hours
         {
             get
@@ -34,6 +57,9 @@ namespace Programming.Model.Classes
             }
         }
 
+        /// <summary>
+        /// Задаёт и возвращает количество минут. Должно быть больше 0 и меньше 60.
+        /// </summary>
         public int Minutes
         {
             get
@@ -47,6 +73,9 @@ namespace Programming.Model.Classes
             }
         }
 
+        /// <summary>
+        /// Задаёт и возвращает количество секунд. Должно быть больше 0 и меньше 60.
+        /// </summary>
         public int Seconds
         {
             get
@@ -60,8 +89,12 @@ namespace Programming.Model.Classes
             }
         }
 
-        //Конструкторы. Перегрузка в зависимости от введённых данных
-
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Time"/>.
+        /// </summary>
+        /// <param name="seconds"> Количество секунд. Должно быть больше 0 и меньше 60. </param>
+        /// <param name="minutes"> Количество минут. Должно быть больше 0 и меньше 60.</param>
+        /// <param name="hours"> Количество часов. Должно быть больше 0 и меньше 24.</param>
         public Time(int seconds, int minutes, int hours)
         {
             Seconds = seconds;
@@ -69,6 +102,9 @@ namespace Programming.Model.Classes
             Hours = hours;
         }
 
+        /// <summary>
+        /// Создаёт пустой экземпляр класса <see cref="Time"/>.
+        /// </summary>
         public Time()
         {
 

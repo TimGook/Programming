@@ -6,12 +6,24 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Enums
 {
+    /// <summary>
+    /// Перечисление, описывающее формы обувения.
+    /// </summary>
     public enum EducationForm
     {
-        DistantLearning,
-        Correspondence,
-        ExtramuralStudies,
-        RartTimeCourses,
-        FullTimeCourses
+        /// <summary>
+        /// Очная форма обучения.
+        /// </summary>
+        Formal,
+
+        /// <summary>
+        /// Заочная форма обучения.
+        /// </summary>
+        Informal,
+
+        /// <summary>
+        /// Дистанционная форма обучения.
+        /// </summary>
+        Nonformal
     }
 }

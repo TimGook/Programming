@@ -6,19 +6,34 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Classes
 {
+    /// <summary>
+    /// Содержит информацию о рейсе.
+    /// </summary>
     class Flight
     {
+        /// <summary>
+        /// Максимальное время полёта в минутах.
+        /// </summary>
         private const int MaxFlightTimeInMinutes = 4000;
 
-        // Целочисленное поле времени полёта
+        /// <summary>
+        /// Время полёта в минутах.
+        /// </summary>
         private int _flightTime;
 
-        // Автосвойство поле Пункт вылета
+        /// <summary>
+        /// Пункт вылета.
+        /// </summary>
         public string Departure { get; set; }
 
-        // Автосвойство поле Пункт назначения
+        /// <summary>
+        /// Пункт назначения.
+        /// </summary>
         public string Destination { get; set; }
 
+        /// <summary>
+        /// Задаёт и возвращает время полёта в минутах. Должно быть больше 0 и меньше 4000.
+        /// </summary>
         public int FightTime
         {
             get
@@ -32,7 +47,12 @@ namespace Programming.Model.Classes
             }
         }
 
-        //Конструкторы
+        /// <summary>
+        /// Создаёт экземпляр класса <see cref="Flight"/>.
+        /// </summary>
+        /// <param name="departure"> Пункт вылета. </param>
+        /// <param name="destination"> Пункт назначения. </param>
+        /// <param name="flightTime"> Время полёта в минутах. </param>
         public Flight(string departure, string destination, int flightTime)
         {
             Departure = departure;
@@ -40,6 +60,9 @@ namespace Programming.Model.Classes
             FightTime = flightTime;
         }
 
+        /// <summary>
+        /// Создаёт пустой экземпляр класса <see cref="Flight"/>.
+        /// </summary>
         public Flight()
         {
 

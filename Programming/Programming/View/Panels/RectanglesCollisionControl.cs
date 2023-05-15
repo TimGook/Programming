@@ -10,16 +10,32 @@ using System.Windows.Forms;
 using Programming.Model.Classes;
 using Programming.Model.Classes.Geometry;
 using Rectangle = Programming.Model.Classes.Rectangle;
-using Color = Programming.Model.Enums.Color;
 
 namespace Programming.View.Panels
 {
+    /// <summary>
+    /// Control, содержаший информацию о прямоугольниках и отображающий их на Panel.
+    /// </summary>
     public partial class RectanglesCollisionControl : UserControl
     {
+        /// <summary>
+        /// Список экземпляров класса <see cref="Rectangle"/>.
+        /// </summary>
         private List<Rectangle> _rectanglesList = new List<Rectangle>();
+
+        /// <summary>
+        /// Выбранный экземпляр класса <see cref="Rectangle"/>.
+        /// </summary>
         private Rectangle _currentDrawnRectangle = new Rectangle();
 
+        /// <summary>
+        /// Координаты центра прямоугольника.
+        /// </summary>
         private Point2D _point2D = new Point2D();
+
+        /// <summary>
+        /// Список прямоугольников на Panel.
+        /// </summary>
         private List<Panel> _rectanglePanels = new List<Panel>();
 
 
@@ -27,7 +43,6 @@ namespace Programming.View.Panels
         {
             InitializeComponent();
         }
-
 
         private void AddRectangleButton_Click(object sender, EventArgs e)
         {
@@ -37,8 +52,7 @@ namespace Programming.View.Panels
             var width = random.Next(100, 150);
             var pointX = random.Next(15, 300);
             var pointY = random.Next(15, 300);
-            //_point2D = new Point2D(pointX, pointY);
-
+   
             _currentDrawnRectangle = RectangleFactory.Randomize(width, length);
             _rectanglesList.Add(_currentDrawnRectangle);
             DrawnRectanglesListBox.Items.Add($"{_currentDrawnRectangle.Id}: (X= {_currentDrawnRectangle.Center.X}; " +
@@ -49,7 +63,7 @@ namespace Programming.View.Panels
             int intWidth = Convert.ToInt32(_currentDrawnRectangle.Width);
             currentRectanglePanel.Location = new Point(pointX, pointY);
             currentRectanglePanel.Size = new Size(intWidth, intLength);
-            currentRectanglePanel.BackColor = System.Drawing.Color.FromArgb(127, 127, 255, 127);
+            currentRectanglePanel.BackColor = AppColors.LightGreen;
             currentRectanglePanel.BorderStyle = BorderStyle.FixedSingle;
             RectanglesPanel.Controls.Add(currentRectanglePanel);
             _rectanglePanels.Add(currentRectanglePanel);
@@ -81,8 +95,8 @@ namespace Programming.View.Panels
 
 
                 DrawnRectangleIdTextBox.Text = _currentDrawnRectangle.Id.ToString();
-                DrawnRectangleXTextBox.Text = _currentDrawnRectangle.Center.X.ToString();
-                DrawnRectangleYTextBox.Text = _currentDrawnRectangle.Center.Y.ToString();
+                DrawnRectangleXTextBox.Text = (_currentDrawnRectangle.Center.X.ToString());
+                DrawnRectangleYTextBox.Text = (_currentDrawnRectangle.Center.Y.ToString());
                 DrawnRectangleWidthTextBox.Text = _currentDrawnRectangle.Width.ToString();
                 DrawnRectangleLengthTextBox.Text = _currentDrawnRectangle.Length.ToString();
             }
@@ -93,6 +107,9 @@ namespace Programming.View.Panels
             }
         }
 
+        /// <summary>
+        /// Очищает все элементы TextBox и меняет их фоны на белый.
+        /// </summary>
         private void ClearRectangleInfo()
         {
             DrawnRectangleIdTextBox.Clear();
@@ -101,11 +118,11 @@ namespace Programming.View.Panels
             DrawnRectangleWidthTextBox.Clear();
             DrawnRectangleLengthTextBox.Clear();
 
-            DrawnRectangleIdTextBox.BackColor = System.Drawing.Color.White;
-            DrawnRectangleXTextBox.BackColor = System.Drawing.Color.White;
-            DrawnRectangleYTextBox.BackColor = System.Drawing.Color.White;
-            DrawnRectangleWidthTextBox.BackColor = System.Drawing.Color.White;
-            DrawnRectangleLengthTextBox.BackColor = System.Drawing.Color.White;
+            DrawnRectangleIdTextBox.BackColor = AppColors.White;
+            DrawnRectangleXTextBox.BackColor = AppColors.White;
+            DrawnRectangleYTextBox.BackColor = AppColors.White;
+            DrawnRectangleWidthTextBox.BackColor = AppColors.White;
+            DrawnRectangleLengthTextBox.BackColor = AppColors.White;
         }
 
         private void DrawnRectangleXTextBox_TextChanged(object sender, EventArgs e)
@@ -129,11 +146,11 @@ namespace Programming.View.Panels
             }
             catch (ArgumentException)
             {
-                DrawnRectangleXTextBox.BackColor = System.Drawing.Color.LightPink;
+                DrawnRectangleXTextBox.BackColor = AppColors.LightPink;
             }
             catch (FormatException)
             {
-                DrawnRectangleXTextBox.BackColor = System.Drawing.Color.LightPink;
+                DrawnRectangleXTextBox.BackColor = AppColors.LightPink;
             }
 
             FindCollisions();
@@ -160,11 +177,11 @@ namespace Programming.View.Panels
             }
             catch (ArgumentException)
             {
-                DrawnRectangleYTextBox.BackColor = System.Drawing.Color.LightPink;
+                DrawnRectangleYTextBox.BackColor = AppColors.LightPink;
             }
             catch (FormatException)
             {
-                DrawnRectangleYTextBox.BackColor = System.Drawing.Color.LightPink;
+                DrawnRectangleYTextBox.BackColor = AppColors.LightPink;
             }
 
             FindCollisions();
@@ -191,11 +208,11 @@ namespace Programming.View.Panels
             }
             catch (ArgumentException)
             {
-                DrawnRectangleWidthTextBox.BackColor = System.Drawing.Color.LightPink;
+                DrawnRectangleWidthTextBox.BackColor = AppColors.LightPink;
             }
             catch (FormatException)
             {
-                DrawnRectangleYTextBox.BackColor = System.Drawing.Color.LightPink;
+                DrawnRectangleYTextBox.BackColor = AppColors.LightPink;
             }
 
             FindCollisions();
@@ -222,23 +239,26 @@ namespace Programming.View.Panels
             }
             catch (ArgumentException)
             {
-                DrawnRectangleLengthTextBox.BackColor = System.Drawing.Color.LightPink;
+                DrawnRectangleLengthTextBox.BackColor = AppColors.LightPink;
             }
             catch (FormatException)
             {
-                DrawnRectangleYTextBox.BackColor = System.Drawing.Color.LightPink;
+                DrawnRectangleYTextBox.BackColor = AppColors.LightPink;
             }
 
             FindCollisions();
         }
 
+        /// <summary>
+        /// Находит пересекающиеся прямоугольники и меняет их цвет на красный.
+        /// </summary>
         private void FindCollisions()
         {
             if (_rectanglesList.Count > 1)
             {
                 for (int i = 0; i < _rectanglesList.Count; i++)
                 {
-                    _rectanglePanels[i].BackColor = System.Drawing.Color.FromArgb(127, 255, 127);
+                    _rectanglePanels[i].BackColor = AppColors.LightGreen;
                 }
 
                 for (int i = 0; i < _rectanglesList.Count; i++)
@@ -249,8 +269,8 @@ namespace Programming.View.Panels
                         {
                             if (CollisionManager.IsCollision(_rectanglesList[i], _rectanglesList[j]))
                             {
-                                _rectanglePanels[i].BackColor = System.Drawing.Color.FromArgb(255, 0, 0);
-                                _rectanglePanels[j].BackColor = System.Drawing.Color.FromArgb(255, 0, 0);
+                                _rectanglePanels[i].BackColor = AppColors.Red;
+                                _rectanglePanels[j].BackColor = AppColors.Red;
                             }
                         }
                     }
@@ -258,12 +278,16 @@ namespace Programming.View.Panels
             }
         }
 
+        /// <summary>
+        /// Обновляет информацию об изменённом экземпляре класса <see cref="Rectangle"/>.
+        /// </summary>
+        /// <param name="rectangle"> Выбранный экземпляр класса <see cref="Rectangle"/>. </param>
+        /// <param name="indexDrawnRectangle"> Индекс выбранного экземпляра класса <see cref="Film"/>. </param>
         private void UpdateRectangleInfo(Rectangle rectangle, int indexDrawnRectangle)
         {
             DrawnRectanglesListBox.Items[indexDrawnRectangle] = ($"{rectangle.Id}: " +
                 $"(X= {rectangle.Center.X}; " +
                 $"Y = {rectangle.Center.Y}; W= {rectangle.Width}; H= {rectangle.Length})");
-
             Panel currentRectanglePanel = _rectanglePanels[indexDrawnRectangle];
             var currentRectangle = _rectanglesList[indexDrawnRectangle];
             currentRectanglePanel.Location = new Point(currentRectangle.Center.X,

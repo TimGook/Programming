@@ -54,8 +54,8 @@
             // RectanglesTableLayoutPanel
             // 
             this.RectanglesTableLayoutPanel.ColumnCount = 2;
-            this.RectanglesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.RectanglesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.RectanglesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.RectanglesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.RectanglesTableLayoutPanel.Controls.Add(this.RectangleGroupBox, 0, 0);
             this.RectanglesTableLayoutPanel.Controls.Add(this.RectanglesPanel, 1, 0);
             this.RectanglesTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -88,7 +88,7 @@
             this.RectangleGroupBox.Controls.Add(this.AddDrawnRectangleButton);
             this.RectangleGroupBox.Location = new System.Drawing.Point(3, 3);
             this.RectangleGroupBox.Name = "RectangleGroupBox";
-            this.RectangleGroupBox.Size = new System.Drawing.Size(520, 703);
+            this.RectangleGroupBox.Size = new System.Drawing.Size(294, 703);
             this.RectangleGroupBox.TabIndex = 1;
             this.RectangleGroupBox.TabStop = false;
             this.RectangleGroupBox.Text = "Rectangle";
@@ -243,9 +243,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RectanglesPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RectanglesPanel.Location = new System.Drawing.Point(529, 3);
+            this.RectanglesPanel.Location = new System.Drawing.Point(303, 3);
             this.RectanglesPanel.Name = "RectanglesPanel";
-            this.RectanglesPanel.Size = new System.Drawing.Size(521, 703);
+            this.RectanglesPanel.Size = new System.Drawing.Size(747, 703);
             this.RectanglesPanel.TabIndex = 0;
             // 
             // RectanglesCollisionControl
