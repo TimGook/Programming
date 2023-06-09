@@ -5,53 +5,53 @@ namespace WorkersRegister
     public partial class MainForm : Form
     {
         /// <summary>
-        /// Обнуление времени.
+        /// РћР±РЅСѓР»РµРЅРёРµ РІСЂРµРјРµРЅРё.
         /// </summary>
         private readonly DateTime _standardDate = new DateTime(2000, 1, 1);
 
         /// <summary>
-        /// Правильность ввода имени работника.
+        /// РџСЂР°РІРёР»СЊРЅРѕСЃС‚СЊ РІРІРѕРґР° РёРјРµРЅРё СЂР°Р±РѕС‚РЅРёРєР°.
         /// </summary>
         private bool IsValidName = true;
 
         /// <summary>
-        /// Правильность ввода должности работника.
+        /// РџСЂР°РІРёР»СЊРЅРѕСЃС‚СЊ РІРІРѕРґР° РґРѕР»Р¶РЅРѕСЃС‚Рё СЂР°Р±РѕС‚РЅРёРєР°.
         /// </summary>
         private bool IsValidPosition = true;
 
         /// <summary>
-        /// Правильность ввода даты трудоустройства.
+        /// РџСЂР°РІРёР»СЊРЅРѕСЃС‚СЊ РІРІРѕРґР° РґР°С‚С‹ С‚СЂСѓРґРѕСѓСЃС‚СЂРѕР№СЃС‚РІР°.
         /// </summary>
         private bool IsValidEmploymentDate = true;
 
         /// <summary>
-        /// Правильность ввода зарплаты.
+        /// РџСЂР°РІРёР»СЊРЅРѕСЃС‚СЊ РІРІРѕРґР° Р·Р°СЂРїР»Р°С‚С‹.
         /// </summary>
         private bool IsValidSalary = true;
 
         /// <summary>
-        /// Список работников.
+        /// РЎРїРёСЃРѕРє СЂР°Р±РѕС‚РЅРёРєРѕРІ.
         /// </summary>
         private List<Worker> _workersList = new List<Worker>();
 
         /// <summary>
-        /// Выбранный рабочий.
+        /// Р’С‹Р±СЂР°РЅРЅС‹Р№ СЂР°Р±РѕС‡РёР№.
         /// </summary>
         private Worker _currentWorker = new Worker();
 
         /// <summary>
-        /// Копия выбранного работника.
+        /// РљРѕРїРёСЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ СЂР°Р±РѕС‚РЅРёРєР°.
         /// </summary>
         private Worker _clonedCurrentWorker = new();
 
         /// <summary>
-        /// Индекс текущего выбранного элемента для сортировки 
-        /// и сохранения выбранного элемента в ListBox.
+        /// РРЅРґРµРєСЃ С‚РµРєСѓС‰РµРіРѕ РІС‹Р±СЂР°РЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё 
+        /// Рё СЃРѕС…СЂР°РЅРµРЅРёСЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІ ListBox.
         /// </summary>
         private int _indexBeforeSort;
 
         /// <summary>
-        /// Индекс текущего элемента для добавления и редактирования элементов.
+        /// РРЅРґРµРєСЃ С‚РµРєСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ Рё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ СЌР»РµРјРµРЅС‚РѕРІ.
         /// </summary>
         private int _selectedIndex;
 
@@ -278,37 +278,40 @@ namespace WorkersRegister
             {
                 ApplyErrorLabel.Visible = true;
             }
-
-            if (_selectedIndex == -1)
-            {
-                _currentWorker = new Worker(
-                    FullNameTextBox.Text,
-                    PositionTextBox.Text,
-                    Int32.Parse(SalaryTextBox.Text),
-                    EmploymentDateTimePicker.Value
-                );
-                _workersList.Add(_currentWorker);
-                Sort();
-                WorkersSerializer.Save(_workersList);
-            }
             else
             {
-                _workersList[_selectedIndex] = _clonedCurrentWorker;
-                _currentWorker = _clonedCurrentWorker;
-            }
+                if (_selectedIndex == -1)
+                {
+                    _currentWorker = new Worker(
+                        FullNameTextBox.Text,
+                        PositionTextBox.Text,
+                        Int32.Parse(SalaryTextBox.Text),
+                        EmploymentDateTimePicker.Value
+                    );
+                    _workersList.Add(_currentWorker);
+                    Sort();
+                    WorkersSerializer.Save(_workersList);
+                }
+                else
+                {
+                    _workersList[_selectedIndex] = _clonedCurrentWorker;
+                    _currentWorker = _clonedCurrentWorker;
+                }
 
-            Sort();
-            UpdateWorkersInfo();
-            WorkersSerializer.Save(_workersList);
-            ToggleInputBoxes(false);
-            ClearWorkersInfo();
-            ApplyButton.Enabled = false;
-            ApplyButton.Visible = false;
-            ApplyErrorLabel.Visible = false;
+                Sort();
+                UpdateWorkersInfo();
+                WorkersSerializer.Save(_workersList);
+                ToggleInputBoxes(false);
+                ClearWorkersInfo();
+                ApplyButton.Enabled = false;
+                ApplyButton.Visible = false;
+                ApplyErrorLabel.Visible = false;
+                WorkersListBox.SelectedIndex = -1;
+            }
         }
 
         /// <summary>
-        /// Метод, проверяющий значения текстовых полей и не дающий их сохранить в случае неправильного ввода
+        /// РњРµС‚РѕРґ, РїСЂРѕРІРµСЂСЏСЋС‰РёР№ Р·РЅР°С‡РµРЅРёСЏ С‚РµРєСЃС‚РѕРІС‹С… РїРѕР»РµР№ Рё РЅРµ РґР°СЋС‰РёР№ РёС… СЃРѕС…СЂР°РЅРёС‚СЊ РІ СЃР»СѓС‡Р°Рµ РЅРµРїСЂР°РІРёР»СЊРЅРѕРіРѕ РІРІРѕРґР°
         /// </summary>
         private void CheckData()
         {
@@ -325,7 +328,7 @@ namespace WorkersRegister
         }
 
         /// <summary>
-        /// Метод, который включает или отключает все элементы.
+        /// РњРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ РІРєР»СЋС‡Р°РµС‚ РёР»Рё РѕС‚РєР»СЋС‡Р°РµС‚ РІСЃРµ СЌР»РµРјРµРЅС‚С‹.
         /// </summary>
         /// <param name="value">True or false.</param>
         private void ToggleInputBoxes(bool value)
@@ -337,7 +340,7 @@ namespace WorkersRegister
         }
 
         /// <summary>
-        /// Метод, который обновляет данные текущего выбранного перелёта в TextBox и ComboBox.
+        /// РњРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ РѕР±РЅРѕРІР»СЏРµС‚ РґР°РЅРЅС‹Рµ С‚РµРєСѓС‰РµРіРѕ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РїРµСЂРµР»С‘С‚Р° РІ TextBox Рё ComboBox.
         /// </summary>
         private void UpdateWorkersInfo()
         {
@@ -348,8 +351,8 @@ namespace WorkersRegister
         }
 
         /// <summary>
-        /// Метод, который сортирует <see cref="_workersList"/> и <see cref="WorkersListBox"/>
-        /// в алфавитном порядке.
+        /// РњРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ СЃРѕСЂС‚РёСЂСѓРµС‚ <see cref="_workersList"/> Рё <see cref="WorkersListBox"/>
+        /// РІ Р°Р»С„Р°РІРёС‚РЅРѕРј РїРѕСЂСЏРґРєРµ.
         /// </summary>
         private void Sort()
         {
@@ -362,7 +365,7 @@ namespace WorkersRegister
         }
 
         /// <summary>
-        /// Метод, который очищает текстовые поля и ComboBox.
+        /// РњРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ РѕС‡РёС‰Р°РµС‚ С‚РµРєСЃС‚РѕРІС‹Рµ РїРѕР»СЏ Рё ComboBox.
         /// </summary>
         private void ClearWorkersInfo()
         {

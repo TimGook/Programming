@@ -129,7 +129,7 @@
             this.WorkersListBox.ItemHeight = 15;
             this.WorkersListBox.Location = new System.Drawing.Point(16, 22);
             this.WorkersListBox.Name = "WorkersListBox";
-            this.WorkersListBox.Size = new System.Drawing.Size(445, 433);
+            this.WorkersListBox.Size = new System.Drawing.Size(446, 433);
             this.WorkersListBox.TabIndex = 0;
             this.WorkersListBox.SelectedIndexChanged += new System.EventHandler(this.WorkersListBox_SelectedIndexChanged);
             // 
@@ -163,31 +163,31 @@
             this.ApplyErrorLabel.AutoSize = true;
             this.ApplyErrorLabel.Location = new System.Drawing.Point(203, 164);
             this.ApplyErrorLabel.Name = "ApplyErrorLabel";
-            this.ApplyErrorLabel.Size = new System.Drawing.Size(223, 15);
+            this.ApplyErrorLabel.Size = new System.Drawing.Size(218, 15);
             this.ApplyErrorLabel.TabIndex = 12;
-            this.ApplyErrorLabel.Text = "Нужно ввести все данные о работнике.";
+            this.ApplyErrorLabel.Text = "You need to input all data about worker.";
             this.ApplyErrorLabel.Visible = false;
             // 
             // SalaryErrorLabel
             // 
             this.SalaryErrorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SalaryErrorLabel.AutoSize = true;
-            this.SalaryErrorLabel.Location = new System.Drawing.Point(432, 132);
+            this.SalaryErrorLabel.Location = new System.Drawing.Point(319, 134);
             this.SalaryErrorLabel.Name = "SalaryErrorLabel";
-            this.SalaryErrorLabel.Size = new System.Drawing.Size(217, 15);
+            this.SalaryErrorLabel.Size = new System.Drawing.Size(328, 15);
             this.SalaryErrorLabel.TabIndex = 11;
-            this.SalaryErrorLabel.Text = "Зарплата может быть только числом.";
+            this.SalaryErrorLabel.Text = "The salary should be a number in the range from 0 to 500000.";
             this.SalaryErrorLabel.Visible = false;
             // 
             // EmploymentDateErrorLabel
             // 
             this.EmploymentDateErrorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.EmploymentDateErrorLabel.AutoSize = true;
-            this.EmploymentDateErrorLabel.Location = new System.Drawing.Point(432, 105);
+            this.EmploymentDateErrorLabel.Location = new System.Drawing.Point(319, 106);
             this.EmploymentDateErrorLabel.Name = "EmploymentDateErrorLabel";
-            this.EmploymentDateErrorLabel.Size = new System.Drawing.Size(278, 15);
+            this.EmploymentDateErrorLabel.Size = new System.Drawing.Size(316, 15);
             this.EmploymentDateErrorLabel.TabIndex = 10;
-            this.EmploymentDateErrorLabel.Text = "Дата трудоустройства не может быть в будущем.";
+            this.EmploymentDateErrorLabel.Text = "The date of employment cannot be later than today\'s date.";
             this.EmploymentDateErrorLabel.Visible = false;
             // 
             // PositionErrorLabel
@@ -196,9 +196,9 @@
             this.PositionErrorLabel.AutoSize = true;
             this.PositionErrorLabel.Location = new System.Drawing.Point(432, 74);
             this.PositionErrorLabel.Name = "PositionErrorLabel";
-            this.PositionErrorLabel.Size = new System.Drawing.Size(253, 15);
+            this.PositionErrorLabel.Size = new System.Drawing.Size(229, 15);
             this.PositionErrorLabel.TabIndex = 9;
-            this.PositionErrorLabel.Text = "Должность может сожержать только буквы.";
+            this.PositionErrorLabel.Text = "The position should only consist of letters.";
             this.PositionErrorLabel.Visible = false;
             // 
             // FullNameErrorLabel
@@ -207,9 +207,9 @@
             this.FullNameErrorLabel.AutoSize = true;
             this.FullNameErrorLabel.Location = new System.Drawing.Point(432, 45);
             this.FullNameErrorLabel.Name = "FullNameErrorLabel";
-            this.FullNameErrorLabel.Size = new System.Drawing.Size(212, 15);
+            this.FullNameErrorLabel.Size = new System.Drawing.Size(216, 15);
             this.FullNameErrorLabel.TabIndex = 8;
-            this.FullNameErrorLabel.Text = "Имя может содержать только буквы.";
+            this.FullNameErrorLabel.Text = "The name should only consist of letters.";
             this.FullNameErrorLabel.Visible = false;
             // 
             // ApplyButton
@@ -309,7 +309,7 @@
             this.Controls.Add(this.WorkersTableLayoutPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimumSize = new System.Drawing.Size(1280, 560);
+            this.MinimumSize = new System.Drawing.Size(1280, 558);
             this.Name = "MainForm";
             this.Text = "WorkersApp";
             this.WorkersTableLayoutPanel.ResumeLayout(false);
