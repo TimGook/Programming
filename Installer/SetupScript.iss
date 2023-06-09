@@ -49,8 +49,8 @@ Root: HKA; Subkey: "Software\Classes\Applications\{#MyAppExeName}\SupportedTypes
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{commondesktop}\WorkersApp"; Filename: "{app}\WorkersApp.exe"; Tasks: desktopicon; IconFilename: "..Programming\WorkersRegister\register_login_signup_icon_32px.ico"
-Name: "{autodesktop}\WorkersApp"; Filename: "{app}\WorkersApp.exe"; Tasks: desktopicon
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\WorkersApp.exe"; Tasks: desktopicon; IconFilename: "..\Installer\register_login_signup_icon_32px.ico"
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
