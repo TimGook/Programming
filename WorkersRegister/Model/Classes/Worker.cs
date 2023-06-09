@@ -3,24 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace WorkersRegister.Classes
+namespace WorkersApp.Model.Classes
 {
     /// <summary>
     /// Содержит информацию о работнике.
     /// </summary>
     internal class Worker
     {
-        /// <summary>
-        /// Личный индитификатор работника.
-        /// </summary>
-        private int _id;
-
-        /// <summary>
-        /// Счётчик экземпляров класса <see cref="Worker"/>.
-        /// </summary>
-        private static int _allWorkersCount = 0;
-
         /// <summary>
         /// Полное имя работника.
         /// </summary>
@@ -42,21 +33,6 @@ namespace WorkersRegister.Classes
         private DateTime _employmentDate;
 
         /// <summary>
-        /// Возращает индетификатор прямоугольника. 
-        /// </summary>
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            private set
-            {
-                _id = value;
-            }
-        }
-
-        /// <summary>
         /// Возвращает и задаёт полное имя работника.
         /// </summary>
         public string FullName
@@ -67,14 +43,8 @@ namespace WorkersRegister.Classes
             }
             set
             {
-                if (Validator.CheckStringContainsOnlyLetters(value))
-                {
-                    _fullName = value;
-                }
-                else
-                {
-                    MessageBox.Show("Неверно введены данные");
-                }                
+                Validator.AssertStringContainsOnlyLetters(value);
+                _fullName = value;
             }
         }
 
@@ -89,14 +59,8 @@ namespace WorkersRegister.Classes
             }
             set
             {
-                if (Validator.CheckStringContainsOnlyLetters(value)) 
-                { 
-                    _position = value; 
-                }
-                else
-                {
-                    MessageBox.Show("Неверно введены данные");
-                }
+                Validator.AssertStringContainsOnlyLetters(value);
+                _position = value;
             }
         }
 
@@ -111,14 +75,8 @@ namespace WorkersRegister.Classes
             }
             set
             {
-                if (Validator.CheckEmploymentDate(value)) 
-                { 
-                    _employmentDate = value; 
-                }
-                else
-                {
-                    MessageBox.Show("Неверно введены данные");
-                }
+                Validator.AssertEmploymentDate(value);
+                _employmentDate = value;
             }
         }
 
@@ -133,14 +91,8 @@ namespace WorkersRegister.Classes
             }
             set
             {
-                if (Validator.CheckOnPositiveValue(value)) 
-                { 
-                    _salary = value; 
-                }
-                else
-                {
-                    MessageBox.Show("Неверно введены данные");
-                }
+                Validator.AssertOnPositiveValue(value);
+                _salary = value;
             }
         }
 
@@ -157,8 +109,6 @@ namespace WorkersRegister.Classes
             Position = position;
             Salary = salary;
             EmploymentDate = employmentDate;
-            _allWorkersCount++;
-            Id = _allWorkersCount;
 
         }
 
@@ -167,8 +117,7 @@ namespace WorkersRegister.Classes
         /// </summary>
         public Worker()
         {
-            _allWorkersCount++;
-            Id = _allWorkersCount;
+
         }
 
         /// <summary>
@@ -177,7 +126,16 @@ namespace WorkersRegister.Classes
         /// <returns>Клонированный объект класса.</returns>
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
+        }
+
+        /// <summary>
+        /// Переопределение метода ToString() для класса <see cref="Worker"/>.
+        /// </summary>
+        /// <returns>Строка: ФИО.</returns>
+        public override string ToString()
+        {
+            return $"{FullName}";
         }
     }
 }

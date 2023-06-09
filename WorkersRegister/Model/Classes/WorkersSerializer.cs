@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorkersRegister.Classes;
-using WorkersRegister.Model.Classes;
 
-namespace WorkersRegister.Model.Classes
+namespace WorkersApp.Model.Classes
 {
     /// <summary>
     /// Класс для сериализации и десериализации данных.
@@ -17,7 +15,7 @@ namespace WorkersRegister.Model.Classes
         /// <summary>
         /// Путь к директории.
         /// </summary>
-        private static readonly string PathDirectory = 
+        private static readonly string PathDirectory =
             $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}/WorkersRegister";
 
         /// <summary>

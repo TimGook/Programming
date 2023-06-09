@@ -1,5 +1,4 @@
-using WorkersRegister.Classes;
-using WorkersRegister.Model.Classes;
+using WorkersApp.Model.Classes;
 
 namespace WorkersRegister
 {
@@ -8,7 +7,7 @@ namespace WorkersRegister
         /// <summary>
         /// Обнуление времени.
         /// </summary>
-        private readonly DateTime _standardDate = new DateTime(1900, 1, 1);
+        private readonly DateTime _standardDate = new DateTime(2000, 1, 1);
 
         /// <summary>
         /// Правильность ввода имени работника.
@@ -56,21 +55,16 @@ namespace WorkersRegister
         /// </summary>
         private int _selectedIndex;
 
-        /// <summary>
-        /// Название файла для сохранения или загрузки данных.
-        /// </summary>
-        // TODO: путь до сохранения указать. Важно! Использовать готовые инструменты C#, не должно быть абсолютных путей.
-        // либо C:/Users/<имя пользователя>/AppData/Roaming/<название вашего приложения>/<имя файла>,
-        // либо C:/Users/<имя пользователя>/Documents/<название вашего приложения>/<имя файла>
-        private string _fileName = "Workers.json";
-
         public MainForm()
         {
             InitializeComponent();
-            WorkersSerializer.LoadWorkers();
+            _workersList = WorkersSerializer.LoadWorkers();
+            WorkersListBox.DataSource = _workersList;
             ClearWorkersInfo();
             WorkersListBox.SelectedIndex = -1;
             ToggleInputBoxes(false);
+            ApplyButton.Enabled = false;
+            ApplyButton.Visible = false;
         }
 
         private void WorkersListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -84,6 +78,7 @@ namespace WorkersRegister
                 EmploymentDateTimePicker.Value = _clonedCurrentWorker.EmploymentDate;
                 SalaryTextBox.Text = _clonedCurrentWorker.Salary.ToString();
                 ApplyButton.Enabled = false;
+                ApplyButton.Visible = false;
             }
         }
 
@@ -94,6 +89,7 @@ namespace WorkersRegister
             _selectedIndex = -1;
             ToggleInputBoxes(true);
             ApplyButton.Enabled = true;
+            ApplyButton.Visible = true;
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -108,6 +104,8 @@ namespace WorkersRegister
             WorkersSerializer.Save(_workersList);
             Sort();
             ClearWorkersInfo();
+            ApplyButton.Enabled = false;
+            ApplyButton.Visible = false;
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -121,6 +119,7 @@ namespace WorkersRegister
             _clonedCurrentWorker = (Worker)_workersList[_selectedIndex].Clone();
             ToggleInputBoxes(true);
             ApplyButton.Enabled = true;
+            ApplyButton.Visible = true;
         }
 
         private void FullNameTextBox_TextChanged(object sender, EventArgs e)
@@ -132,6 +131,7 @@ namespace WorkersRegister
                     _clonedCurrentWorker.FullName = FullNameTextBox.Text;
                     FullNameTextBox.BackColor = Color.White;
                     IsValidName = true;
+                    FullNameErrorLabel.Visible = false;
                     CheckData();
                 }
             }
@@ -139,6 +139,21 @@ namespace WorkersRegister
             {
                 IsValidName = false;
                 FullNameTextBox.BackColor = Color.LightPink;
+                FullNameErrorLabel.Visible = true;
+                CheckData();
+            }
+            catch (FormatException)
+            {
+                IsValidName = false;
+                FullNameTextBox.BackColor = Color.LightPink;
+                FullNameErrorLabel.Visible = true;
+                CheckData();
+            }
+            catch (OverflowException)
+            {
+                IsValidSalary = false;
+                SalaryTextBox.BackColor = Color.LightPink;
+                FullNameErrorLabel.Visible = true;
                 CheckData();
             }
         }
@@ -153,6 +168,7 @@ namespace WorkersRegister
                     _clonedCurrentWorker.Position = PositionTextBox.Text;
                     PositionTextBox.BackColor = Color.White;
                     IsValidPosition = true;
+                    PositionErrorLabel.Visible = false;
                     CheckData();
                 }
             }
@@ -160,6 +176,21 @@ namespace WorkersRegister
             {
                 IsValidPosition = false;
                 PositionTextBox.BackColor = Color.LightPink;
+                PositionErrorLabel.Visible = true;
+                CheckData();
+            }
+            catch (FormatException)
+            {
+                IsValidPosition = false;
+                PositionTextBox.BackColor = Color.LightPink;
+                PositionErrorLabel.Visible = true;
+                CheckData();
+            }
+            catch (OverflowException)
+            {
+                IsValidSalary = false;
+                SalaryTextBox.BackColor = Color.LightPink;
+                PositionErrorLabel.Visible = true;
                 CheckData();
             }
         }
@@ -173,6 +204,7 @@ namespace WorkersRegister
                     _clonedCurrentWorker.Salary = Int32.Parse(SalaryTextBox.Text);
                     SalaryTextBox.BackColor = Color.White;
                     IsValidSalary = true;
+                    SalaryErrorLabel.Visible = false;
                     CheckData();
                 }
             }
@@ -181,6 +213,21 @@ namespace WorkersRegister
                 IsValidSalary = false;
                 SalaryTextBox.BackColor = Color.LightPink;
                 CheckData();
+                SalaryErrorLabel.Visible = true;
+            }
+            catch (FormatException)
+            {
+                IsValidSalary = false;
+                SalaryTextBox.BackColor = Color.LightPink;
+                CheckData();
+                SalaryErrorLabel.Visible = true;
+            }
+            catch (OverflowException)
+            {
+                IsValidSalary = false;
+                SalaryTextBox.BackColor = Color.LightPink;
+                CheckData();
+                SalaryErrorLabel.Visible = true;
             }
         }
 
@@ -192,6 +239,8 @@ namespace WorkersRegister
                 {
                     _clonedCurrentWorker.EmploymentDate = EmploymentDateTimePicker.Value;
                     IsValidEmploymentDate = true;
+                    EmploymentDateErrorLabel.Visible = false;
+                    EmploymentDateTimePicker.BackColor = Color.White;
                     CheckData();
                 }
 
@@ -199,8 +248,25 @@ namespace WorkersRegister
             catch (ArgumentException)
             {
                 IsValidEmploymentDate = false;
+                EmploymentDateErrorLabel.Visible = true;
+                EmploymentDateTimePicker.BackColor = Color.LightPink;
                 CheckData();
-                MessageBox.Show("Date Error");
+            }
+            catch (FormatException)
+            {
+                IsValidSalary = false;
+                SalaryTextBox.BackColor = Color.LightPink;
+                EmploymentDateErrorLabel.Visible = true;
+                EmploymentDateTimePicker.BackColor = Color.LightPink;
+                CheckData();
+            }
+            catch (OverflowException)
+            {
+                IsValidSalary = false;
+                SalaryTextBox.BackColor = Color.LightPink;
+                EmploymentDateErrorLabel.Visible = true;
+                EmploymentDateTimePicker.BackColor = Color.LightPink;
+                CheckData();
             }
         }
 
@@ -210,8 +276,7 @@ namespace WorkersRegister
                 string.IsNullOrEmpty(PositionTextBox.Text) ||
                 string.IsNullOrEmpty(SalaryTextBox.Text))
             {
-                MessageBox.Show("Ошибка ввода");
-                return;
+                ApplyErrorLabel.Visible = true;
             }
 
             if (_selectedIndex == -1)
@@ -225,7 +290,6 @@ namespace WorkersRegister
                 _workersList.Add(_currentWorker);
                 Sort();
                 WorkersSerializer.Save(_workersList);
-                return;
             }
             else
             {
@@ -239,6 +303,8 @@ namespace WorkersRegister
             ToggleInputBoxes(false);
             ClearWorkersInfo();
             ApplyButton.Enabled = false;
+            ApplyButton.Visible = false;
+            ApplyErrorLabel.Visible = false;
         }
 
         /// <summary>
@@ -249,10 +315,12 @@ namespace WorkersRegister
             if (IsValidEmploymentDate && IsValidName && IsValidPosition && IsValidSalary)
             {
                 ApplyButton.Enabled = true;
+                ApplyButton.Visible = true;
             }
             else
             {
                 ApplyButton.Enabled = false;
+                ApplyButton.Visible = false;
             }
         }
 
@@ -287,7 +355,7 @@ namespace WorkersRegister
         {
             _indexBeforeSort = WorkersListBox.SelectedIndex;
             WorkersListBox.SelectedIndexChanged -= WorkersListBox_SelectedIndexChanged;
-            _workersList = _workersList.OrderBy(worker => worker.ToString()).ToList();
+            _workersList = _workersList.OrderBy(worker => worker.FullName).ToList();
             WorkersListBox.DataSource = _workersList;
             WorkersListBox.SelectedIndex = _indexBeforeSort;
             WorkersListBox.SelectedIndexChanged += WorkersListBox_SelectedIndexChanged;
@@ -303,6 +371,16 @@ namespace WorkersRegister
             SalaryTextBox.Clear();
             EmploymentDateTimePicker.Value = _standardDate;
             ApplyButton.Enabled = true;
+            ApplyButton.Visible = true;
+            FullNameErrorLabel.Visible = false;
+            PositionErrorLabel.Visible = false;
+            EmploymentDateErrorLabel.Visible = false;
+            SalaryErrorLabel.Visible = false;
+            ApplyErrorLabel.Visible = false;
+            FullNameTextBox.BackColor = Color.White;
+            PositionTextBox.BackColor = Color.White;
+            SalaryTextBox.BackColor = Color.White;
+            EmploymentDateTimePicker.BackColor = Color.White;
         }
     }
 }

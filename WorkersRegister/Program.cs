@@ -1,4 +1,6 @@
-namespace WorkersRegister
+using WorkersRegister;
+
+namespace WorkersApp
 {
     internal static class Program
     {

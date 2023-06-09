@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.WorkersTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.WorkersGroupBox = new System.Windows.Forms.GroupBox();
             this.EditButton = new System.Windows.Forms.Button();
@@ -35,6 +36,12 @@
             this.AddButton = new System.Windows.Forms.Button();
             this.WorkersListBox = new System.Windows.Forms.ListBox();
             this.SelectedWorkerGroupBox = new System.Windows.Forms.GroupBox();
+            this.ApplyErrorLabel = new System.Windows.Forms.Label();
+            this.SalaryErrorLabel = new System.Windows.Forms.Label();
+            this.EmploymentDateErrorLabel = new System.Windows.Forms.Label();
+            this.PositionErrorLabel = new System.Windows.Forms.Label();
+            this.FullNameErrorLabel = new System.Windows.Forms.Label();
+            this.ApplyButton = new System.Windows.Forms.Button();
             this.SalaryLabel = new System.Windows.Forms.Label();
             this.EmploymentDateLabel = new System.Windows.Forms.Label();
             this.PositionLabel = new System.Windows.Forms.Label();
@@ -43,7 +50,6 @@
             this.SalaryTextBox = new System.Windows.Forms.TextBox();
             this.PositionTextBox = new System.Windows.Forms.TextBox();
             this.FullNameTextBox = new System.Windows.Forms.TextBox();
-            this.ApplyButton = new System.Windows.Forms.Button();
             this.WorkersTableLayoutPanel.SuspendLayout();
             this.WorkersGroupBox.SuspendLayout();
             this.SelectedWorkerGroupBox.SuspendLayout();
@@ -61,61 +67,79 @@
             this.WorkersTableLayoutPanel.Name = "WorkersTableLayoutPanel";
             this.WorkersTableLayoutPanel.RowCount = 1;
             this.WorkersTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.WorkersTableLayoutPanel.Size = new System.Drawing.Size(1111, 512);
+            this.WorkersTableLayoutPanel.Size = new System.Drawing.Size(1264, 521);
             this.WorkersTableLayoutPanel.TabIndex = 0;
             // 
             // WorkersGroupBox
             // 
+            this.WorkersGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.WorkersGroupBox.Controls.Add(this.EditButton);
             this.WorkersGroupBox.Controls.Add(this.DeleteButton);
             this.WorkersGroupBox.Controls.Add(this.AddButton);
             this.WorkersGroupBox.Controls.Add(this.WorkersListBox);
-            this.WorkersGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.WorkersGroupBox.Location = new System.Drawing.Point(3, 3);
             this.WorkersGroupBox.Name = "WorkersGroupBox";
-            this.WorkersGroupBox.Size = new System.Drawing.Size(421, 506);
+            this.WorkersGroupBox.Size = new System.Drawing.Size(479, 515);
             this.WorkersGroupBox.TabIndex = 1;
             this.WorkersGroupBox.TabStop = false;
             this.WorkersGroupBox.Text = "Workers";
             // 
             // EditButton
             // 
-            this.EditButton.Location = new System.Drawing.Point(171, 452);
+            this.EditButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.EditButton.Location = new System.Drawing.Point(177, 461);
             this.EditButton.Name = "EditButton";
             this.EditButton.Size = new System.Drawing.Size(75, 23);
             this.EditButton.TabIndex = 3;
             this.EditButton.Text = "Edit";
             this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(90, 452);
+            this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.DeleteButton.Location = new System.Drawing.Point(96, 461);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(75, 23);
             this.DeleteButton.TabIndex = 2;
             this.DeleteButton.Text = "Delete";
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(9, 452);
+            this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.AddButton.Location = new System.Drawing.Point(15, 461);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
             this.AddButton.TabIndex = 1;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // WorkersListBox
             // 
+            this.WorkersListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.WorkersListBox.FormattingEnabled = true;
+            this.WorkersListBox.IntegralHeight = false;
             this.WorkersListBox.ItemHeight = 15;
-            this.WorkersListBox.Location = new System.Drawing.Point(9, 22);
+            this.WorkersListBox.Location = new System.Drawing.Point(16, 22);
             this.WorkersListBox.Name = "WorkersListBox";
-            this.WorkersListBox.Size = new System.Drawing.Size(387, 424);
+            this.WorkersListBox.Size = new System.Drawing.Size(445, 433);
             this.WorkersListBox.TabIndex = 0;
+            this.WorkersListBox.SelectedIndexChanged += new System.EventHandler(this.WorkersListBox_SelectedIndexChanged);
             // 
             // SelectedWorkerGroupBox
             // 
+            this.SelectedWorkerGroupBox.Controls.Add(this.ApplyErrorLabel);
+            this.SelectedWorkerGroupBox.Controls.Add(this.SalaryErrorLabel);
+            this.SelectedWorkerGroupBox.Controls.Add(this.EmploymentDateErrorLabel);
+            this.SelectedWorkerGroupBox.Controls.Add(this.PositionErrorLabel);
+            this.SelectedWorkerGroupBox.Controls.Add(this.FullNameErrorLabel);
             this.SelectedWorkerGroupBox.Controls.Add(this.ApplyButton);
             this.SelectedWorkerGroupBox.Controls.Add(this.SalaryLabel);
             this.SelectedWorkerGroupBox.Controls.Add(this.EmploymentDateLabel);
@@ -126,12 +150,77 @@
             this.SelectedWorkerGroupBox.Controls.Add(this.PositionTextBox);
             this.SelectedWorkerGroupBox.Controls.Add(this.FullNameTextBox);
             this.SelectedWorkerGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SelectedWorkerGroupBox.Location = new System.Drawing.Point(430, 3);
+            this.SelectedWorkerGroupBox.Location = new System.Drawing.Point(488, 3);
             this.SelectedWorkerGroupBox.Name = "SelectedWorkerGroupBox";
-            this.SelectedWorkerGroupBox.Size = new System.Drawing.Size(678, 506);
+            this.SelectedWorkerGroupBox.Size = new System.Drawing.Size(773, 515);
             this.SelectedWorkerGroupBox.TabIndex = 0;
             this.SelectedWorkerGroupBox.TabStop = false;
             this.SelectedWorkerGroupBox.Text = "SelectedWorker";
+            // 
+            // ApplyErrorLabel
+            // 
+            this.ApplyErrorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ApplyErrorLabel.AutoSize = true;
+            this.ApplyErrorLabel.Location = new System.Drawing.Point(203, 164);
+            this.ApplyErrorLabel.Name = "ApplyErrorLabel";
+            this.ApplyErrorLabel.Size = new System.Drawing.Size(223, 15);
+            this.ApplyErrorLabel.TabIndex = 12;
+            this.ApplyErrorLabel.Text = "Нужно ввести все данные о работнике.";
+            this.ApplyErrorLabel.Visible = false;
+            // 
+            // SalaryErrorLabel
+            // 
+            this.SalaryErrorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SalaryErrorLabel.AutoSize = true;
+            this.SalaryErrorLabel.Location = new System.Drawing.Point(432, 132);
+            this.SalaryErrorLabel.Name = "SalaryErrorLabel";
+            this.SalaryErrorLabel.Size = new System.Drawing.Size(217, 15);
+            this.SalaryErrorLabel.TabIndex = 11;
+            this.SalaryErrorLabel.Text = "Зарплата может быть только числом.";
+            this.SalaryErrorLabel.Visible = false;
+            // 
+            // EmploymentDateErrorLabel
+            // 
+            this.EmploymentDateErrorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EmploymentDateErrorLabel.AutoSize = true;
+            this.EmploymentDateErrorLabel.Location = new System.Drawing.Point(432, 105);
+            this.EmploymentDateErrorLabel.Name = "EmploymentDateErrorLabel";
+            this.EmploymentDateErrorLabel.Size = new System.Drawing.Size(278, 15);
+            this.EmploymentDateErrorLabel.TabIndex = 10;
+            this.EmploymentDateErrorLabel.Text = "Дата трудоустройства не может быть в будущем.";
+            this.EmploymentDateErrorLabel.Visible = false;
+            // 
+            // PositionErrorLabel
+            // 
+            this.PositionErrorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.PositionErrorLabel.AutoSize = true;
+            this.PositionErrorLabel.Location = new System.Drawing.Point(432, 74);
+            this.PositionErrorLabel.Name = "PositionErrorLabel";
+            this.PositionErrorLabel.Size = new System.Drawing.Size(253, 15);
+            this.PositionErrorLabel.TabIndex = 9;
+            this.PositionErrorLabel.Text = "Должность может сожержать только буквы.";
+            this.PositionErrorLabel.Visible = false;
+            // 
+            // FullNameErrorLabel
+            // 
+            this.FullNameErrorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FullNameErrorLabel.AutoSize = true;
+            this.FullNameErrorLabel.Location = new System.Drawing.Point(432, 45);
+            this.FullNameErrorLabel.Name = "FullNameErrorLabel";
+            this.FullNameErrorLabel.Size = new System.Drawing.Size(212, 15);
+            this.FullNameErrorLabel.TabIndex = 8;
+            this.FullNameErrorLabel.Text = "Имя может содержать только буквы.";
+            this.FullNameErrorLabel.Visible = false;
+            // 
+            // ApplyButton
+            // 
+            this.ApplyButton.Location = new System.Drawing.Point(122, 160);
+            this.ApplyButton.Name = "ApplyButton";
+            this.ApplyButton.Size = new System.Drawing.Size(75, 23);
+            this.ApplyButton.TabIndex = 4;
+            this.ApplyButton.Text = "Apply";
+            this.ApplyButton.UseVisualStyleBackColor = true;
+            this.ApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
             // SalaryLabel
             // 
@@ -171,53 +260,58 @@
             // 
             // EmploymentDateTimePicker
             // 
-            this.EmploymentDateTimePicker.Location = new System.Drawing.Point(117, 102);
+            this.EmploymentDateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.EmploymentDateTimePicker.Location = new System.Drawing.Point(122, 103);
             this.EmploymentDateTimePicker.Name = "EmploymentDateTimePicker";
-            this.EmploymentDateTimePicker.Size = new System.Drawing.Size(253, 23);
+            this.EmploymentDateTimePicker.Size = new System.Drawing.Size(193, 23);
             this.EmploymentDateTimePicker.TabIndex = 3;
+            this.EmploymentDateTimePicker.ValueChanged += new System.EventHandler(this.EmploymentDateTimePicker_ValueChanged);
             // 
             // SalaryTextBox
             // 
-            this.SalaryTextBox.Location = new System.Drawing.Point(117, 131);
+            this.SalaryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SalaryTextBox.Location = new System.Drawing.Point(122, 132);
             this.SalaryTextBox.MaxLength = 6;
             this.SalaryTextBox.Name = "SalaryTextBox";
-            this.SalaryTextBox.Size = new System.Drawing.Size(253, 23);
+            this.SalaryTextBox.Size = new System.Drawing.Size(193, 23);
             this.SalaryTextBox.TabIndex = 2;
+            this.SalaryTextBox.TextChanged += new System.EventHandler(this.SalaryTextBox_TextChanged);
             // 
             // PositionTextBox
             // 
-            this.PositionTextBox.Location = new System.Drawing.Point(117, 73);
+            this.PositionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PositionTextBox.Location = new System.Drawing.Point(122, 74);
             this.PositionTextBox.MaxLength = 50;
             this.PositionTextBox.Name = "PositionTextBox";
-            this.PositionTextBox.Size = new System.Drawing.Size(506, 23);
+            this.PositionTextBox.Size = new System.Drawing.Size(304, 23);
             this.PositionTextBox.TabIndex = 1;
+            this.PositionTextBox.TextChanged += new System.EventHandler(this.PositionTextBox_TextChanged);
             // 
             // FullNameTextBox
             // 
-            this.FullNameTextBox.Location = new System.Drawing.Point(117, 44);
+            this.FullNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FullNameTextBox.Location = new System.Drawing.Point(122, 45);
             this.FullNameTextBox.MaxLength = 100;
             this.FullNameTextBox.Name = "FullNameTextBox";
-            this.FullNameTextBox.Size = new System.Drawing.Size(506, 23);
+            this.FullNameTextBox.Size = new System.Drawing.Size(304, 23);
             this.FullNameTextBox.TabIndex = 0;
-            // 
-            // ApplyButton
-            // 
-            this.ApplyButton.Location = new System.Drawing.Point(117, 160);
-            this.ApplyButton.Name = "ApplyButton";
-            this.ApplyButton.Size = new System.Drawing.Size(75, 23);
-            this.ApplyButton.TabIndex = 4;
-            this.ApplyButton.Text = "Apply";
-            this.ApplyButton.UseVisualStyleBackColor = true;
+            this.FullNameTextBox.TextChanged += new System.EventHandler(this.FullNameTextBox_TextChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1111, 512);
+            this.ClientSize = new System.Drawing.Size(1264, 521);
             this.Controls.Add(this.WorkersTableLayoutPanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(1280, 560);
             this.Name = "MainForm";
-            this.Text = "RegisterApp";
+            this.Text = "WorkersApp";
             this.WorkersTableLayoutPanel.ResumeLayout(false);
             this.WorkersGroupBox.ResumeLayout(false);
             this.SelectedWorkerGroupBox.ResumeLayout(false);
@@ -244,5 +338,10 @@
         private Label EmploymentDateLabel;
         private Label PositionLabel;
         private Button ApplyButton;
+        private Label SalaryErrorLabel;
+        private Label EmploymentDateErrorLabel;
+        private Label PositionErrorLabel;
+        private Label FullNameErrorLabel;
+        private Label ApplyErrorLabel;
     }
 }

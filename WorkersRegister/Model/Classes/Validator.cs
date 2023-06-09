@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkersRegister.Classes
+namespace WorkersApp.Model.Classes
 {
     /// <summary>
     /// Предоставляет доступ к методам валидации значений.
@@ -12,50 +12,44 @@ namespace WorkersRegister.Classes
     internal class Validator
     {
         /// <summary>
-        /// Порверяет, входит ли число <see cref="Int32"/> в диапазон или нет.
+        /// Порверяет, входит ли число <see cref="int"/> в диапазон или нет.
         /// </summary>
         /// <param name="value"> Проверяемое число. </param>
-        public static bool CheckOnPositiveValue(int value)
+        public static void AssertOnPositiveValue(int value)
         {
-            bool ValueIsPositive = true;
-            if (value < 0 || value > 500000)
+            string salary = value.ToString();
+            if (value < 0 || value > 500000 || salary[0] == '0' && salary.Length > 1)
             {
-                ValueIsPositive = false;
+                throw new ArgumentException("Значение должно быть положительным и не больше 500000");
             }
-
-            return ValueIsPositive;
         }
 
         /// <summary>
-        /// Порверяет, входит ли число <see cref="Double"/> в диапазон или нет.
+        /// Порверяет, входит ли число <see cref="double"/> в диапазон или нет.
         /// </summary>
         /// <param name="value"> Проверяемое число. </param>
-        public static bool CheckOnPositiveValue(double value)
+        public static void AssertOnPositiveValue(double value)
         {
-            bool ValueIsPositive = true;
-            if (value < 0d || value > 500000d)
+            string salary = value.ToString();
+            if (value < 0d || value > 500000d || salary[0] == '0' && salary.Length > 1)
             {
-                ValueIsPositive = false;
+                throw new ArgumentException("Значение должно быть положительным и не больше 500000");
             }
-
-            return ValueIsPositive;
         }
 
         /// <summary>
         /// Проверяет, состоит ли строка только из буквенный символов.
         /// </summary>
         /// <param name="name"> Проверяемая строка. </param>
-        public static bool CheckStringContainsOnlyLetters(string name)
+        public static void AssertStringContainsOnlyLetters(string name)
         {
-            bool StringContainsOnlyLetters = true;
             foreach (char c in name)
             {
-                if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == ' '))
+                if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == ' ' || c >= 'а' && c <= 'я' || c >= 'А' && c <= 'Я' || c == '-'))
                 {
-                    StringContainsOnlyLetters = false;
+                    throw new ArgumentException("Строка должна состоять только из букв.");
                 }
             }
-            return StringContainsOnlyLetters;
         }
 
         /// <summary>
@@ -63,9 +57,13 @@ namespace WorkersRegister.Classes
         /// </summary>
         /// <param name="value">проверяемое значение</param>
         /// <returns>True, если дата не более текущего дня, и  False если нет.</returns>
-        public static bool CheckEmploymentDate(DateTime value)
+        public static void AssertEmploymentDate(DateTime value)
         {
-            return (DateTime.Today <= value);
+            if (DateTime.Today < value)
+            {
+                throw new ArgumentException("Значение введено неверно.");
+            }
+            
         }
     }
 }
