@@ -21,7 +21,7 @@ namespace ObjectOrientedPractics.Services
         {
             if (value.Length > maxLength)
             {
-                throw new Exception($"{propertyName} должен содержать не более {maxLength} символов.");
+                throw new OverflowException($"{propertyName} должен содержать не более {maxLength} символов.");
             }
         }
 
@@ -36,7 +36,7 @@ namespace ObjectOrientedPractics.Services
         {
             if (value > maxValue || value < minValue)
             {
-                throw new Exception($"{propertyName} не может быть меньше {minValue} и больше {maxValue}.");
+                throw new ArgumentException($"{propertyName} не может быть меньше {minValue} и больше {maxValue}.");
             }
         }
     }

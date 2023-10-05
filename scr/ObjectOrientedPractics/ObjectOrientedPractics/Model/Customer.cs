@@ -13,7 +13,7 @@ namespace ObjectOrientedPractics.Model
     class Customer
     {
         /// <summary>
-        /// Счётчик для <see cref="Id"/>.
+        /// Счётчик для <see cref="Customer"/>.
         /// </summary>
         private static int _idCounter = 0;
 
@@ -55,7 +55,7 @@ namespace ObjectOrientedPractics.Model
         {
             get
             {
-                return _address;
+                return _address;              
             }
             set
             {
@@ -84,6 +84,24 @@ namespace ObjectOrientedPractics.Model
         {
             _idCounter++;
             Id = _idCounter;
+        }
+
+        /// <summary>
+        /// Переопределение метода ToString() для класса <see cref="Customer"/>.
+        /// </summary>
+        /// <returns>Строка: id, Fullname, adress.</returns>
+        public override string ToString()
+        {
+            return $"Id: {Id}, Fullname: {Fullname}, Address: {Address}";
+        }
+
+        /// <summary>
+        /// Клонирование объекта класса для редактирования его через текстовые поля.
+        /// </summary>
+        /// <returns>Клонированный объект класса.</returns>
+        public object Clone()
+        {
+            return MemberwiseClone();
         }
     }
 }

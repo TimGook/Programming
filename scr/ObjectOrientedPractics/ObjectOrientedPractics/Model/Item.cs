@@ -108,5 +108,23 @@ namespace ObjectOrientedPractics.Model
             _idCounter++;
             Id = _idCounter;
         }
+
+        /// <summary>
+        /// Переопределение метода ToString() для класса <see cref="Item"/>.
+        /// </summary>
+        /// <returns>Строка: id, cost, name, info.</returns>
+        public override string ToString()
+        {
+            return $"Id: {Id}, Cost: {Cost}, Name: {Name}, Info: {Info}";
+        }
+
+        /// <summary>
+        /// Клонирование объекта класса для редактирования его через текстовые поля.
+        /// </summary>
+        /// <returns>Клонированный объект класса.</returns>
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }
