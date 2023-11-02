@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.View.Controls;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -69,7 +70,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 ToggleInputBoxes(false);
                 _clonedCurrentCustomer = (Customer)_customersList[CustomersListBox.SelectedIndex].Clone();
                 SelectedCustomerFullNameTextBox.Text = _clonedCurrentCustomer.Fullname;
-                SelectedCustomerAddressTextBox.Text = _clonedCurrentCustomer.Address;
+                CustomerAddressControl.CustomerAddress = _clonedCurrentCustomer.Address;
                 SelectedCustomerIdTextBox.Text = _clonedCurrentCustomer.Id.ToString();
                 EditCustomerButton.Enabled = true;
                 ApplyCustomerInfoChangesButton.Enabled = false;
@@ -114,6 +115,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
             _selectedIndex = CustomersListBox.SelectedIndex;
             _clonedCurrentCustomer = (Customer)_customersList[_selectedIndex].Clone();
+            
             ToggleInputBoxes(true);
             ApplyCustomerInfoChangesButton.Enabled = true;
             ApplyCustomerInfoChangesButton.Visible = true;
@@ -148,59 +150,11 @@ namespace ObjectOrientedPractics.View.Tabs
                 CustomerErrorsLabel.Visible = true;
                 CheckData();
             }
-            //catch (OverflowException)
-            //{
-            //    IsValidCustomerName = false;
-            //    SelectedCustomerFullNameTextBox.BackColor = Color.LightPink;
-            //    CustomerErrorsLabel.Text = "Необходимо указать имя заказчика.";
-            //    CustomerErrorsLabel.Visible = true;
-            //    CheckData();
-            //}
-        }
-
-        private void CustomerAddressTextBox_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(SelectedCustomerAddressTextBox.Text))
-                {
-                    _clonedCurrentCustomer.Address = SelectedCustomerAddressTextBox.Text;
-                    SelectedCustomerAddressTextBox.BackColor = Color.White;
-                    IsValidCustomerAddress = true;
-                    CustomerErrorsLabel.Visible = false;
-                    CheckData();
-                }
-            }
-            catch (ArgumentException)
-            {
-                IsValidCustomerAddress = false;
-                SelectedCustomerAddressTextBox.BackColor = Color.LightPink;
-                CustomerErrorsLabel.Text = "Необходимо указать адрес заказчика.";
-                CustomerErrorsLabel.Visible = true;
-                CheckData();
-            }
-            catch (FormatException)
-            {
-                IsValidCustomerAddress = false;
-                SelectedCustomerAddressTextBox.BackColor = Color.LightPink;
-                CustomerErrorsLabel.Text = "Необходимо указать адрес заказчика.";
-                CustomerErrorsLabel.Visible = true;
-                CheckData();
-            }
-            //catch (OverflowException)
-            //{
-            //    IsValidCustomerAddress = false;
-            //    SelectedCustomerAddressTextBox.BackColor = Color.LightPink;
-            //    CustomerErrorsLabel.Text = "Необходимо указать адрес заказчика.";
-            //    CustomerErrorsLabel.Visible = true;
-            //    CheckData();
-            //}
         }
 
         private void ApplyCustomerInfoChangesButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(SelectedCustomerFullNameTextBox.Text) ||
-                string.IsNullOrEmpty(SelectedCustomerAddressTextBox.Text))
+            if (string.IsNullOrEmpty(SelectedCustomerFullNameTextBox.Text) || CustomerAddressControl.AddressIsNullOrEmpty())
             {
                 CustomerErrorsLabel.Text = "Необходимо заполнить все поля.";
                 CustomerErrorsLabel.Visible = true;
@@ -211,7 +165,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     _currentCustomer = new Customer(
                         SelectedCustomerFullNameTextBox.Text,
-                        SelectedCustomerAddressTextBox.Text);
+                        new Address(CustomerAddressControl.CustomerAddress.Index, CustomerAddressControl.CustomerAddress.Country, CustomerAddressControl.CustomerAddress.City, CustomerAddressControl.CustomerAddress.Street,
+                        CustomerAddressControl.CustomerAddress.Building, CustomerAddressControl.CustomerAddress.Apartment));
                     _customersList.Add(_currentCustomer);
                     Sort();
                     //CustomersSerializer.Save(_customersList);
@@ -258,7 +213,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private void ToggleInputBoxes(bool value)
         {
             SelectedCustomerFullNameTextBox.Enabled = value;
-            SelectedCustomerAddressTextBox.Enabled = value;
+            CustomerAddressControl.ToggleAddressTextBoxes(value);
         }
 
         /// <summary>
@@ -267,7 +222,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private void UpdateCusotmerInfo()
         {
             SelectedCustomerFullNameTextBox.Text = _currentCustomer.Fullname;
-            SelectedCustomerAddressTextBox.Text = _currentCustomer.Address;
+            CustomerAddressControl.CustomerAddress = _currentCustomer.Address;
             SelectedCustomerIdTextBox.Text = _currentCustomer.Id.ToString();
         }
 
@@ -291,17 +246,12 @@ namespace ObjectOrientedPractics.View.Tabs
         private void ClearCustomersInfo()
         {
             SelectedCustomerFullNameTextBox.Clear();
-            SelectedCustomerAddressTextBox.Clear();
+            CustomerAddressControl.AddressClear();
             SelectedCustomerIdTextBox.Clear();
             ApplyCustomerInfoChangesButton.Enabled = true;
             ApplyCustomerInfoChangesButton.Visible = true;
             CustomerErrorsLabel.Visible = false;
-            //PositionErrorLabel.Visible = false;
-            //EmploymentDateErrorLabel.Visible = false;
-            //SalaryErrorLabel.Visible = false;
-            //ApplyErrorLabel.Visible = false;
             SelectedCustomerFullNameTextBox.BackColor = Color.White;
-            SelectedCustomerAddressTextBox.BackColor = Color.White;
         }
     }
 }
