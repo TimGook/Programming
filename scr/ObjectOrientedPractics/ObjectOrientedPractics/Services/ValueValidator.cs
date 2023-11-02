@@ -61,9 +61,12 @@ namespace ObjectOrientedPractics.Services
         /// <param name="propertyName"> Название проверяемого поля. </param>
         public static void AssertIntInRange(int value, int maxValue, int minValue, string propertyName)
         {
-            if (value > maxValue || value < minValue)
+            if (value != 0)
             {
-                throw new ArgumentException($"{propertyName} не может быть меньше {minValue} и больше {maxValue}.");
+                if (value > maxValue || value < minValue)
+                {
+                    throw new ArgumentException($"{propertyName} не может быть меньше {minValue} и больше {maxValue}.");
+                }
             }
         }
     }

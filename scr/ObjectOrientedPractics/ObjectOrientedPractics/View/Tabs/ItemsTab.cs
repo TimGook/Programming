@@ -76,6 +76,22 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private int _selectedIndex;
 
+        /// <summary>
+        /// Возвращает и задаёт список покупателей.
+        /// </summary>
+        internal List<Item> Items
+        {
+            get
+            {
+                return _itemsList;
+            }
+            set
+            {
+                _itemsList = value;
+                Sort();
+            }
+        }
+
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ItemsListBox.SelectedIndex != -1)

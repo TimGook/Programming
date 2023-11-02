@@ -8,14 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ObjectOrientedPractics;
+using ObjectOrientedPractics.Model;
 
 namespace ObjectOrientedPractics
 {
     public partial class MainForm : Form
     {
+        Store _store = new Store();
+
         public MainForm()
         {
             InitializeComponent();
+            ItemsTab.Items = _store.Items;
+            CustomersTab.Customers = _store.Customers;
         }
     }
 }

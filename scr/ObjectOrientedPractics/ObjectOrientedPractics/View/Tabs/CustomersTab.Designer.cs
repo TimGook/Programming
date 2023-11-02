@@ -39,6 +39,7 @@
             this.CustomersListBox = new System.Windows.Forms.ListBox();
             this.SelectedCustomerTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SelectedCustomerGroupBox = new System.Windows.Forms.GroupBox();
+            this.CustomerAddressControl = new ObjectOrientedPractics.View.Controls.AddressControl();
             this.CustomerErrorsLabel = new System.Windows.Forms.Label();
             this.SelectedCustomerIdTextBox = new System.Windows.Forms.TextBox();
             this.SelectedCustomerFullNameTextBox = new System.Windows.Forms.TextBox();
@@ -49,7 +50,6 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
-            this.CustomerAddressControl = new ObjectOrientedPractics.View.Controls.AddressControl();
             this.CustomersTableLayoutPanel.SuspendLayout();
             this.CustomersGroupBox.SuspendLayout();
             this.SelectedCustomerTableLayoutPanel.SuspendLayout();
@@ -109,7 +109,6 @@
             this.ApplyCustomerInfoChangesButton.TabIndex = 4;
             this.ApplyCustomerInfoChangesButton.Text = "Apply";
             this.ApplyCustomerInfoChangesButton.UseVisualStyleBackColor = true;
-            this.ApplyCustomerInfoChangesButton.Visible = false;
             this.ApplyCustomerInfoChangesButton.Click += new System.EventHandler(this.ApplyCustomerInfoChangesButton_Click);
             // 
             // RemoveCustomerButton
@@ -178,12 +177,26 @@
             this.SelectedCustomerGroupBox.TabStop = false;
             this.SelectedCustomerGroupBox.Text = "Selected Customer";
             // 
+            // CustomerAddressControl
+            // 
+            address1.Apartment = null;
+            address1.Building = null;
+            address1.City = null;
+            address1.Country = null;
+            address1.Index = 0;
+            address1.Street = null;
+            this.CustomerAddressControl.Address = address1;
+            this.CustomerAddressControl.Location = new System.Drawing.Point(44, 88);
+            this.CustomerAddressControl.Name = "CustomerAddressControl";
+            this.CustomerAddressControl.Size = new System.Drawing.Size(586, 142);
+            this.CustomerAddressControl.TabIndex = 7;
+            // 
             // CustomerErrorsLabel
             // 
             this.CustomerErrorsLabel.AutoSize = true;
             this.CustomerErrorsLabel.Location = new System.Drawing.Point(7, 681);
             this.CustomerErrorsLabel.Name = "CustomerErrorsLabel";
-            this.CustomerErrorsLabel.Size = new System.Drawing.Size(29, 13);
+            this.CustomerErrorsLabel.Size = new System.Drawing.Size(34, 15);
             this.CustomerErrorsLabel.TabIndex = 6;
             this.CustomerErrorsLabel.Text = "Error";
             // 
@@ -208,14 +221,14 @@
             this.SelectedCustomerFullNameTextBox.Name = "SelectedCustomerFullNameTextBox";
             this.SelectedCustomerFullNameTextBox.Size = new System.Drawing.Size(561, 20);
             this.SelectedCustomerFullNameTextBox.TabIndex = 3;
-            this.SelectedCustomerFullNameTextBox.TextChanged += new System.EventHandler(this.CustomerNameTextBox_TextChanged);
+            this.SelectedCustomerFullNameTextBox.TextChanged += new System.EventHandler(this.SelectedCustomerFullNameTextBox_TextChanged);
             // 
             // SelectedCustomerAddressLabel
             // 
             this.SelectedCustomerAddressLabel.AutoSize = true;
             this.SelectedCustomerAddressLabel.Location = new System.Drawing.Point(7, 72);
             this.SelectedCustomerAddressLabel.Name = "SelectedCustomerAddressLabel";
-            this.SelectedCustomerAddressLabel.Size = new System.Drawing.Size(89, 13);
+            this.SelectedCustomerAddressLabel.Size = new System.Drawing.Size(100, 15);
             this.SelectedCustomerAddressLabel.TabIndex = 2;
             this.SelectedCustomerAddressLabel.Text = "Delivery Address:";
             // 
@@ -224,7 +237,7 @@
             this.SelectedCustomerFullNameLabel.AutoSize = true;
             this.SelectedCustomerFullNameLabel.Location = new System.Drawing.Point(6, 46);
             this.SelectedCustomerFullNameLabel.Name = "SelectedCustomerFullNameLabel";
-            this.SelectedCustomerFullNameLabel.Size = new System.Drawing.Size(57, 13);
+            this.SelectedCustomerFullNameLabel.Size = new System.Drawing.Size(67, 15);
             this.SelectedCustomerFullNameLabel.TabIndex = 1;
             this.SelectedCustomerFullNameLabel.Text = "Full Name:";
             // 
@@ -233,28 +246,15 @@
             this.CustomerIdLabel.AutoSize = true;
             this.CustomerIdLabel.Location = new System.Drawing.Point(7, 16);
             this.CustomerIdLabel.Name = "CustomerIdLabel";
-            this.CustomerIdLabel.Size = new System.Drawing.Size(21, 13);
+            this.CustomerIdLabel.Size = new System.Drawing.Size(22, 15);
             this.CustomerIdLabel.TabIndex = 0;
             this.CustomerIdLabel.Text = "ID:";
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // CustomerAddressControl
-            // 
-            address1.Apartment = "";
-            address1.Building = "";
-            address1.City = null;
-            address1.Country = null;
-            address1.Index = 0;
-            address1.Street = null;
-            this.CustomerAddressControl.CustomerAddress = address1;
-            this.CustomerAddressControl.Location = new System.Drawing.Point(44, 88);
-            this.CustomerAddressControl.Name = "CustomerAddressControl";
-            this.CustomerAddressControl.Size = new System.Drawing.Size(586, 142);
-            this.CustomerAddressControl.TabIndex = 7;
             // 
             // CustomersTab
             // 

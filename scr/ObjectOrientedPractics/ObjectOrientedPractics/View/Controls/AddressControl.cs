@@ -33,7 +33,7 @@ namespace ObjectOrientedPractics.View.Controls
         /// <summary>
         /// Возвращает и задает адрес покупателя.
         /// </summary>
-        public Address CustomerAddress
+        public Address Address
         {
             get => _address;
             set
@@ -44,7 +44,12 @@ namespace ObjectOrientedPractics.View.Controls
                 StreetTextBox.Text = value.Street;
                 BuildingTextBox.Text = value.Building;
                 ApartmentTextBox.Text = value.Apartment;
-                _address = value;
+                Address.Index = value.Index;
+                Address.Country = value.Country;
+                Address.City = value.City;
+                Address.Street = value.Street;
+                Address.Building = value.Building;
+                Address.Apartment = value.Apartment;
             }
         }
 
@@ -57,15 +62,19 @@ namespace ObjectOrientedPractics.View.Controls
         {
             try
             {
-                CustomerAddress.Index = int.Parse(IndexTextBox.Text);
-                IndexTextBox.BackColor = Color.White;
-                _isValidIndex = true;
+                if (!string.IsNullOrEmpty(IndexTextBox.Text) & int.TryParse(IndexTextBox.Text, out var number))
+                {
+                    _address.Index = number;
+                    IndexTextBox.BackColor = Color.White;
+                    _isValidIndex = true;
+                }
             }
-            catch (ArgumentException) 
+            catch (ArgumentException)
             {
                 IndexTextBox.BackColor = Color.LightPink;
                 _isValidIndex = false;
             }
+
             catch (FormatException)
             {
                 IndexTextBox.BackColor = Color.LightPink;
@@ -77,48 +86,71 @@ namespace ObjectOrientedPractics.View.Controls
         {
             try
             {
-                    CustomerAddress.Country = CountryTextBox.Text;
+                if (!string.IsNullOrEmpty(CountryTextBox.Text))
+                {
+                    _address.Country = CountryTextBox.Text;
                     CountryTextBox.BackColor = Color.White;
                     _isValidCountry = true;
+                }
             }
             catch (ArgumentException)
             {
-                    CountryTextBox.BackColor = Color.LightPink;
-                    _isValidCountry = false;
+                CountryTextBox.BackColor = Color.LightPink;
+                _isValidCountry = false;
             }
+
             catch (FormatException)
             {
-                    CountryTextBox.BackColor = Color.LightPink;
-                    _isValidCountry = false;
+                CountryTextBox.BackColor = Color.LightPink;
+                _isValidCountry = false;
             }
         }
 
         private void CityTextBox_TextChanged(object sender, EventArgs e)
         {
             try
+            {
+                if (!string.IsNullOrEmpty(CityTextBox.Text))
                 {
-                    CustomerAddress.City = CityTextBox.Text;
+                    _address.City = CityTextBox.Text;
                     CityTextBox.BackColor = Color.White;
                     _isValidCity = true;
                 }
-                catch (ArgumentException)
-                {
-                    CityTextBox.BackColor = Color.LightPink;
-                    _isValidCity = false;
-                }
             }
+            catch (ArgumentException)
+            {
+                CityTextBox.BackColor = Color.LightPink;
+                _isValidCity = false;
+            }
+
+            catch (FormatException)
+            {
+                CityTextBox.BackColor = Color.LightPink;
+                _isValidCity = false;
+            }
+        }
+
         private void StreetTextBox_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                    CustomerAddress.Street = StreetTextBox.Text;
+                if (!string.IsNullOrEmpty(StreetTextBox.Text))
+                {
+                    _address.Street = StreetTextBox.Text;
                     StreetTextBox.BackColor = Color.White;
                     _isValidStreet = true;
+                }
             }
             catch (ArgumentException)
             {
-                    StreetTextBox.BackColor = Color.LightPink;
-                    _isValidStreet = false;
+                StreetTextBox.BackColor = Color.LightPink;
+                _isValidStreet = false;
+            }
+
+            catch (FormatException)
+            {
+                StreetTextBox.BackColor = Color.LightPink;
+                _isValidStreet = false;
             }
         }
 
@@ -126,14 +158,23 @@ namespace ObjectOrientedPractics.View.Controls
         {
             try
             {
-                    CustomerAddress.Building = BuildingTextBox.Text;
+                if (!string.IsNullOrEmpty(BuildingTextBox.Text))
+                {
+                    _address.Building = BuildingTextBox.Text;
                     BuildingTextBox.BackColor = Color.White;
                     _isValidBuilding = true;
+                }
             }
             catch (ArgumentException)
             {
-                    BuildingTextBox.BackColor = Color.LightPink;
-                    _isValidBuilding = false;
+                BuildingTextBox.BackColor = Color.LightPink;
+                _isValidBuilding = false;
+            }
+
+            catch (FormatException)
+            {
+                BuildingTextBox.BackColor = Color.LightPink;
+                _isValidBuilding = false;
             }
         }
 
@@ -141,29 +182,25 @@ namespace ObjectOrientedPractics.View.Controls
         {
             try
             {
-                CustomerAddress.Apartment = ApartmentTextBox.Text;
-                ApartmentTextBox.BackColor = Color.White;
-                _isValidApartment = true;
+                if (!string.IsNullOrEmpty(ApartmentTextBox.Text))
+                {
+                    _address.Apartment = ApartmentTextBox.Text;
+                    ApartmentTextBox.BackColor = Color.White;
+                    _isValidApartment = true;
+                }
             }
             catch (ArgumentException)
             {
                 ApartmentTextBox.BackColor = Color.LightPink;
                 _isValidApartment = false;
             }
-        }
 
-        /// <summary>
-        /// Включает/выключает поля.
-        /// </summary>
-        /// <param name="flag">Включить - True/Выключить - False.</param>
-        public void ToggleAddressTextBoxes(bool flag)
-        {
-                IndexTextBox.Enabled = flag;
-                CountryTextBox.Enabled = flag;
-                CityTextBox.Enabled = flag;
-                StreetTextBox.Enabled = flag;
-                BuildingTextBox.Enabled = flag;
-                ApartmentTextBox.Enabled = flag;
+            catch (FormatException)
+            {
+                ApartmentTextBox.BackColor = Color.LightPink;
+                _isValidApartment = false;
+
+            }
         }
 
         /// <summary>
@@ -172,17 +209,11 @@ namespace ObjectOrientedPractics.View.Controls
         public void AddressClear()
         {
             IndexTextBox.Clear();
-            IndexTextBox.BackColor = Color.White;
             CountryTextBox.Clear();
-            CountryTextBox.BackColor = Color.White;
             CityTextBox.Clear();
-            CityTextBox.BackColor = Color.White;
             StreetTextBox.Clear();
-            StreetTextBox.BackColor = Color.White;
             BuildingTextBox.Clear();
-            BuildingTextBox.BackColor = Color.White;
             ApartmentTextBox.Clear();
-            ApartmentTextBox.BackColor = Color.White;
         }
 
         /// <summary>
@@ -214,185 +245,3 @@ namespace ObjectOrientedPractics.View.Controls
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//private void IndexTextBox_TextChanged(object sender, EventArgs e)
-//{
-//    try
-//    {
-//        if (!string.IsNullOrEmpty(IndexTextBox.Text) & int.TryParse(IndexTextBox.Text, out var number))
-//        {
-//            _address.Index = number;
-//            IndexTextBox.BackColor = Color.White;
-//            ExceptionToolTip.SetToolTip(IndexTextBox, null);
-//            _isValidIndex = true;
-//        }
-//    }
-//    catch (ArgumentException)
-//    {
-//        IndexTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(IndexTextBox, "Шестизначное число!");
-//        _isValidIndex = false;
-//    }
-
-//    catch (FormatException)
-//    {
-//        IndexTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(IndexTextBox, "Шестизначное число!");
-//        _isValidIndex = false;
-//    }
-//}
-
-//private void CountryTextBox_TextChanged(object sender, EventArgs e)
-//{
-//    try
-//    {
-//        if (!string.IsNullOrEmpty(CountryTextBox.Text))
-//        {
-//            _address.Country = CountryTextBox.Text;
-//            CountryTextBox.BackColor = Color.White;
-//            ExceptionToolTip.SetToolTip(CountryTextBox, null);
-//            _isValidCountry = true;
-//        }
-//    }
-//    catch (ArgumentException)
-//    {
-//        CountryTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(CountryTextBox, "Не более 50 символов!");
-//        _isValidCountry = false;
-//    }
-
-//    catch (FormatException)
-//    {
-//        CountryTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(CountryTextBox, "Не более 50 символов!");
-//        _isValidCountry = false;
-//    }
-//}
-
-//private void CityTextBox_TextChanged(object sender, EventArgs e)
-//{
-//    try
-//    {
-//        if (!string.IsNullOrEmpty(CityTextBox.Text))
-//        {
-//            _address.City = CityTextBox.Text;
-//            CityTextBox.BackColor = Color.White;
-//            ExceptionToolTip.SetToolTip(CityTextBox, null);
-//            _isValidCity = true;
-//        }
-//    }
-//    catch (ArgumentException)
-//    {
-//        CityTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(CityTextBox, "Не более 50 символов!");
-//        _isValidCity = false;
-//    }
-
-//    catch (FormatException)
-//    {
-//        CityTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(CityTextBox, "Не более 50 символов!");
-//        _isValidCity = false;
-//    }
-//}
-
-//private void StreetTextBox_TextChanged(object sender, EventArgs e)
-//{
-//    try
-//    {
-//        if (!string.IsNullOrEmpty(StreetTextBox.Text))
-//        {
-//            _address.Street = StreetTextBox.Text;
-//            StreetTextBox.BackColor = Color.White;
-//            ExceptionToolTip.SetToolTip(StreetTextBox, null);
-//            _isValidStreet = true;
-//        }
-//    }
-//    catch (ArgumentException)
-//    {
-//        StreetTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(StreetTextBox, "Не более 100 символов!");
-//        _isValidStreet = false;
-//    }
-
-//    catch (FormatException)
-//    {
-//        StreetTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(StreetTextBox, "Не более 100 символов!");
-//        _isValidStreet = false;
-//    }
-//}
-
-//private void BuildingTextBox_TextChanged(object sender, EventArgs e)
-//{
-//    try
-//    {
-//        if (!string.IsNullOrEmpty(BuildingTextBox.Text))
-//        {
-//            _address.Building = BuildingTextBox.Text;
-//            BuildingTextBox.BackColor = Color.White;
-//            ExceptionToolTip.SetToolTip(BuildingTextBox, null);
-//            _isValidBuilding = true;
-//        }
-//    }
-//    catch (ArgumentException)
-//    {
-//        BuildingTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(BuildingTextBox, "Не более 10 символов!");
-//        _isValidBuilding = false;
-//    }
-
-//    catch (FormatException)
-//    {
-//        BuildingTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(BuildingTextBox, "Не более 10 символов!");
-//        _isValidBuilding = false;
-//    }
-//}
-
-//private void ApartmentTextBox_TextChanged(object sender, EventArgs e)
-//{
-//    try
-//    {
-//        if (!string.IsNullOrEmpty(ApartmentTextBox.Text))
-//        {
-//            _address.Apartment = ApartmentTextBox.Text;
-//            ApartmentTextBox.BackColor = Color.White;
-//            ExceptionToolTip.SetToolTip(ApartmentTextBox, null);
-//            _isValidApartment = true;
-//        }
-//    }
-//    catch (ArgumentException)
-//    {
-//        ApartmentTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(ApartmentTextBox, "Не более 10 символов!");
-//        _isValidApartment = false;
-//    }
-
-//    catch (FormatException)
-//    {
-//        ApartmentTextBox.BackColor = Color.LightPink;
-//        ExceptionToolTip.SetToolTip(ApartmentTextBox, "Не более 10 символов!");
-//        _isValidApartment = false;
-
-//    }
-//}

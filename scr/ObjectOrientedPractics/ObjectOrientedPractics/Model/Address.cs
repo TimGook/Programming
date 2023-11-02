@@ -50,7 +50,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueValidator.AssertIntInRange(value, 999999, 0, "Неверное значение почтового индекса. Шестизначное число.");
+                ValueValidator.AssertIntInRange(value, 999999, 100000, "Неверное значение почтового индекса. Шестизначное число.");
                 _index = value;
             }
         }
