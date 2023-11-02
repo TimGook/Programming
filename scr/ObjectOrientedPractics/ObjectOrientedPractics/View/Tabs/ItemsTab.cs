@@ -15,6 +15,9 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class ItemsTab : UserControl
     {
+        //Категории товара.
+        object[] _categoryValues = Enum.GetValues(typeof(Category)).Cast<object>().ToArray();
+
         public ItemsTab()
         {
             InitializeComponent();
@@ -25,8 +28,13 @@ namespace ObjectOrientedPractics.View.Tabs
             ToggleInputBoxes(false);
             ApplyItemInfoChangesButton.Enabled = false;
             ApplyItemInfoChangesButton.Visible = false;
-        }
 
+            CategoryComboBox.Items.AddRange(_categoryValues);
+            CategoryComboBox.SelectedItem = _categoryValues[0];
+            //CategoryComboBox.DataSource = Enum.GetValues(typeof(Category));
+            //CategoryComboBox.SelectedIndex = 0;
+        }
+        
         /// <summary>
         /// Правильность ввода название товара.
         /// </summary>
@@ -68,6 +76,22 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private int _selectedIndex;
 
+        /// <summary>
+        /// Возвращает и задаёт список покупателей.
+        /// </summary>
+        internal List<Item> Items
+        {
+            get
+            {
+                return _itemsList;
+            }
+            set
+            {
+                _itemsList = value;
+                Sort();
+            }
+        }
+
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ItemsListBox.SelectedIndex != -1)
@@ -78,6 +102,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 ItemDescriptionTextBox.Text = _clonedCurrentItem.Info;
                 ItemCostTextBox.Text = _clonedCurrentItem.Cost.ToString();
                 ItemIdTextBox.Text = _clonedCurrentItem.Id.ToString();
+                CategoryComboBox.SelectedItem = _clonedCurrentItem.Category;
                 EditItemButton.Enabled = true;
                 ApplyItemInfoChangesButton.Enabled = false;
                 ApplyItemInfoChangesButton.Visible = false;
@@ -155,14 +180,6 @@ namespace ObjectOrientedPractics.View.Tabs
                 ItemErrorsLabel.Visible = true;
                 CheckData();
             }
-            //catch (OverflowException)
-            //{
-            //    IsValidItemName = false;
-            //    ItemNameTextBox.BackColor = Color.LightPink;
-            //    ItemErrorsLabel.Text = "Необходимо указать название товара.";
-            //    ItemErrorsLabel.Visible = true;
-            //    CheckData();
-            //}
         }
 
         private void ItemDescriptionTextBox_TextChanged(object sender, EventArgs e)
@@ -194,14 +211,6 @@ namespace ObjectOrientedPractics.View.Tabs
                 ItemErrorsLabel.Visible = true;
                 CheckData();
             }
-            //catch (OverflowException)
-            //{
-            //    IsValidItemInfo = false;
-            //    ItemDescriptionTextBox.BackColor = Color.LightPink;
-            //    ItemErrorsLabel.Text = "Необходимо добавить описание товара.";
-            //    ItemErrorsLabel.Visible = true;
-            //    CheckData();
-            //}
         }
 
         private void ItemCostTextBox_TextChanged(object sender, EventArgs e)
@@ -233,14 +242,28 @@ namespace ObjectOrientedPractics.View.Tabs
                 ItemErrorsLabel.Visible = true;
                 CheckData();
             }
-            //catch (OverflowException)
-            //{
-            //    IsValidItemCost = false;
-            //    ItemCostTextBox.BackColor = Color.LightPink;
-            //    ItemErrorsLabel.Text = "Необходимо указать цену(числом), не превышающим 100000..";
-            //    ItemErrorsLabel.Visible = true;
-            //    CheckData();
-            //}
+        }
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_selectedIndex != -1)
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(CategoryComboBox.Text))
+                    {
+                        _clonedCurrentItem.Category = (Category)CategoryComboBox.SelectedItem;
+                        CategoryComboBox.BackColor = Color.White;
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    CategoryComboBox.BackColor = Color.LightPink;
+                }
+            }
+
+
+            //_clonedCurrentItem.Category = (Category)CategoryComboBox.SelectedItem;
         }
 
         private void ApplyItemInfoChangesButton_Click(object sender, EventArgs e)
@@ -259,7 +282,8 @@ namespace ObjectOrientedPractics.View.Tabs
                     _currentItem = new Item(
                         ItemNameTextBox.Text,
                         ItemDescriptionTextBox.Text,
-                        Int32.Parse(ItemCostTextBox.Text));
+                        Int32.Parse(ItemCostTextBox.Text),
+                        (Category)CategoryComboBox.SelectedItem);
                     _itemsList.Add(_currentItem);
                     Sort();
                     //ItemsSerializer.Save(_itemsList);
@@ -279,6 +303,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 ApplyItemInfoChangesButton.Visible = false;
                 ItemErrorsLabel.Visible = false;
                 ItemsListBox.SelectedIndex = -1;
+                //CategoryComboBox.SelectedIndex = 0;
             }
         }
 
@@ -308,6 +333,7 @@ namespace ObjectOrientedPractics.View.Tabs
             ItemNameTextBox.Enabled = value;
             ItemCostTextBox.Enabled = value;
             ItemDescriptionTextBox.Enabled = value;
+            CategoryComboBox.Enabled = value;
         }
 
         /// <summary>
@@ -319,6 +345,7 @@ namespace ObjectOrientedPractics.View.Tabs
             ItemDescriptionTextBox.Text = _currentItem.Info;
             ItemCostTextBox.Text = _currentItem.Cost.ToString();
             ItemIdTextBox.Text = _currentItem.Id.ToString();
+            CategoryComboBox.SelectedItem = _currentItem.Category;
         }
 
         /// <summary>
@@ -344,13 +371,10 @@ namespace ObjectOrientedPractics.View.Tabs
             ItemDescriptionTextBox.Clear();
             ItemCostTextBox.Clear();
             ItemIdTextBox.Clear();
+            //CategoryComboBox.SelectedItem = _categoryValues[0];
             ApplyItemInfoChangesButton.Enabled = true;
             ApplyItemInfoChangesButton.Visible = true;
             ItemErrorsLabel.Visible = false;
-            //PositionErrorLabel.Visible = false;
-            //EmploymentDateErrorLabel.Visible = false;
-            //SalaryErrorLabel.Visible = false;
-            //ApplyErrorLabel.Visible = false;
             ItemNameTextBox.BackColor = Color.White;
             ItemCostTextBox.BackColor = Color.White;
             ItemDescriptionTextBox.BackColor = Color.White;

@@ -33,6 +33,11 @@ namespace ObjectOrientedPractics.Model
         private double _cost;
 
         /// <summary>
+        /// Категория товара.
+        /// </summary>
+        public Category Category;
+
+        /// <summary>
         /// Возвращает идентификатор.
         /// </summary>
         public int Id { get; }
@@ -48,7 +53,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueValidator.AssertStringOnLength(value, 200, "Name");
+                ValueValidator.AssertStringOnLength(value, 0, 200, "Name");
                 _name = value;
             }
         }
@@ -64,7 +69,7 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueValidator.AssertStringOnLength(value, 1000, "Info");
+                ValueValidator.AssertStringOnLength(value, 0, 1000, "Info");
                 _info = value;
             }
         }
@@ -88,14 +93,16 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Создаёт экземпляр класса <see cref="Item"/>.
         /// </summary>
-        /// <param name="name"> Название товара. Не может быть больше 200 символов.</param>
-        /// <param name="info"> Описание товара. Не может быть больше 1000 символов</param>
-        /// <param name="cost"> Стоимость товара. Не можеть быть больше 100 000 и меньше 0.</param>
-        public Item(string name, string info, int cost)
+        /// <param name="name"> Название товара. Не может быть больше 200 символов. </param>
+        /// <param name="category"> Категория товара типа <see cref="Category">. </param>
+        /// <param name="info"> Описание товара. Не может быть больше 1000 символов. </param>
+        /// <param name="cost"> Стоимость товара. Не можеть быть больше 100 000 и меньше 0. </param>
+        public Item(string name, string info, int cost, Category category)
         {
             Name = name;
             Info = info;
             Cost = cost;
+            Category = category;
             _idCounter++;
             Id = _idCounter;
         }

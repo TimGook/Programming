@@ -25,7 +25,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Адрес заказчика.
         /// </summary>
-        private string _address;
+        private Address _address;
 
         /// <summary>
         /// Возвращает идентификатор.
@@ -43,24 +43,25 @@ namespace ObjectOrientedPractics.Model
             }
             set
             {
-                ValueValidator.AssertStringOnLength(value, 200, Fullname);
+                ValueValidator.AssertStringOnLength(value, 0, 200, Fullname);
                 _fullname = value;
             }
         }
 
         /// <summary>
-        /// Адрес заказчика.
+        /// Возвращает и задаёт адресс доставки.
         /// </summary>
-        public string Address
+        public Address Address
         {
             get
             {
-                return _address;              
+                return _address;
             }
+
             set
             {
-                ValueValidator.AssertStringOnLength(value, 500, Address);
                 _address = value;
+                //_address = new Address(value.Index, value.Country, value.City, value.Street, value.Building, value.Apartment);
             }
         }
 
@@ -68,8 +69,8 @@ namespace ObjectOrientedPractics.Model
         /// Создаёт экземпляр класса <see cref="Customer"/>.
         /// </summary>
         /// <param name="fullname"> Полное имя заказчика. Должно быть не больше 200 символов. </param>
-        /// <param name="address"> Адрес заказчика. Должно содержать не более 500 символов. </param>
-        public Customer(string fullname, string address)
+        /// <param name="address"> Адрес заказчика типа <see cref="Address">. </param>
+        public Customer(string fullname, Address address)
         {
             Fullname = fullname;
             Address = address;

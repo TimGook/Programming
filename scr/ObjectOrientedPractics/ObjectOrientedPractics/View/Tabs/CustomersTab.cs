@@ -9,83 +9,89 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.View.Controls;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class CustomersTab : UserControl
     {
-        public CustomersTab()
-        {
-            InitializeComponent();
-            //_customersList = CustomersSerializer.LoadCustomers();
-            CustomersListBox.DataSource = _customersList;
-            ClearCustomersInfo();
-            CustomersListBox.SelectedIndex = -1;
-            ToggleInputBoxes(false);
-            ApplyCustomerInfoChangesButton.Enabled = false;
-            ApplyCustomerInfoChangesButton.Visible = false;
-        }
-
         /// <summary>
-        /// Правильность ввода имени заказчика.
+        /// Список покупателей.
         /// </summary>
-        private bool IsValidCustomerName = true;
+        private List<Customer> _customers = new List<Customer>();
 
         /// <summary>
-        /// Правильность ввода адреса заказчика.
-        /// </summary>
-        private bool IsValidCustomerAddress = true;
-
-        /// <summary>
-        /// Список заказчиков.
-        /// </summary>
-        private List<Customer> _customersList = new List<Customer>();
-
-        /// <summary>
-        /// Выбранный заказчик.
+        /// Текущий покупатель.
         /// </summary>
         private Customer _currentCustomer = new Customer();
 
         /// <summary>
-        /// Копия выбранного заказчика.
+        /// Копия текущего покупателя для изменений.
         /// </summary>
-        private Customer _clonedCurrentCustomer = new Customer();
+        private Customer _copiedCurrentCustomer = new Customer();
 
         /// <summary>
-        /// Индекс текущего выбранного элемента для сортировки 
-        /// и сохранения выбранного элемента в ListBox.
+        /// Индекс текущего элемента ListBox.
         /// </summary>
-        private int _indexBeforeSort;
+        private int _selectedIndex = -1;
 
         /// <summary>
-        /// Индекс текущего элемента для добавления и редактирования элементов.
+        /// Правильность ввода имени покупателя. true or false.
         /// </summary>
-        private int _selectedIndex;
+        private bool _isValidFullName;
+
+
+        /// <summary>
+        /// Возвращает и задаёт список покупателей.
+        /// </summary>
+        internal List<Customer> Customers
+        {
+            get
+            {
+                return _customers;
+            }
+            set
+            {
+                _customers = value;
+                Sort();
+            }
+        }
+
+        public CustomersTab()
+        {
+            InitializeComponent();
+            //ProjectSerializer.CustomerssInfo(ref _customers);
+            Sort();
+            ClearCustomersInfo();
+            CustomersListBox.SelectedIndex = -1;
+            ToggleInputBoxes(false);
+        }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CustomersListBox.SelectedIndex != -1)
             {
+                _selectedIndex = CustomersListBox.SelectedIndex;
                 ToggleInputBoxes(false);
-                _clonedCurrentCustomer = (Customer)_customersList[CustomersListBox.SelectedIndex].Clone();
-                SelectedCustomerFullNameTextBox.Text = _clonedCurrentCustomer.Fullname;
-                SelectedCustomerAddressTextBox.Text = _clonedCurrentCustomer.Address;
-                SelectedCustomerIdTextBox.Text = _clonedCurrentCustomer.Id.ToString();
+                _copiedCurrentCustomer = (Customer)_customers[CustomersListBox.SelectedIndex].Clone();
+                SelectedCustomerFullNameTextBox.Text = _copiedCurrentCustomer.Fullname;
+                CustomerAddressControl.Address = _copiedCurrentCustomer.Address;
+                SelectedCustomerIdTextBox.Text = _copiedCurrentCustomer.Id.ToString();
                 EditCustomerButton.Enabled = true;
                 ApplyCustomerInfoChangesButton.Enabled = false;
-                ApplyCustomerInfoChangesButton.Visible = false;
+            }
+            else
+            {
+                EditCustomerButton.Enabled = false;
             }
         }
 
         private void AddCustomerButton_Click(object sender, EventArgs e)
         {
-            ClearCustomersInfo();
-            CustomersListBox.SelectedIndex = -1;
             _selectedIndex = -1;
+            ClearCustomersInfo();
+            CustomersListBox.SelectedIndex = _selectedIndex;
             ToggleInputBoxes(true);
-            EditCustomerButton.Enabled = false;
-            ApplyCustomerInfoChangesButton.Enabled = true;
-            ApplyCustomerInfoChangesButton.Visible = true;
         }
 
         private void RemoveCustomerButton_Click(object sender, EventArgs e)
@@ -94,15 +100,13 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 return;
             }
-            _currentCustomer = _customersList[CustomersListBox.SelectedIndex];
-            _customersList.Remove(_currentCustomer);
+            _currentCustomer = _customers[CustomersListBox.SelectedIndex];
+            _customers.Remove(_currentCustomer);
             CustomersListBox.SelectedIndex = -1;
-            //CustomersSerializer.Save(_customersList);
+            //ProjectSerializer.SaveItems(ref CustomersListBox, _customers);
             Sort();
             ClearCustomersInfo();
-            EditCustomerButton.Enabled = false;
             ApplyCustomerInfoChangesButton.Enabled = false;
-            ApplyCustomerInfoChangesButton.Visible = false;
         }
 
         private void EditCustomerButton_Click(object sender, EventArgs e)
@@ -113,195 +117,133 @@ namespace ObjectOrientedPractics.View.Tabs
             }
 
             _selectedIndex = CustomersListBox.SelectedIndex;
-            _clonedCurrentCustomer = (Customer)_customersList[_selectedIndex].Clone();
+            _copiedCurrentCustomer = (Customer)_customers[_selectedIndex].Clone();
             ToggleInputBoxes(true);
-            ApplyCustomerInfoChangesButton.Enabled = true;
-            ApplyCustomerInfoChangesButton.Visible = true;
         }
 
-        private void CustomerNameTextBox_TextChanged(object sender, EventArgs e)
+        private void SelectedCustomerFullNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (_selectedIndex != -1)
             {
-                if (!string.IsNullOrEmpty(SelectedCustomerFullNameTextBox.Text))
+                try
                 {
-                    _clonedCurrentCustomer.Fullname = SelectedCustomerFullNameTextBox.Text;
-                    SelectedCustomerFullNameTextBox.BackColor = Color.White;
-                    IsValidCustomerName = true;
-                    CustomerErrorsLabel.Visible = false;
+                    if (!string.IsNullOrEmpty(SelectedCustomerFullNameTextBox.Text))
+                    {
+                        _copiedCurrentCustomer.Fullname = SelectedCustomerFullNameTextBox.Text;
+                        SelectedCustomerFullNameTextBox.BackColor = Color.White;
+                        _isValidFullName = true;
+                        CheckData();
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    _isValidFullName = false;
+                    SelectedCustomerFullNameTextBox.BackColor = Color.LightPink;
+                    CheckData();
+                }
+
+                catch (FormatException)
+                {
+                    _isValidFullName = false;
+                    SelectedCustomerFullNameTextBox.BackColor = Color.LightPink;
                     CheckData();
                 }
             }
-            catch (ArgumentException)
-            {
-                IsValidCustomerName = false;
-                SelectedCustomerFullNameTextBox.BackColor = Color.LightPink;
-                CustomerErrorsLabel.Text = "Необходимо указать имя заказчика.";
-                CustomerErrorsLabel.Visible = true;
-                CheckData();
-            }
-            catch (FormatException)
-            {
-                IsValidCustomerName = false;
-                SelectedCustomerFullNameTextBox.BackColor = Color.LightPink;
-                CustomerErrorsLabel.Text = "Необходимо указать имя заказчика.";
-                CustomerErrorsLabel.Visible = true;
-                CheckData();
-            }
-            //catch (OverflowException)
-            //{
-            //    IsValidCustomerName = false;
-            //    SelectedCustomerFullNameTextBox.BackColor = Color.LightPink;
-            //    CustomerErrorsLabel.Text = "Необходимо указать имя заказчика.";
-            //    CustomerErrorsLabel.Visible = true;
-            //    CheckData();
-            //}
-        }
-
-        private void CustomerAddressTextBox_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(SelectedCustomerAddressTextBox.Text))
-                {
-                    _clonedCurrentCustomer.Address = SelectedCustomerAddressTextBox.Text;
-                    SelectedCustomerAddressTextBox.BackColor = Color.White;
-                    IsValidCustomerAddress = true;
-                    CustomerErrorsLabel.Visible = false;
-                    CheckData();
-                }
-            }
-            catch (ArgumentException)
-            {
-                IsValidCustomerAddress = false;
-                SelectedCustomerAddressTextBox.BackColor = Color.LightPink;
-                CustomerErrorsLabel.Text = "Необходимо указать адрес заказчика.";
-                CustomerErrorsLabel.Visible = true;
-                CheckData();
-            }
-            catch (FormatException)
-            {
-                IsValidCustomerAddress = false;
-                SelectedCustomerAddressTextBox.BackColor = Color.LightPink;
-                CustomerErrorsLabel.Text = "Необходимо указать адрес заказчика.";
-                CustomerErrorsLabel.Visible = true;
-                CheckData();
-            }
-            //catch (OverflowException)
-            //{
-            //    IsValidCustomerAddress = false;
-            //    SelectedCustomerAddressTextBox.BackColor = Color.LightPink;
-            //    CustomerErrorsLabel.Text = "Необходимо указать адрес заказчика.";
-            //    CustomerErrorsLabel.Visible = true;
-            //    CheckData();
-            //}
         }
 
         private void ApplyCustomerInfoChangesButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(SelectedCustomerFullNameTextBox.Text) ||
-                string.IsNullOrEmpty(SelectedCustomerAddressTextBox.Text))
+            if (string.IsNullOrEmpty(SelectedCustomerFullNameTextBox.Text) || CustomerAddressControl.AddressIsNullOrEmpty())
             {
-                CustomerErrorsLabel.Text = "Необходимо заполнить все поля.";
-                CustomerErrorsLabel.Visible = true;
+                MessageBox.Show("Не введены данные!", "Ошибка ввода данных полей!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-            else
-            {
-                if (_selectedIndex == -1)
-                {
-                    _currentCustomer = new Customer(
-                        SelectedCustomerFullNameTextBox.Text,
-                        SelectedCustomerAddressTextBox.Text);
-                    _customersList.Add(_currentCustomer);
-                    Sort();
-                    //CustomersSerializer.Save(_customersList);
-                }
-                else
-                {
-                    _customersList[_selectedIndex] = _clonedCurrentCustomer;
-                    _currentCustomer = _clonedCurrentCustomer;
-                }
 
+            if (_selectedIndex == -1)
+            {
+                _currentCustomer = new Customer(SelectedCustomerFullNameTextBox.Text,
+                   new Address(CustomerAddressControl.Address.Index, CustomerAddressControl.Address.Country,
+                  CustomerAddressControl.Address.City, CustomerAddressControl.Address.Street,
+                  CustomerAddressControl.Address.Building, CustomerAddressControl.Address.Apartment));
+                _customers.Add(_currentCustomer);
                 Sort();
-                UpdateCusotmerInfo();
-                //CustomersSerializer.Save(_customersList);
-                ToggleInputBoxes(false);
                 ClearCustomersInfo();
-                ApplyCustomerInfoChangesButton.Enabled = false;
-                ApplyCustomerInfoChangesButton.Visible = false;
-                CustomerErrorsLabel.Visible = false;
-                CustomersListBox.SelectedIndex = -1;
-            }
-        }
-
-            /// <summary>
-            /// Метод, проверяющий значения текстовых полей и не дающий их сохранить в случае неправильного ввода.
-            /// </summary>
-            private void CheckData()
-        {
-            if (IsValidCustomerName && IsValidCustomerAddress)
-            {
-                ApplyCustomerInfoChangesButton.Enabled = true;
-                ApplyCustomerInfoChangesButton.Visible = true;
+                ToggleInputBoxes(false);
+                return;
             }
             else
             {
-                ApplyCustomerInfoChangesButton.Enabled = false;
-                ApplyCustomerInfoChangesButton.Visible = false;
+                _customers[_selectedIndex] = _copiedCurrentCustomer;
+                _currentCustomer = _copiedCurrentCustomer;
             }
+
+            _selectedIndex = -1;
+            Sort();
+            ClearCustomersInfo();
+            ToggleInputBoxes(false);
         }
 
         /// <summary>
-        /// Метод, который включает или отключает все элементы.
+        /// Вкл. и выкл. поля для данных.
         /// </summary>
-        /// <param name="value">True or false.</param>
+        /// <param name="value">true or false.</param>
         private void ToggleInputBoxes(bool value)
         {
             SelectedCustomerFullNameTextBox.Enabled = value;
-            SelectedCustomerAddressTextBox.Enabled = value;
+            CustomerAddressControl.Enabled = value;
+            ApplyCustomerInfoChangesButton.Enabled = value;
         }
 
         /// <summary>
-        /// Метод, который обновляет данные выбранного товара в TextBox и ComboBox.
-        /// </summary>
-        private void UpdateCusotmerInfo()
-        {
-            SelectedCustomerFullNameTextBox.Text = _currentCustomer.Fullname;
-            SelectedCustomerAddressTextBox.Text = _currentCustomer.Address;
-            SelectedCustomerIdTextBox.Text = _currentCustomer.Id.ToString();
-        }
-
-        /// <summary>
-        /// Метод, который сортирует <see cref="_customersList"/> и <see cref="CustomersListBox"/>
-        /// в алфавитном порядке.
+        /// Сортировка <see cref="CustomersListBox"/>.
         /// </summary>
         private void Sort()
         {
-            _indexBeforeSort = CustomersListBox.SelectedIndex;
+            var _indexBeforeSort = CustomersListBox.SelectedIndex;
             CustomersListBox.SelectedIndexChanged -= CustomersListBox_SelectedIndexChanged;
-            _customersList = _customersList.OrderBy(customer => customer.Fullname).ToList();
-            CustomersListBox.DataSource = _customersList;
+            _customers = _customers.OrderBy(contact => contact.ToString()).ToList();
+            CustomersListBox.DataSource = _customers;
             CustomersListBox.SelectedIndex = _indexBeforeSort;
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
         }
 
         /// <summary>
-        /// Метод, который очищает текстовые поля и ComboBox.
+        /// Обновить информацию о товарах в <see cref="CustomersListBox"/>.
+        /// </summary>
+        private void UpdateCustomersInfo()
+        {
+            SelectedCustomerFullNameTextBox.Text = _currentCustomer.Fullname.ToString();
+            CustomerAddressControl.Address = _currentCustomer.Address;
+            SelectedCustomerIdTextBox.Text = _currentCustomer.Id.ToString();
+        }
+
+        /// <summary>
+        /// Очистить поля данных. 
+        /// <see cref="FullNameTextBox"/>
+        /// <see cref="AdressTextBox"/>
+        /// <see cref="IdTextBox"/>
         /// </summary>
         private void ClearCustomersInfo()
         {
             SelectedCustomerFullNameTextBox.Clear();
-            SelectedCustomerAddressTextBox.Clear();
+            CustomerAddressControl.AddressClear();
             SelectedCustomerIdTextBox.Clear();
             ApplyCustomerInfoChangesButton.Enabled = true;
-            ApplyCustomerInfoChangesButton.Visible = true;
-            CustomerErrorsLabel.Visible = false;
-            //PositionErrorLabel.Visible = false;
-            //EmploymentDateErrorLabel.Visible = false;
-            //SalaryErrorLabel.Visible = false;
-            //ApplyErrorLabel.Visible = false;
-            SelectedCustomerFullNameTextBox.BackColor = Color.White;
-            SelectedCustomerAddressTextBox.BackColor = Color.White;
+        }
+
+        /// <summary>
+        /// Проверка на правильный ввод всех полей.
+        /// </summary>
+        public void CheckData()
+        {
+            if (CustomerAddressControl.IsValidAddress() && _isValidFullName)
+            {
+                ApplyCustomerInfoChangesButton.Enabled = true;
+            }
+            else
+            {
+                ApplyCustomerInfoChangesButton.Enabled = false;
+            }
         }
     }
 }
