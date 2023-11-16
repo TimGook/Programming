@@ -25,12 +25,52 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Адрес заказчика.
         /// </summary>
-        private Address _address;
+        private Address _address = new Address();
+
+        /// <summary>
+        /// Корзина покупателя.
+        /// </summary>
+        private Cart _cart = new Cart();
+
+        /// <summary>
+        /// Список заказов.
+        /// </summary>
+        private List<Order> _orders = new List<Order>();
 
         /// <summary>
         /// Возвращает идентификатор.
         /// </summary>
         public int Id { get; }
+
+        /// <summary>
+        /// Задаёт и возвращает список заказов.
+        /// </summary>
+        public List<Order> Orders
+        {
+            get
+            {
+                return _orders;
+            }
+            set
+            {
+                _orders = value;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает и задаёт корзину товара <see cref="Cart"/>.
+        /// </summary>
+        public Cart Cart
+        {
+            get
+            {
+                return _cart;
+            }
+            set
+            {
+                _cart = value;
+            }
+        }
 
         /// <summary>
         /// Задаёт и возвращает полное имя заказчика.
@@ -61,7 +101,6 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 _address = value;
-                //_address = new Address(value.Index, value.Country, value.City, value.Street, value.Building, value.Apartment);
             }
         }
 
@@ -76,6 +115,7 @@ namespace ObjectOrientedPractics.Model
             Address = address;
             _idCounter++;
             Id = _idCounter;
+            Cart = new Cart();
         }
 
         /// <summary>
@@ -83,6 +123,7 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public Customer()
         {
+            Cart = new Cart();
             _idCounter++;
             Id = _idCounter;
         }
