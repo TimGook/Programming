@@ -14,13 +14,31 @@ namespace ObjectOrientedPractics
 {
     public partial class MainForm : Form
     {
-        Store _store = new Store();
+        /// <summary>
+        /// Магазин. Хранит в себе экземпляры товаров и заказчиков.
+        /// </summary>
+        private Store _store = new Store();
 
         public MainForm()
         {
             InitializeComponent();
-            ItemsTab.Items = _store.Items;
-            CustomersTab.Customers = _store.Customers;
+            
+        }
+
+        private void MainFormTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _store.Items = ItemsTab.Items;
+            _store.Customers = CustomersTab.Customers;
+
+            if (MainFormTabControl.SelectedIndex == 2)
+            {
+                CartsTab.Customers = _store.Customers;
+                CartsTab.Items = _store.Items;
+            }
+            if (MainFormTabControl.SelectedIndex == 3)
+            {
+                OrdersTab.Customers = _store.Customers;
+            }
         }
     }
 }

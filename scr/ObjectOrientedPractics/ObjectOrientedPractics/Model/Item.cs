@@ -35,7 +35,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Категория товара.
         /// </summary>
-        public Category Category;
+        public Category Category = new Category();
 
         /// <summary>
         /// Возвращает идентификатор.

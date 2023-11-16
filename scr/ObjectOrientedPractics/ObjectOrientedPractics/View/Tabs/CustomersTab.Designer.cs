@@ -196,7 +196,7 @@
             this.CustomerErrorsLabel.AutoSize = true;
             this.CustomerErrorsLabel.Location = new System.Drawing.Point(7, 681);
             this.CustomerErrorsLabel.Name = "CustomerErrorsLabel";
-            this.CustomerErrorsLabel.Size = new System.Drawing.Size(34, 15);
+            this.CustomerErrorsLabel.Size = new System.Drawing.Size(29, 13);
             this.CustomerErrorsLabel.TabIndex = 6;
             this.CustomerErrorsLabel.Text = "Error";
             // 
@@ -228,7 +228,7 @@
             this.SelectedCustomerAddressLabel.AutoSize = true;
             this.SelectedCustomerAddressLabel.Location = new System.Drawing.Point(7, 72);
             this.SelectedCustomerAddressLabel.Name = "SelectedCustomerAddressLabel";
-            this.SelectedCustomerAddressLabel.Size = new System.Drawing.Size(100, 15);
+            this.SelectedCustomerAddressLabel.Size = new System.Drawing.Size(89, 13);
             this.SelectedCustomerAddressLabel.TabIndex = 2;
             this.SelectedCustomerAddressLabel.Text = "Delivery Address:";
             // 
@@ -237,7 +237,7 @@
             this.SelectedCustomerFullNameLabel.AutoSize = true;
             this.SelectedCustomerFullNameLabel.Location = new System.Drawing.Point(6, 46);
             this.SelectedCustomerFullNameLabel.Name = "SelectedCustomerFullNameLabel";
-            this.SelectedCustomerFullNameLabel.Size = new System.Drawing.Size(67, 15);
+            this.SelectedCustomerFullNameLabel.Size = new System.Drawing.Size(57, 13);
             this.SelectedCustomerFullNameLabel.TabIndex = 1;
             this.SelectedCustomerFullNameLabel.Text = "Full Name:";
             // 
@@ -246,7 +246,7 @@
             this.CustomerIdLabel.AutoSize = true;
             this.CustomerIdLabel.Location = new System.Drawing.Point(7, 16);
             this.CustomerIdLabel.Name = "CustomerIdLabel";
-            this.CustomerIdLabel.Size = new System.Drawing.Size(22, 15);
+            this.CustomerIdLabel.Size = new System.Drawing.Size(21, 13);
             this.CustomerIdLabel.TabIndex = 0;
             this.CustomerIdLabel.Text = "ID:";
             // 
