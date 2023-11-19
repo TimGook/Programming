@@ -43,6 +43,11 @@ namespace ObjectOrientedPractics.Model
         public int Id { get; }
 
         /// <summary>
+        /// Является ли заказчик приоритетным в обслуживании.
+        /// </summary>
+        public bool IsPriority { get; set; } = false;
+
+        /// <summary>
         /// Задаёт и возвращает список заказов.
         /// </summary>
         public List<Order> Orders

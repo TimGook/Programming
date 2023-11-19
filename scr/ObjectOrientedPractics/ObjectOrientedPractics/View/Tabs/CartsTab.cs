@@ -13,6 +13,9 @@ namespace ObjectOrientedPractics.View.Tabs
 {
     public partial class CartsTab : UserControl
     {
+        /// <summary>
+        /// Задаёт список товаров.
+        /// </summary>
         internal List<Item> Items
         {
             set
@@ -22,6 +25,9 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Задаёт список заказчиков.
+        /// </summary>
         internal List<Customer> Customers
         {
             set
@@ -31,8 +37,14 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Текущий заказчик.
+        /// </summary>
         private Customer _currentCustomer = new Customer();
 
+        /// <summary>
+        /// Список товаров в корзине.
+        /// </summary>
         private BindingList<Item> _currentItems;
 
         public CartsTab()
@@ -76,11 +88,26 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (CustomersComboBox.SelectedIndex != -1)
             {
-                _currentCustomer.Cart.Items = _currentItems.ToList<Item>();
-                _currentCustomer.Orders.Add(new Order(_currentCustomer.Address, _currentCustomer.Cart, OrderStatus.New, DateTime.Now.ToString()));
-                _currentItems = null;
-                _currentCustomer = null;
-                ClearOrder();
+                if (CartListBox.Items.Count == 0)
+                {
+                    return;
+                }
+
+                if (_currentCustomer.IsPriority == false)
+                {
+                    _currentCustomer.Cart.Items = _currentItems.ToList<Item>();
+                    _currentCustomer.Orders.Add(new Order(_currentCustomer.Address, _currentCustomer.Cart, OrderStatus.New, DateTime.Now.ToString()));
+                    _currentItems = new BindingList<Item>(); ;
+                    ClearOrder();
+                }
+
+                else
+                {
+                    _currentCustomer.Cart.Items = _currentItems.ToList<Item>();
+                    _currentCustomer.Orders.Add(new PriorityOrder(_currentCustomer.Address, _currentCustomer.Cart, OrderStatus.New, DateTime.Now.ToString()));
+                    _currentItems = new BindingList<Item>(); ;
+                    ClearOrder();
+                }
             }
         }
 
@@ -97,12 +124,16 @@ namespace ObjectOrientedPractics.View.Tabs
         private void ClearCartButton_Click(object sender, EventArgs e)
         {
             ClearOrder();
-            CartListBox.DataSource = null;
         }
 
+        /// <summary>
+        /// Очистка корзины.
+        /// </summary>
         private void ClearOrder()
         {
             _currentItems = new BindingList<Item>();
+            _currentCustomer.Cart.Items = _currentItems.ToList<Item>();
+            CartListBox.DataSource = null;
             AmountCostLabel.Text = "0.0";
         }
     }

@@ -133,5 +133,19 @@ namespace ObjectOrientedPractics.Model
         {
             return MemberwiseClone();
         }
+
+        /// <summary>
+        /// Генерирует случайный товар.
+        /// </summary>
+        /// <returns>Случайный товар.</returns>
+        public static Item GenerateRandomItem()
+        {
+            Random random = new Random();
+            string name = $"Случайный товар ({_idCounter + 1}).";
+            string info = "Случайно сгенерированный товар.";
+            int cost = random.Next(0, 10000);
+            Category category = (Category)random.Next(0, Enum.GetNames(typeof(DesiredDeliveryTime)).Length);
+            return new Item(name, info, cost, category);
+        }
     }
 }

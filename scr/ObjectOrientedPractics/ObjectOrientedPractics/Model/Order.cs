@@ -14,32 +14,32 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Целочисленный уникальный идентификатор.
         /// </summary>
-        private int _id;
+        protected int _id;
 
         /// <summary>
         /// Поле даты заказа.
         /// </summary>
-        private string _date;
+        protected string _date;
 
         /// <summary>
         /// Список товаров.
         /// </summary>
-        private List<Item> _items;
+        protected List<Item> _items;
 
         /// <summary>
         /// Счетчик заказов.
         /// </summary>
-        private static int _allOrdersCount = 0;
+        protected static int _allOrdersCount = 0;
 
         /// <summary>
         /// Общая стоимость товаров.
         /// </summary>
-        private double _amount;
+        protected double _amount;
 
         /// <summary>
         /// Адрес покупателя.
         /// </summary>
-        private Address _address = new Address();
+        protected Address _address = new Address();
 
         /// <summary>
         /// Возвращает значение уникального идентификатора.
@@ -47,11 +47,12 @@ namespace ObjectOrientedPractics.Model
         public int Id
         {
             get { return _id; }
-            private set
+            protected set
             {
                 _id = value;
             }
         }
+
         /// <summary>
         /// Список товаров.
         /// </summary>
@@ -76,7 +77,7 @@ namespace ObjectOrientedPractics.Model
             {
                 return _date;
             }
-            private set
+            protected set
             {
                 _date = value;
             }
@@ -103,7 +104,7 @@ namespace ObjectOrientedPractics.Model
         public int AllOrdersCount
         {
             get => _allOrdersCount;
-            private set => _allOrdersCount = value;
+            protected set => _allOrdersCount = value;
         }
 
         /// <summary>
@@ -111,7 +112,15 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public double Amount
         {
-            get => _amount;
+            get
+            {
+                if (Items == null || Items.Count == 0)
+                {
+                    return 0.0;
+                }
+                return Items.Sum(item => item.Cost);
+            }
+            // TODO: удалить сеттер.
             set => _amount = value;
         }
 

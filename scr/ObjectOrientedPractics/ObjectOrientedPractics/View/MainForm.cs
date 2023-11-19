@@ -22,7 +22,6 @@ namespace ObjectOrientedPractics
         public MainForm()
         {
             InitializeComponent();
-            
         }
 
         private void MainFormTabControl_SelectedIndexChanged(object sender, EventArgs e)
@@ -40,5 +39,6 @@ namespace ObjectOrientedPractics
                 OrdersTab.Customers = _store.Customers;
             }
         }
+
     }
 }

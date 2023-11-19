@@ -77,6 +77,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 SelectedCustomerFullNameTextBox.Text = _copiedCurrentCustomer.Fullname;
                 CustomerAddressControl.Address = _copiedCurrentCustomer.Address;
                 SelectedCustomerIdTextBox.Text = _copiedCurrentCustomer.Id.ToString();
+                PriorityCheckBox.Checked = _copiedCurrentCustomer.IsPriority;
                 EditCustomerButton.Enabled = true;
                 ApplyCustomerInfoChangesButton.Enabled = false;
             }
@@ -165,6 +166,7 @@ namespace ObjectOrientedPractics.View.Tabs
                    new Address(CustomerAddressControl.Address.Index, CustomerAddressControl.Address.Country,
                   CustomerAddressControl.Address.City, CustomerAddressControl.Address.Street,
                   CustomerAddressControl.Address.Building, CustomerAddressControl.Address.Apartment));
+                _currentCustomer.IsPriority = PriorityCheckBox.Checked;
                 _customers.Add(_currentCustomer);
                 Sort();
                 ClearCustomersInfo();
@@ -192,6 +194,7 @@ namespace ObjectOrientedPractics.View.Tabs
             SelectedCustomerFullNameTextBox.Enabled = value;
             CustomerAddressControl.Enabled = value;
             ApplyCustomerInfoChangesButton.Enabled = value;
+            PriorityCheckBox.Enabled = value;
         }
 
         /// <summary>
@@ -215,6 +218,7 @@ namespace ObjectOrientedPractics.View.Tabs
             SelectedCustomerFullNameTextBox.Text = _currentCustomer.Fullname.ToString();
             CustomerAddressControl.Address = _currentCustomer.Address;
             SelectedCustomerIdTextBox.Text = _currentCustomer.Id.ToString();
+            PriorityCheckBox.Checked = _currentCustomer.IsPriority;
         }
 
         /// <summary>
@@ -228,6 +232,7 @@ namespace ObjectOrientedPractics.View.Tabs
             SelectedCustomerFullNameTextBox.Clear();
             CustomerAddressControl.AddressClear();
             SelectedCustomerIdTextBox.Clear();
+            PriorityCheckBox.Enabled = false;
             ApplyCustomerInfoChangesButton.Enabled = true;
         }
 
@@ -243,6 +248,14 @@ namespace ObjectOrientedPractics.View.Tabs
             else
             {
                 ApplyCustomerInfoChangesButton.Enabled = false;
+            }
+        }
+
+        private void PriorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                _copiedCurrentCustomer.IsPriority = PriorityCheckBox.Checked;
             }
         }
     }

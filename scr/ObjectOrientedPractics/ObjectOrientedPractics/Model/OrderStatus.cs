@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
+    /// <summary>
+    /// Перечисление, описывающее статус заказа.
+    /// </summary>
     enum OrderStatus
     {
         New,

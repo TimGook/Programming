@@ -29,10 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            ObjectOrientedPractics.Model.Address address2 = new ObjectOrientedPractics.Model.Address();
+            ObjectOrientedPractics.Model.Address address1 = new ObjectOrientedPractics.Model.Address();
             this.OrdersTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.OrdersGroupBox = new System.Windows.Forms.GroupBox();
             this.OrdersDataGridView = new System.Windows.Forms.DataGridView();
+            this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustomerNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountCostColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderStatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SelectedOrderGroupBox = new System.Windows.Forms.GroupBox();
             this.AmountCostLabel = new System.Windows.Forms.Label();
             this.AmountLabel = new System.Windows.Forms.Label();
@@ -48,17 +54,16 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustomerNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AddressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountCostColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderStatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriorityOptionsPanel = new System.Windows.Forms.Panel();
+            this.DeliveryTimeLabel = new System.Windows.Forms.Label();
+            this.DeliveryTimeComboBox = new System.Windows.Forms.ComboBox();
+            this.PriorityOptionsLabel = new System.Windows.Forms.Label();
             this.DeliveryAddressControl = new ObjectOrientedPractics.View.Controls.AddressControl();
             this.OrdersTableLayoutPanel.SuspendLayout();
             this.OrdersGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDataGridView)).BeginInit();
             this.SelectedOrderGroupBox.SuspendLayout();
+            this.PriorityOptionsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // OrdersTableLayoutPanel
@@ -109,130 +114,6 @@
             this.OrdersDataGridView.TabIndex = 0;
             this.OrdersDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrdersDataGridView_CellContentClick);
             // 
-            // SelectedOrderGroupBox
-            // 
-            this.SelectedOrderGroupBox.Controls.Add(this.AmountCostLabel);
-            this.SelectedOrderGroupBox.Controls.Add(this.AmountLabel);
-            this.SelectedOrderGroupBox.Controls.Add(this.OrderItemsListBox);
-            this.SelectedOrderGroupBox.Controls.Add(this.OrderItemsLabel);
-            this.SelectedOrderGroupBox.Controls.Add(this.DeliveryAddressControl);
-            this.SelectedOrderGroupBox.Controls.Add(this.StatusComboBox);
-            this.SelectedOrderGroupBox.Controls.Add(this.CreatedTextBox);
-            this.SelectedOrderGroupBox.Controls.Add(this.DeliveryAddressLabel);
-            this.SelectedOrderGroupBox.Controls.Add(this.StatusLabel);
-            this.SelectedOrderGroupBox.Controls.Add(this.CreatedLabel);
-            this.SelectedOrderGroupBox.Controls.Add(this.IdTextBox);
-            this.SelectedOrderGroupBox.Controls.Add(this.IdLabel);
-            this.SelectedOrderGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SelectedOrderGroupBox.Location = new System.Drawing.Point(489, 3);
-            this.SelectedOrderGroupBox.Name = "SelectedOrderGroupBox";
-            this.SelectedOrderGroupBox.Size = new System.Drawing.Size(588, 714);
-            this.SelectedOrderGroupBox.TabIndex = 3;
-            this.SelectedOrderGroupBox.TabStop = false;
-            this.SelectedOrderGroupBox.Text = "Selected Order";
-            // 
-            // AmountCostLabel
-            // 
-            this.AmountCostLabel.AutoSize = true;
-            this.AmountCostLabel.Location = new System.Drawing.Point(509, 418);
-            this.AmountCostLabel.Name = "AmountCostLabel";
-            this.AmountCostLabel.Size = new System.Drawing.Size(22, 13);
-            this.AmountCostLabel.TabIndex = 11;
-            this.AmountCostLabel.Text = "0,0";
-            // 
-            // AmountLabel
-            // 
-            this.AmountLabel.AutoSize = true;
-            this.AmountLabel.Location = new System.Drawing.Point(536, 393);
-            this.AmountLabel.Name = "AmountLabel";
-            this.AmountLabel.Size = new System.Drawing.Size(46, 13);
-            this.AmountLabel.TabIndex = 10;
-            this.AmountLabel.Text = "Amount:";
-            // 
-            // OrderItemsListBox
-            // 
-            this.OrderItemsListBox.FormattingEnabled = true;
-            this.OrderItemsListBox.Location = new System.Drawing.Point(6, 256);
-            this.OrderItemsListBox.Name = "OrderItemsListBox";
-            this.OrderItemsListBox.Size = new System.Drawing.Size(576, 134);
-            this.OrderItemsListBox.TabIndex = 9;
-            // 
-            // OrderItemsLabel
-            // 
-            this.OrderItemsLabel.AutoSize = true;
-            this.OrderItemsLabel.Location = new System.Drawing.Point(7, 240);
-            this.OrderItemsLabel.Name = "OrderItemsLabel";
-            this.OrderItemsLabel.Size = new System.Drawing.Size(64, 13);
-            this.OrderItemsLabel.TabIndex = 8;
-            this.OrderItemsLabel.Text = "Order Items:";
-            // 
-            // StatusComboBox
-            // 
-            this.StatusComboBox.FormattingEnabled = true;
-            this.StatusComboBox.Location = new System.Drawing.Point(60, 70);
-            this.StatusComboBox.Name = "StatusComboBox";
-            this.StatusComboBox.Size = new System.Drawing.Size(121, 21);
-            this.StatusComboBox.TabIndex = 6;
-            this.StatusComboBox.SelectedIndexChanged += new System.EventHandler(this.StatusComboBox_SelectedIndexChanged);
-            this.StatusComboBox.Enter += new System.EventHandler(this.StatusComboBox_SelectedIndexChanged);
-            // 
-            // CreatedTextBox
-            // 
-            this.CreatedTextBox.Location = new System.Drawing.Point(60, 43);
-            this.CreatedTextBox.Name = "CreatedTextBox";
-            this.CreatedTextBox.ReadOnly = true;
-            this.CreatedTextBox.Size = new System.Drawing.Size(100, 20);
-            this.CreatedTextBox.TabIndex = 5;
-            // 
-            // DeliveryAddressLabel
-            // 
-            this.DeliveryAddressLabel.AutoSize = true;
-            this.DeliveryAddressLabel.Location = new System.Drawing.Point(7, 108);
-            this.DeliveryAddressLabel.Name = "DeliveryAddressLabel";
-            this.DeliveryAddressLabel.Size = new System.Drawing.Size(89, 13);
-            this.DeliveryAddressLabel.TabIndex = 4;
-            this.DeliveryAddressLabel.Text = "Delivery Address:";
-            // 
-            // StatusLabel
-            // 
-            this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Location = new System.Drawing.Point(7, 72);
-            this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(40, 13);
-            this.StatusLabel.TabIndex = 3;
-            this.StatusLabel.Text = "Status:";
-            // 
-            // CreatedLabel
-            // 
-            this.CreatedLabel.AutoSize = true;
-            this.CreatedLabel.Location = new System.Drawing.Point(7, 46);
-            this.CreatedLabel.Name = "CreatedLabel";
-            this.CreatedLabel.Size = new System.Drawing.Size(47, 13);
-            this.CreatedLabel.TabIndex = 2;
-            this.CreatedLabel.Text = "Created:";
-            // 
-            // IdTextBox
-            // 
-            this.IdTextBox.Location = new System.Drawing.Point(60, 17);
-            this.IdTextBox.Name = "IdTextBox";
-            this.IdTextBox.ReadOnly = true;
-            this.IdTextBox.Size = new System.Drawing.Size(100, 20);
-            this.IdTextBox.TabIndex = 1;
-            // 
-            // IdLabel
-            // 
-            this.IdLabel.AutoSize = true;
-            this.IdLabel.Location = new System.Drawing.Point(7, 20);
-            this.IdLabel.Name = "IdLabel";
-            this.IdLabel.Size = new System.Drawing.Size(21, 13);
-            this.IdLabel.TabIndex = 0;
-            this.IdLabel.Text = "ID:";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // IdColumn
             // 
             this.IdColumn.Frozen = true;
@@ -275,15 +156,182 @@
             this.OrderStatusColumn.Name = "OrderStatusColumn";
             this.OrderStatusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // SelectedOrderGroupBox
+            // 
+            this.SelectedOrderGroupBox.Controls.Add(this.PriorityOptionsPanel);
+            this.SelectedOrderGroupBox.Controls.Add(this.AmountCostLabel);
+            this.SelectedOrderGroupBox.Controls.Add(this.AmountLabel);
+            this.SelectedOrderGroupBox.Controls.Add(this.OrderItemsListBox);
+            this.SelectedOrderGroupBox.Controls.Add(this.OrderItemsLabel);
+            this.SelectedOrderGroupBox.Controls.Add(this.DeliveryAddressControl);
+            this.SelectedOrderGroupBox.Controls.Add(this.StatusComboBox);
+            this.SelectedOrderGroupBox.Controls.Add(this.CreatedTextBox);
+            this.SelectedOrderGroupBox.Controls.Add(this.DeliveryAddressLabel);
+            this.SelectedOrderGroupBox.Controls.Add(this.StatusLabel);
+            this.SelectedOrderGroupBox.Controls.Add(this.CreatedLabel);
+            this.SelectedOrderGroupBox.Controls.Add(this.IdTextBox);
+            this.SelectedOrderGroupBox.Controls.Add(this.IdLabel);
+            this.SelectedOrderGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SelectedOrderGroupBox.Location = new System.Drawing.Point(489, 3);
+            this.SelectedOrderGroupBox.Name = "SelectedOrderGroupBox";
+            this.SelectedOrderGroupBox.Size = new System.Drawing.Size(588, 714);
+            this.SelectedOrderGroupBox.TabIndex = 3;
+            this.SelectedOrderGroupBox.TabStop = false;
+            this.SelectedOrderGroupBox.Text = "Selected Order";
+            // 
+            // AmountCostLabel
+            // 
+            this.AmountCostLabel.AutoSize = true;
+            this.AmountCostLabel.Location = new System.Drawing.Point(536, 421);
+            this.AmountCostLabel.Name = "AmountCostLabel";
+            this.AmountCostLabel.Size = new System.Drawing.Size(22, 13);
+            this.AmountCostLabel.TabIndex = 11;
+            this.AmountCostLabel.Text = "0,0";
+            // 
+            // AmountLabel
+            // 
+            this.AmountLabel.AutoSize = true;
+            this.AmountLabel.Location = new System.Drawing.Point(536, 393);
+            this.AmountLabel.Name = "AmountLabel";
+            this.AmountLabel.Size = new System.Drawing.Size(46, 13);
+            this.AmountLabel.TabIndex = 10;
+            this.AmountLabel.Text = "Amount:";
+            // 
+            // OrderItemsListBox
+            // 
+            this.OrderItemsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.OrderItemsListBox.FormattingEnabled = true;
+            this.OrderItemsListBox.Location = new System.Drawing.Point(6, 256);
+            this.OrderItemsListBox.Name = "OrderItemsListBox";
+            this.OrderItemsListBox.Size = new System.Drawing.Size(576, 134);
+            this.OrderItemsListBox.TabIndex = 9;
+            // 
+            // OrderItemsLabel
+            // 
+            this.OrderItemsLabel.AutoSize = true;
+            this.OrderItemsLabel.Location = new System.Drawing.Point(7, 240);
+            this.OrderItemsLabel.Name = "OrderItemsLabel";
+            this.OrderItemsLabel.Size = new System.Drawing.Size(64, 13);
+            this.OrderItemsLabel.TabIndex = 8;
+            this.OrderItemsLabel.Text = "Order Items:";
+            // 
+            // StatusComboBox
+            // 
+            this.StatusComboBox.FormattingEnabled = true;
+            this.StatusComboBox.Location = new System.Drawing.Point(60, 70);
+            this.StatusComboBox.Name = "StatusComboBox";
+            this.StatusComboBox.Size = new System.Drawing.Size(121, 21);
+            this.StatusComboBox.TabIndex = 6;
+            this.StatusComboBox.SelectedIndexChanged += new System.EventHandler(this.StatusComboBox_SelectedIndexChanged);
+            this.StatusComboBox.Enter += new System.EventHandler(this.StatusComboBox_SelectedIndexChanged);
+            // 
+            // CreatedTextBox
+            // 
+            this.CreatedTextBox.Location = new System.Drawing.Point(60, 43);
+            this.CreatedTextBox.Name = "CreatedTextBox";
+            this.CreatedTextBox.ReadOnly = true;
+            this.CreatedTextBox.Size = new System.Drawing.Size(121, 20);
+            this.CreatedTextBox.TabIndex = 5;
+            // 
+            // DeliveryAddressLabel
+            // 
+            this.DeliveryAddressLabel.AutoSize = true;
+            this.DeliveryAddressLabel.Location = new System.Drawing.Point(7, 108);
+            this.DeliveryAddressLabel.Name = "DeliveryAddressLabel";
+            this.DeliveryAddressLabel.Size = new System.Drawing.Size(89, 13);
+            this.DeliveryAddressLabel.TabIndex = 4;
+            this.DeliveryAddressLabel.Text = "Delivery Address:";
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.AutoSize = true;
+            this.StatusLabel.Location = new System.Drawing.Point(7, 72);
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(40, 13);
+            this.StatusLabel.TabIndex = 3;
+            this.StatusLabel.Text = "Status:";
+            // 
+            // CreatedLabel
+            // 
+            this.CreatedLabel.AutoSize = true;
+            this.CreatedLabel.Location = new System.Drawing.Point(7, 46);
+            this.CreatedLabel.Name = "CreatedLabel";
+            this.CreatedLabel.Size = new System.Drawing.Size(47, 13);
+            this.CreatedLabel.TabIndex = 2;
+            this.CreatedLabel.Text = "Created:";
+            // 
+            // IdTextBox
+            // 
+            this.IdTextBox.Location = new System.Drawing.Point(60, 17);
+            this.IdTextBox.Name = "IdTextBox";
+            this.IdTextBox.ReadOnly = true;
+            this.IdTextBox.Size = new System.Drawing.Size(121, 20);
+            this.IdTextBox.TabIndex = 1;
+            // 
+            // IdLabel
+            // 
+            this.IdLabel.AutoSize = true;
+            this.IdLabel.Location = new System.Drawing.Point(7, 20);
+            this.IdLabel.Name = "IdLabel";
+            this.IdLabel.Size = new System.Drawing.Size(21, 13);
+            this.IdLabel.TabIndex = 0;
+            this.IdLabel.Text = "ID:";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // PriorityOptionsPanel
+            // 
+            this.PriorityOptionsPanel.Controls.Add(this.PriorityOptionsLabel);
+            this.PriorityOptionsPanel.Controls.Add(this.DeliveryTimeComboBox);
+            this.PriorityOptionsPanel.Controls.Add(this.DeliveryTimeLabel);
+            this.PriorityOptionsPanel.Location = new System.Drawing.Point(242, 16);
+            this.PriorityOptionsPanel.Name = "PriorityOptionsPanel";
+            this.PriorityOptionsPanel.Size = new System.Drawing.Size(340, 77);
+            this.PriorityOptionsPanel.TabIndex = 12;
+            this.PriorityOptionsPanel.Visible = false;
+            // 
+            // DeliveryTimeLabel
+            // 
+            this.DeliveryTimeLabel.AutoSize = true;
+            this.DeliveryTimeLabel.Location = new System.Drawing.Point(3, 30);
+            this.DeliveryTimeLabel.Name = "DeliveryTimeLabel";
+            this.DeliveryTimeLabel.Size = new System.Drawing.Size(74, 13);
+            this.DeliveryTimeLabel.TabIndex = 0;
+            this.DeliveryTimeLabel.Text = "Delivery Time:";
+            // 
+            // DeliveryTimeComboBox
+            // 
+            this.DeliveryTimeComboBox.FormattingEnabled = true;
+            this.DeliveryTimeComboBox.Location = new System.Drawing.Point(83, 27);
+            this.DeliveryTimeComboBox.Name = "DeliveryTimeComboBox";
+            this.DeliveryTimeComboBox.Size = new System.Drawing.Size(144, 21);
+            this.DeliveryTimeComboBox.TabIndex = 1;
+            this.DeliveryTimeComboBox.SelectedIndexChanged += new System.EventHandler(this.DeliveryTimeComboBox_SelectedIndexChanged);
+            // 
+            // PriorityOptionsLabel
+            // 
+            this.PriorityOptionsLabel.AutoSize = true;
+            this.PriorityOptionsLabel.Location = new System.Drawing.Point(3, 4);
+            this.PriorityOptionsLabel.Name = "PriorityOptionsLabel";
+            this.PriorityOptionsLabel.Size = new System.Drawing.Size(77, 13);
+            this.PriorityOptionsLabel.TabIndex = 2;
+            this.PriorityOptionsLabel.Text = "Priority Options";
+            // 
             // DeliveryAddressControl
             // 
-            address2.Apartment = null;
-            address2.Building = null;
-            address2.City = null;
-            address2.Country = null;
-            address2.Index = 0;
-            address2.Street = null;
-            this.DeliveryAddressControl.Address = address2;
+            address1.Apartment = null;
+            address1.Building = null;
+            address1.City = null;
+            address1.Country = null;
+            address1.Index = 0;
+            address1.Street = null;
+            this.DeliveryAddressControl.Address = address1;
+            this.DeliveryAddressControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DeliveryAddressControl.Enabled = false;
             this.DeliveryAddressControl.Location = new System.Drawing.Point(6, 124);
             this.DeliveryAddressControl.Name = "DeliveryAddressControl";
@@ -303,6 +351,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDataGridView)).EndInit();
             this.SelectedOrderGroupBox.ResumeLayout(false);
             this.SelectedOrderGroupBox.PerformLayout();
+            this.PriorityOptionsPanel.ResumeLayout(false);
+            this.PriorityOptionsPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -334,5 +384,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AddressColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn AmountCostColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderStatusColumn;
+        private System.Windows.Forms.Panel PriorityOptionsPanel;
+        private System.Windows.Forms.Label DeliveryTimeLabel;
+        private System.Windows.Forms.Label PriorityOptionsLabel;
+        private System.Windows.Forms.ComboBox DeliveryTimeComboBox;
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            ObjectOrientedPractics.Model.Address address1 = new ObjectOrientedPractics.Model.Address();
+            ObjectOrientedPractics.Model.Address address4 = new ObjectOrientedPractics.Model.Address();
             this.CustomersTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CustomersGroupBox = new System.Windows.Forms.GroupBox();
             this.EditCustomerButton = new System.Windows.Forms.Button();
@@ -50,6 +50,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.PriorityCheckBox = new System.Windows.Forms.CheckBox();
             this.CustomersTableLayoutPanel.SuspendLayout();
             this.CustomersGroupBox.SuspendLayout();
             this.SelectedCustomerTableLayoutPanel.SuspendLayout();
@@ -162,6 +163,7 @@
             // 
             // SelectedCustomerGroupBox
             // 
+            this.SelectedCustomerGroupBox.Controls.Add(this.PriorityCheckBox);
             this.SelectedCustomerGroupBox.Controls.Add(this.CustomerAddressControl);
             this.SelectedCustomerGroupBox.Controls.Add(this.CustomerErrorsLabel);
             this.SelectedCustomerGroupBox.Controls.Add(this.SelectedCustomerIdTextBox);
@@ -179,14 +181,14 @@
             // 
             // CustomerAddressControl
             // 
-            address1.Apartment = null;
-            address1.Building = null;
-            address1.City = null;
-            address1.Country = null;
-            address1.Index = 0;
-            address1.Street = null;
-            this.CustomerAddressControl.Address = address1;
-            this.CustomerAddressControl.Location = new System.Drawing.Point(44, 88);
+            address4.Apartment = null;
+            address4.Building = null;
+            address4.City = null;
+            address4.Country = null;
+            address4.Index = 0;
+            address4.Street = null;
+            this.CustomerAddressControl.Address = address4;
+            this.CustomerAddressControl.Location = new System.Drawing.Point(44, 110);
             this.CustomerAddressControl.Name = "CustomerAddressControl";
             this.CustomerAddressControl.Size = new System.Drawing.Size(586, 142);
             this.CustomerAddressControl.TabIndex = 7;
@@ -226,7 +228,7 @@
             // SelectedCustomerAddressLabel
             // 
             this.SelectedCustomerAddressLabel.AutoSize = true;
-            this.SelectedCustomerAddressLabel.Location = new System.Drawing.Point(7, 72);
+            this.SelectedCustomerAddressLabel.Location = new System.Drawing.Point(7, 94);
             this.SelectedCustomerAddressLabel.Name = "SelectedCustomerAddressLabel";
             this.SelectedCustomerAddressLabel.Size = new System.Drawing.Size(89, 13);
             this.SelectedCustomerAddressLabel.TabIndex = 2;
@@ -255,6 +257,17 @@
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // PriorityCheckBox
+            // 
+            this.PriorityCheckBox.AutoSize = true;
+            this.PriorityCheckBox.Location = new System.Drawing.Point(69, 70);
+            this.PriorityCheckBox.Name = "PriorityCheckBox";
+            this.PriorityCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.PriorityCheckBox.TabIndex = 8;
+            this.PriorityCheckBox.Text = "Is Priority";
+            this.PriorityCheckBox.UseVisualStyleBackColor = true;
+            this.PriorityCheckBox.CheckedChanged += new System.EventHandler(this.PriorityCheckBox_CheckedChanged);
             // 
             // CustomersTab
             // 
@@ -295,5 +308,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolTip toolTip2;
         private Controls.AddressControl CustomerAddressControl;
+        private System.Windows.Forms.CheckBox PriorityCheckBox;
     }
 }
