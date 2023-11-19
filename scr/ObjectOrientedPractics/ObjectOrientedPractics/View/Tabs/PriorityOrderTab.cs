@@ -43,8 +43,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
             StatusComboBox.DataSource = Enum.GetValues(typeof(OrderStatus));
 
-            DeliveryAddressControl.Address = new Address(random.Next(100000,999999),"Рандомная страна", "Рандомный город","Рандомная улица","Рандомное строение","Рандомная квартира");
-            DeliveryAddressControl.AddressClear();
+            DeliveryAddressControl.Address = new Address(random.Next(100000,999999),"Рандомная страна", "Рандомный город","Рандомная улица","Cтроение","Квартира");
 
             PriorityOrder.Items = new List<Item>(); 
 
@@ -105,9 +104,10 @@ namespace ObjectOrientedPractics.View.Tabs
                 DeliveryTimeComboBox.SelectedIndex = -1;
 
                 PriorityOrder = new PriorityOrder();
+                PriorityOrder.Items = new List<Item>();
                 PriorityOrder.OrderStatus = (OrderStatus)StatusComboBox.SelectedValue;
-                DeliveryAddressControl.Address = new Address();
-                DeliveryAddressControl.AddressClear();
+                DeliveryAddressControl.Address = new Address(random.Next(100000, 999999), 
+                    "Другая рандомная страна", "Другой рандомный город", "Другая рандомная улица", "Cтроение", "Квартира");
                 StatusComboBox.SelectedIndex = 0;
                 DeliveryTimeComboBox.SelectedIndex = 0;
             }
