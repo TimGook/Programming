@@ -52,7 +52,7 @@ namespace ObjectOrientedPractics.View.Tabs
                         {
                             if (order != null)
                             {
-                                string[] currentOrder = {$"{order.Id}", $"{order.Date}", $"{customer.Fullname}", $"{order.Address}",
+                                string[] currentOrder = { $"{order.Id}", $"{order.Date}", $"{customer.Fullname}", $"{order.Total}",$"{order.Address}",
                                 $"{order.Amount}", $"{order.OrderStatus}"};
                                 OrdersDataGridView.Rows.Add(currentOrder);
                                 //OrdersDataGridView.DataSource = _ordersList;

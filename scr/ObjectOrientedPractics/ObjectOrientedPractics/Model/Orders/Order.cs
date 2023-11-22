@@ -53,6 +53,19 @@ namespace ObjectOrientedPractics.Model
             }
         }
         /// <summary>
+        /// Возвращает и задаёт размер примерной скидки.
+        /// </summary>
+        public double DiscountAmount { get; set; }
+
+        public double Total
+        {
+            get
+            {
+                return Amount - DiscountAmount;
+            }
+        }
+
+        /// <summary>
         /// Список товаров.
         /// </summary>
         public List<Item> Items
@@ -68,7 +81,7 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает дату заказа.
+        /// Возвращает и задаёт дату заказа.
         /// </summary>
         public string Date
         {
