@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.View.Controls;
+using ObjectOrientedPractics.View.Forms;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -77,6 +78,12 @@ namespace ObjectOrientedPractics.View.Tabs
                 SelectedCustomerFullNameTextBox.Text = _copiedCurrentCustomer.Fullname;
                 CustomerAddressControl.Address = _copiedCurrentCustomer.Address;
                 SelectedCustomerIdTextBox.Text = _copiedCurrentCustomer.Id.ToString();
+                PriorityCheckBox.Checked = _copiedCurrentCustomer.IsPriority;
+
+                DiscountsListBox.DataSource = null;
+                DiscountsListBox.DataSource = _copiedCurrentCustomer.Discounts;
+                DiscountsListBox.DisplayMember = "Info";
+
                 EditCustomerButton.Enabled = true;
                 ApplyCustomerInfoChangesButton.Enabled = false;
             }
@@ -165,11 +172,17 @@ namespace ObjectOrientedPractics.View.Tabs
                    new Address(CustomerAddressControl.Address.Index, CustomerAddressControl.Address.Country,
                   CustomerAddressControl.Address.City, CustomerAddressControl.Address.Street,
                   CustomerAddressControl.Address.Building, CustomerAddressControl.Address.Apartment));
+                _currentCustomer.IsPriority = PriorityCheckBox.Checked;
+
+                DiscountsListBox.DataSource = null;
+                DiscountsListBox.DataSource = _copiedCurrentCustomer.Discounts;
+                DiscountsListBox.DisplayMember = "Info";
+
                 _customers.Add(_currentCustomer);
                 Sort();
                 ClearCustomersInfo();
                 ToggleInputBoxes(false);
-                return;
+                //return;
             }
             else
             {
@@ -192,6 +205,8 @@ namespace ObjectOrientedPractics.View.Tabs
             SelectedCustomerFullNameTextBox.Enabled = value;
             CustomerAddressControl.Enabled = value;
             ApplyCustomerInfoChangesButton.Enabled = value;
+            PriorityCheckBox.Enabled = value;
+            DiscountsPanel.Enabled = value;
         }
 
         /// <summary>
@@ -215,6 +230,11 @@ namespace ObjectOrientedPractics.View.Tabs
             SelectedCustomerFullNameTextBox.Text = _currentCustomer.Fullname.ToString();
             CustomerAddressControl.Address = _currentCustomer.Address;
             SelectedCustomerIdTextBox.Text = _currentCustomer.Id.ToString();
+            PriorityCheckBox.Checked = _currentCustomer.IsPriority;
+
+            DiscountsListBox.DataSource = null;
+            DiscountsListBox.DataSource = _copiedCurrentCustomer.Discounts;
+            DiscountsListBox.DisplayMember = "Info";
         }
 
         /// <summary>
@@ -228,6 +248,8 @@ namespace ObjectOrientedPractics.View.Tabs
             SelectedCustomerFullNameTextBox.Clear();
             CustomerAddressControl.AddressClear();
             SelectedCustomerIdTextBox.Clear();
+            DiscountsListBox.DataSource = null;
+            PriorityCheckBox.Enabled = false;
             ApplyCustomerInfoChangesButton.Enabled = true;
         }
 
@@ -244,6 +266,36 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 ApplyCustomerInfoChangesButton.Enabled = false;
             }
+        }
+
+        private void PriorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                _copiedCurrentCustomer.IsPriority = PriorityCheckBox.Checked;
+            }
+        }
+
+        private void AddDiscountButton_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                AddDiscountForm addDiscountForm = new AddDiscountForm();
+                addDiscountForm.SelectedIndex = CustomersListBox.SelectedIndex;
+                addDiscountForm.Customers = Customers;
+                addDiscountForm.Show();
+            }
+        }
+
+        private void RemoveDiscountButton_Click(object sender, EventArgs e)
+        {
+            if (DiscountsListBox.SelectedIndex > 0)
+            {
+                _copiedCurrentCustomer.Discounts.RemoveAt(DiscountsListBox.SelectedIndex);
+            }
+            DiscountsListBox.DataSource = null;
+            DiscountsListBox.DataSource = _copiedCurrentCustomer.Discounts;
+            DiscountsListBox.DisplayMember = "Info";
         }
     }
 }

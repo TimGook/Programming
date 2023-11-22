@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using ObjectOrientedPractics;
 using ObjectOrientedPractics.Model;
 
+using ObjectOrientedPractics.DopMission4;
+
 namespace ObjectOrientedPractics
 {
     public partial class MainForm : Form

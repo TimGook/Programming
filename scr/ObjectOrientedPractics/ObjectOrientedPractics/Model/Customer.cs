@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ObjectOrientedPractics.Services;
+using ObjectOrientedPractics.Model.Discounts;
 
 namespace ObjectOrientedPractics.Model
 {
@@ -41,6 +42,16 @@ namespace ObjectOrientedPractics.Model
         /// Возвращает идентификатор.
         /// </summary>
         public int Id { get; }
+
+        /// <summary>
+        /// Задаёт и возвращает список скидок.
+        /// </summary>
+        public List<IDiscount> Discounts { get; set; }
+
+        /// <summary>
+        /// Является ли заказчик приоритетным в обслуживании.
+        /// </summary>
+        public bool IsPriority { get; set; } = false;
 
         /// <summary>
         /// Задаёт и возвращает список заказов.
@@ -116,6 +127,8 @@ namespace ObjectOrientedPractics.Model
             _idCounter++;
             Id = _idCounter;
             Cart = new Cart();
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
 
         /// <summary>
@@ -126,6 +139,8 @@ namespace ObjectOrientedPractics.Model
             Cart = new Cart();
             _idCounter++;
             Id = _idCounter;
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
 
         /// <summary>

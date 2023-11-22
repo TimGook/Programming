@@ -29,7 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+<<<<<<< Updated upstream
             ObjectOrientedPractics.Model.Address address1 = new ObjectOrientedPractics.Model.Address();
+=======
+            ObjectOrientedPractics.Model.Address address2 = new ObjectOrientedPractics.Model.Address();
+>>>>>>> Stashed changes
             this.CustomersTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CustomersGroupBox = new System.Windows.Forms.GroupBox();
             this.EditCustomerButton = new System.Windows.Forms.Button();
@@ -39,7 +43,7 @@
             this.CustomersListBox = new System.Windows.Forms.ListBox();
             this.SelectedCustomerTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SelectedCustomerGroupBox = new System.Windows.Forms.GroupBox();
-            this.CustomerAddressControl = new ObjectOrientedPractics.View.Controls.AddressControl();
+            this.PriorityCheckBox = new System.Windows.Forms.CheckBox();
             this.CustomerErrorsLabel = new System.Windows.Forms.Label();
             this.SelectedCustomerIdTextBox = new System.Windows.Forms.TextBox();
             this.SelectedCustomerFullNameTextBox = new System.Windows.Forms.TextBox();
@@ -50,10 +54,20 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+<<<<<<< Updated upstream
+=======
+            this.DiscountsPanel = new System.Windows.Forms.Panel();
+            this.DiscountsLabel = new System.Windows.Forms.Label();
+            this.DiscountsListBox = new System.Windows.Forms.ListBox();
+            this.AddDiscountButton = new System.Windows.Forms.Button();
+            this.RemoveDiscountButton = new System.Windows.Forms.Button();
+            this.CustomerAddressControl = new ObjectOrientedPractics.View.Controls.AddressControl();
+>>>>>>> Stashed changes
             this.CustomersTableLayoutPanel.SuspendLayout();
             this.CustomersGroupBox.SuspendLayout();
             this.SelectedCustomerTableLayoutPanel.SuspendLayout();
             this.SelectedCustomerGroupBox.SuspendLayout();
+            this.DiscountsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // CustomersTableLayoutPanel
@@ -162,6 +176,11 @@
             // 
             // SelectedCustomerGroupBox
             // 
+<<<<<<< Updated upstream
+=======
+            this.SelectedCustomerGroupBox.Controls.Add(this.DiscountsPanel);
+            this.SelectedCustomerGroupBox.Controls.Add(this.PriorityCheckBox);
+>>>>>>> Stashed changes
             this.SelectedCustomerGroupBox.Controls.Add(this.CustomerAddressControl);
             this.SelectedCustomerGroupBox.Controls.Add(this.CustomerErrorsLabel);
             this.SelectedCustomerGroupBox.Controls.Add(this.SelectedCustomerIdTextBox);
@@ -177,8 +196,9 @@
             this.SelectedCustomerGroupBox.TabStop = false;
             this.SelectedCustomerGroupBox.Text = "Selected Customer";
             // 
-            // CustomerAddressControl
+            // PriorityCheckBox
             // 
+<<<<<<< Updated upstream
             address1.Apartment = null;
             address1.Building = null;
             address1.City = null;
@@ -190,15 +210,26 @@
             this.CustomerAddressControl.Name = "CustomerAddressControl";
             this.CustomerAddressControl.Size = new System.Drawing.Size(586, 142);
             this.CustomerAddressControl.TabIndex = 7;
+=======
+            this.PriorityCheckBox.AutoSize = true;
+            this.PriorityCheckBox.Location = new System.Drawing.Point(69, 70);
+            this.PriorityCheckBox.Name = "PriorityCheckBox";
+            this.PriorityCheckBox.Size = new System.Drawing.Size(78, 19);
+            this.PriorityCheckBox.TabIndex = 8;
+            this.PriorityCheckBox.Text = "Is Priority";
+            this.PriorityCheckBox.UseVisualStyleBackColor = true;
+            this.PriorityCheckBox.CheckedChanged += new System.EventHandler(this.PriorityCheckBox_CheckedChanged);
+>>>>>>> Stashed changes
             // 
             // CustomerErrorsLabel
             // 
             this.CustomerErrorsLabel.AutoSize = true;
             this.CustomerErrorsLabel.Location = new System.Drawing.Point(7, 681);
             this.CustomerErrorsLabel.Name = "CustomerErrorsLabel";
-            this.CustomerErrorsLabel.Size = new System.Drawing.Size(29, 13);
+            this.CustomerErrorsLabel.Size = new System.Drawing.Size(34, 15);
             this.CustomerErrorsLabel.TabIndex = 6;
             this.CustomerErrorsLabel.Text = "Error";
+            this.CustomerErrorsLabel.Visible = false;
             // 
             // SelectedCustomerIdTextBox
             // 
@@ -228,7 +259,7 @@
             this.SelectedCustomerAddressLabel.AutoSize = true;
             this.SelectedCustomerAddressLabel.Location = new System.Drawing.Point(7, 72);
             this.SelectedCustomerAddressLabel.Name = "SelectedCustomerAddressLabel";
-            this.SelectedCustomerAddressLabel.Size = new System.Drawing.Size(89, 13);
+            this.SelectedCustomerAddressLabel.Size = new System.Drawing.Size(100, 15);
             this.SelectedCustomerAddressLabel.TabIndex = 2;
             this.SelectedCustomerAddressLabel.Text = "Delivery Address:";
             // 
@@ -237,7 +268,7 @@
             this.SelectedCustomerFullNameLabel.AutoSize = true;
             this.SelectedCustomerFullNameLabel.Location = new System.Drawing.Point(6, 46);
             this.SelectedCustomerFullNameLabel.Name = "SelectedCustomerFullNameLabel";
-            this.SelectedCustomerFullNameLabel.Size = new System.Drawing.Size(57, 13);
+            this.SelectedCustomerFullNameLabel.Size = new System.Drawing.Size(67, 15);
             this.SelectedCustomerFullNameLabel.TabIndex = 1;
             this.SelectedCustomerFullNameLabel.Text = "Full Name:";
             // 
@@ -246,7 +277,7 @@
             this.CustomerIdLabel.AutoSize = true;
             this.CustomerIdLabel.Location = new System.Drawing.Point(7, 16);
             this.CustomerIdLabel.Name = "CustomerIdLabel";
-            this.CustomerIdLabel.Size = new System.Drawing.Size(21, 13);
+            this.CustomerIdLabel.Size = new System.Drawing.Size(22, 15);
             this.CustomerIdLabel.TabIndex = 0;
             this.CustomerIdLabel.Text = "ID:";
             // 
@@ -256,6 +287,77 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+<<<<<<< Updated upstream
+=======
+            // DiscountsPanel
+            // 
+            this.DiscountsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiscountsPanel.Controls.Add(this.RemoveDiscountButton);
+            this.DiscountsPanel.Controls.Add(this.AddDiscountButton);
+            this.DiscountsPanel.Controls.Add(this.DiscountsListBox);
+            this.DiscountsPanel.Controls.Add(this.DiscountsLabel);
+            this.DiscountsPanel.Location = new System.Drawing.Point(10, 272);
+            this.DiscountsPanel.Name = "DiscountsPanel";
+            this.DiscountsPanel.Size = new System.Drawing.Size(411, 161);
+            this.DiscountsPanel.TabIndex = 9;
+            // 
+            // DiscountsLabel
+            // 
+            this.DiscountsLabel.AutoSize = true;
+            this.DiscountsLabel.Location = new System.Drawing.Point(4, 4);
+            this.DiscountsLabel.Name = "DiscountsLabel";
+            this.DiscountsLabel.Size = new System.Drawing.Size(64, 15);
+            this.DiscountsLabel.TabIndex = 0;
+            this.DiscountsLabel.Text = "Discounts:";
+            // 
+            // DiscountsListBox
+            // 
+            this.DiscountsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DiscountsListBox.FormattingEnabled = true;
+            this.DiscountsListBox.Location = new System.Drawing.Point(7, 22);
+            this.DiscountsListBox.Name = "DiscountsListBox";
+            this.DiscountsListBox.Size = new System.Drawing.Size(290, 121);
+            this.DiscountsListBox.TabIndex = 1;
+            // 
+            // AddDiscountButton
+            // 
+            this.AddDiscountButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddDiscountButton.Location = new System.Drawing.Point(303, 22);
+            this.AddDiscountButton.Name = "AddDiscountButton";
+            this.AddDiscountButton.Size = new System.Drawing.Size(75, 41);
+            this.AddDiscountButton.TabIndex = 2;
+            this.AddDiscountButton.Text = "Add";
+            this.AddDiscountButton.UseVisualStyleBackColor = true;
+            this.AddDiscountButton.Click += new System.EventHandler(this.AddDiscountButton_Click);
+            // 
+            // RemoveDiscountButton
+            // 
+            this.RemoveDiscountButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RemoveDiscountButton.Location = new System.Drawing.Point(303, 69);
+            this.RemoveDiscountButton.Name = "RemoveDiscountButton";
+            this.RemoveDiscountButton.Size = new System.Drawing.Size(75, 41);
+            this.RemoveDiscountButton.TabIndex = 3;
+            this.RemoveDiscountButton.Text = "Remove";
+            this.RemoveDiscountButton.UseVisualStyleBackColor = true;
+            this.RemoveDiscountButton.Click += new System.EventHandler(this.RemoveDiscountButton_Click);
+            // 
+            // CustomerAddressControl
+            // 
+            address2.Apartment = null;
+            address2.Building = null;
+            address2.City = null;
+            address2.Country = null;
+            address2.Index = 0;
+            address2.Street = null;
+            this.CustomerAddressControl.Address = address2;
+            this.CustomerAddressControl.Location = new System.Drawing.Point(44, 110);
+            this.CustomerAddressControl.Name = "CustomerAddressControl";
+            this.CustomerAddressControl.Size = new System.Drawing.Size(586, 142);
+            this.CustomerAddressControl.TabIndex = 7;
+            // 
+>>>>>>> Stashed changes
             // CustomersTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,6 +371,8 @@
             this.SelectedCustomerTableLayoutPanel.ResumeLayout(false);
             this.SelectedCustomerGroupBox.ResumeLayout(false);
             this.SelectedCustomerGroupBox.PerformLayout();
+            this.DiscountsPanel.ResumeLayout(false);
+            this.DiscountsPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -295,5 +399,14 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolTip toolTip2;
         private Controls.AddressControl CustomerAddressControl;
+<<<<<<< Updated upstream
+=======
+        private System.Windows.Forms.CheckBox PriorityCheckBox;
+        private System.Windows.Forms.Panel DiscountsPanel;
+        private System.Windows.Forms.Button RemoveDiscountButton;
+        private System.Windows.Forms.Button AddDiscountButton;
+        private System.Windows.Forms.ListBox DiscountsListBox;
+        private System.Windows.Forms.Label DiscountsLabel;
+>>>>>>> Stashed changes
     }
 }
