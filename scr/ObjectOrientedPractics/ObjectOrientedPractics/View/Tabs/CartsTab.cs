@@ -47,7 +47,6 @@ namespace ObjectOrientedPractics.View.Tabs
             InitializeComponent();
             CartListBox.DataSource = _currentItems;
             CustomersComboBox.SelectedIndex = -1;
-            //_currentCustomer.Cart.Items = _currentItems.ToList<Item>();
         }
 
         private void CustomersComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -106,6 +105,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     order.Amount = order.Amount - ApplyDiscount();
                     _currentCustomer.Orders.Add(order);
                     _currentItems = new BindingList<Item>();
+                    _currentCustomer.Cart.Items = _currentItems.ToList<Item>();
                     ClearOrder();
                 }
 
@@ -189,6 +189,18 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 RefreshDiscount();
             }
+        }
+
+        public void RefreshData()
+        {
+            _currentCustomer = (Customer)CustomersComboBox.SelectedItem;
+            DiscountsCheckedListBox.DataSource = _currentCustomer.Discounts;
+            DiscountsCheckedListBox.DisplayMember = "Info";
+            for (int i = 0; i < DiscountsCheckedListBox.Items.Count; i++)
+            {
+                DiscountsCheckedListBox.SetItemChecked(i, true);
+            }
+            //CustomersComboBox.SelectedIndex = -1;
         }
     }
 }

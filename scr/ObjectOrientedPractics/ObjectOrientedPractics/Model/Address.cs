@@ -9,6 +9,8 @@ namespace ObjectOrientedPractics.Model
 {
     public class Address: ICloneable, IEquatable<Address>
     {
+        public event EventHandler<EventArgs> AddressChanged;
+
         /// <summary>
         /// Почтовый индекс, целое шестизначное число.
         /// </summary>
@@ -52,6 +54,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertIntInRange(value, 999999, 100000, "Неверное значение почтового индекса. Шестизначное число.");
                 _index = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -68,6 +71,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 0, 50, "Неверное значение страны/региона. Не более 50 символов.");
                 _country = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -84,6 +88,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 0,  50, "Неверное значение города. Не более 50 символов.");
                 _city = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
 
             }
         }
@@ -101,6 +106,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 0, 100, "Неверное значение улицы. Не более 100 символов.");
                 _street = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -117,6 +123,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 0, 10, "Неверное значение номера дома. Не более 10 символов.");
                 _building = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -133,6 +140,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 0, 10, "Неверное значение страны/региона. Не более 10 символов.");
                 _apartment = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
