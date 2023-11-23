@@ -45,5 +45,40 @@ namespace ObjectOrientedPractics.Model
                 return Items.Sum(item => item.Cost);
             }
         }
+
+        /// <summary>
+        /// Клонирование объекта класса.
+        /// <returns>Клонированный объект класса <see cref="Item"/>.</returns>
+        public object Clone()
+        {
+            Cart cloneCart = new Cart();
+            cloneCart.Items = Items;
+            return cloneCart;
+        }
+
+        /// <summary>
+        /// <inheritdoc cref="IEquatable<Address>"/>
+        /// </summary>
+        /// <param name="other">Сравниваемая переменная типа <see cref="Cart"/>.</param>
+        /// <returns>True - если они равны. False - не равны.</returns>
+        public bool Equals(Cart other)
+        {
+            if(other == null)
+            {
+                return false;
+            }
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (this.Items == other.Items)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -97,7 +97,7 @@ namespace ObjectOrientedPractics.Model
         /// <param name="category"> Категория товара типа <see cref="Category">. </param>
         /// <param name="info"> Описание товара. Не может быть больше 1000 символов. </param>
         /// <param name="cost"> Стоимость товара. Не можеть быть больше 100 000 и меньше 0. </param>
-        public Item(string name, string info, int cost, Category category)
+        public Item(string name, string info, double cost, Category category)
         {
             Name = name;
             Info = info;
@@ -132,6 +132,58 @@ namespace ObjectOrientedPractics.Model
         public object Clone()
         {
             return MemberwiseClone();
+        }
+
+        ///// <summary>
+        ///// Клонирование объекта класса для редактирования его через текстовые поля.
+        ///// </summary>
+        ///// <returns>Клонированный объект класса <see cref="Item"/>.</returns>
+        //public object Clone()
+        //{
+        //    return new Item(Name, Info, Cost, Category);
+        //}
+
+        /// <summary>
+        /// <inheritdoc cref="IEquatable<Address>"/>
+        /// </summary>
+        /// <param name="other">Сравниваемая переменная типа <see cref="Item"/>.</param>
+        /// <returns>True - если они равны. False - не равны.</returns>
+        public bool Equals(Item other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (this.Name == other.Name || this.Info == other.Info
+                || this.Cost == other.Cost || this.Category == other.Category)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// <inheritdoc cref="IComparable"/>
+        /// </summary>
+        /// <param name="other">Сравниваемая переменная типа <see cref="Item"/>.</param>
+        /// <returns>1 - больше или null сравниваемый объект. 0 - они равны. -1 - сравниваемый больше.</returns>
+        public int CompareTo(Item other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+            else
+            {
+                return this.Cost.CompareTo(other.Cost);
+            }
         }
     }
 }

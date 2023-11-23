@@ -89,5 +89,22 @@ namespace ObjectOrientedPractics.Model.Discounts
         {
             get => $"«Накопительная – {PointsCounter} баллов";
         }
+
+        /// <summary>
+        /// <inheritdoc cref="IComparable"/>
+        /// </summary>
+        /// <param name="other">Сравниваемая переменная типа <see cref="PointsDiscount"/>.</param>
+        /// <returns>1 - больше или null сравниваемый объект. 0 - они равны. -1 - сравниваемый больше.</returns>
+        public int CompareTo(PointsDiscount other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+            else
+            {
+                return this.PointsCounter.CompareTo(other.PointsCounter);
+            }
+        }
     }
 }
