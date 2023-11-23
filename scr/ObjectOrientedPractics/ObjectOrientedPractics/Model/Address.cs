@@ -171,5 +171,41 @@ namespace ObjectOrientedPractics.Model
         {
             return $"Index: {Index}, Country:{Country}, City:{City}, Street:{Street}, Building:{Building}, Apartment:{Apartment}";
         }
+
+        /// <summary>
+        /// Клонирование объекта класса.
+        /// </summary>
+        /// <returns>Клонированный объект класса <see cref="Item"/>.</returns>
+        public object Clone()
+        {
+            return new Address(Index, Country, City, Street, Building, Apartment);
+        }
+
+        /// <summary>
+        /// <inheritdoc cref="IEquatable<Address>"/>
+        /// </summary>
+        /// <param name="other">Сравниваемая переменная типа <see cref="Address"/>.</param>
+        /// <returns>True - если они равны. False - не равны.</returns>
+        public bool Equals(Address other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (this.Index == other.Index || this.Building == other.Building
+                || this.City == other.City || this.Country == other.Country
+                || this.Street == other.Street || this.Apartment == other.Apartment)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
