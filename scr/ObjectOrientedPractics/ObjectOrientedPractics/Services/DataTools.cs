@@ -54,7 +54,7 @@ namespace ObjectOrientedPractics.Services
         /// </summary>
         /// <param name="item">Товар <see cref="Item"/>.</param>
         /// <returns>True - товар спорт категории. Иначе False.</returns>
-        internal static bool ItemFilterBySportCategory(Item item)
+        internal static bool ItemFilterByFoodCategory(Item item)
         {
             return item.Category == Category.Food;
         }
