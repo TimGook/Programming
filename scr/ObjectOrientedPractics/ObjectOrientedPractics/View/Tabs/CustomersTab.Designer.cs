@@ -29,11 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-<<<<<<< Updated upstream
             ObjectOrientedPractics.Model.Address address1 = new ObjectOrientedPractics.Model.Address();
-=======
             ObjectOrientedPractics.Model.Address address2 = new ObjectOrientedPractics.Model.Address();
->>>>>>> Stashed changes
             this.CustomersTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.CustomersGroupBox = new System.Windows.Forms.GroupBox();
             this.EditCustomerButton = new System.Windows.Forms.Button();
@@ -54,15 +51,12 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
-<<<<<<< Updated upstream
-=======
             this.DiscountsPanel = new System.Windows.Forms.Panel();
             this.DiscountsLabel = new System.Windows.Forms.Label();
             this.DiscountsListBox = new System.Windows.Forms.ListBox();
             this.AddDiscountButton = new System.Windows.Forms.Button();
             this.RemoveDiscountButton = new System.Windows.Forms.Button();
             this.CustomerAddressControl = new ObjectOrientedPractics.View.Controls.AddressControl();
->>>>>>> Stashed changes
             this.CustomersTableLayoutPanel.SuspendLayout();
             this.CustomersGroupBox.SuspendLayout();
             this.SelectedCustomerTableLayoutPanel.SuspendLayout();
@@ -176,11 +170,8 @@
             // 
             // SelectedCustomerGroupBox
             // 
-<<<<<<< Updated upstream
-=======
             this.SelectedCustomerGroupBox.Controls.Add(this.DiscountsPanel);
             this.SelectedCustomerGroupBox.Controls.Add(this.PriorityCheckBox);
->>>>>>> Stashed changes
             this.SelectedCustomerGroupBox.Controls.Add(this.CustomerAddressControl);
             this.SelectedCustomerGroupBox.Controls.Add(this.CustomerErrorsLabel);
             this.SelectedCustomerGroupBox.Controls.Add(this.SelectedCustomerIdTextBox);
@@ -198,7 +189,6 @@
             // 
             // PriorityCheckBox
             // 
-<<<<<<< Updated upstream
             address1.Apartment = null;
             address1.Building = null;
             address1.City = null;
@@ -210,7 +200,6 @@
             this.CustomerAddressControl.Name = "CustomerAddressControl";
             this.CustomerAddressControl.Size = new System.Drawing.Size(586, 142);
             this.CustomerAddressControl.TabIndex = 7;
-=======
             this.PriorityCheckBox.AutoSize = true;
             this.PriorityCheckBox.Location = new System.Drawing.Point(69, 70);
             this.PriorityCheckBox.Name = "PriorityCheckBox";
@@ -219,7 +208,6 @@
             this.PriorityCheckBox.Text = "Is Priority";
             this.PriorityCheckBox.UseVisualStyleBackColor = true;
             this.PriorityCheckBox.CheckedChanged += new System.EventHandler(this.PriorityCheckBox_CheckedChanged);
->>>>>>> Stashed changes
             // 
             // CustomerErrorsLabel
             // 
@@ -287,8 +275,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-<<<<<<< Updated upstream
-=======
             // DiscountsPanel
             // 
             this.DiscountsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -357,7 +343,6 @@
             this.CustomerAddressControl.Size = new System.Drawing.Size(586, 142);
             this.CustomerAddressControl.TabIndex = 7;
             // 
->>>>>>> Stashed changes
             // CustomersTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,14 +384,11 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolTip toolTip2;
         private Controls.AddressControl CustomerAddressControl;
-<<<<<<< Updated upstream
-=======
         private System.Windows.Forms.CheckBox PriorityCheckBox;
         private System.Windows.Forms.Panel DiscountsPanel;
         private System.Windows.Forms.Button RemoveDiscountButton;
         private System.Windows.Forms.Button AddDiscountButton;
         private System.Windows.Forms.ListBox DiscountsListBox;
         private System.Windows.Forms.Label DiscountsLabel;
->>>>>>> Stashed changes
     }
 }

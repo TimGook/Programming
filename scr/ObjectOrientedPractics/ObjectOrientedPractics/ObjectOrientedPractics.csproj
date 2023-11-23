@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -51,9 +51,9 @@
   <ItemGroup>
     <Compile Include="ClassesSerialization\CustomersSerializer.cs" />
     <Compile Include="ClassesSerialization\ItemsSerializer.cs" />
-    <Compile Include="DopMission4\Kid.cs" />
-    <Compile Include="DopMission4\Person.cs" />
-    <Compile Include="DopMission4\Student.cs" />
+    <Compile Include="DopMission5\MasterTeacher.cs" />
+    <Compile Include="DopMission5\Stuff.cs" />
+    <Compile Include="DopMission5\Teacher.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Cart.cs" />
     <Compile Include="Model\Discounts\PercentDiscount.cs" />
