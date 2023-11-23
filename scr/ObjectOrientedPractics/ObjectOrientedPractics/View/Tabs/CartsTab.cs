@@ -158,7 +158,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 }
             }
             DiscountAmountCostLabel.Text = discountAmount.ToString();
-            TotalAmountLabel.Text = (_currentCustomer.Cart.Amount - discountAmount).ToString();
+            TotalAmountCostLabel.Text = (_currentCustomer.Cart.Amount - discountAmount).ToString();
         }
 
         private double ApplyDiscount()

@@ -1,3 +1,5 @@
+using ObjectOrientedPractics.Model;
+
 namespace ObjectOrientedPractics.View.Tabs
 {
     partial class OrdersTab
@@ -164,7 +166,7 @@ namespace ObjectOrientedPractics.View.Tabs
             this.DeliveryTimeComboBox.Name = "DeliveryTimeComboBox";
             this.DeliveryTimeComboBox.Size = new System.Drawing.Size(144, 21);
             this.DeliveryTimeComboBox.TabIndex = 1;
-            this.DeliveryTimeComboBox.SelectedIndexChanged += new System.EventHandler(this.DeliveryTimeComboBox_SelectedIndexChanged);
+            //this.DeliveryTimeComboBox.SelectedIndexChanged += new System.EventHandler(this.DeliveryTimeComboBox_SelectedIndexChanged);
             // 
             // DeliveryTimeLabel
             // 
@@ -212,6 +214,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // DeliveryAddressControl
             // 
+            Address address1 = new Address();
             address1.Apartment = null;
             address1.Building = null;
             address1.City = null;
