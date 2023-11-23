@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Класс, описывающий заказ покупателя.
     /// </summary>
-    class Order
+    class Order: IEquatable<Order>
     {
         /// <summary>
         /// Целочисленный уникальный идентификатор.

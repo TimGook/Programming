@@ -10,7 +10,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Содержит информацию о товаре.
     /// </summary>
-    class Item
+    class Item: ICloneable, IEquatable<Item>, IComparable<Item>
     {
         /// <summary>
         /// Счётчик для <see cref="Id"/>.

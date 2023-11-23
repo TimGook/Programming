@@ -55,7 +55,6 @@ namespace ObjectOrientedPractics.View.Tabs
                                 string[] currentOrder = { $"{order.Id}", $"{order.Date}", $"{customer.Fullname}", $"{order.Total}",$"{order.Address}",
                                 $"{order.Amount}", $"{order.OrderStatus}"};
                                 OrdersDataGridView.Rows.Add(currentOrder);
-                                //OrdersDataGridView.DataSource = _ordersList;
                                 OrdersDataGridView.Refresh();
                             }
                         }
