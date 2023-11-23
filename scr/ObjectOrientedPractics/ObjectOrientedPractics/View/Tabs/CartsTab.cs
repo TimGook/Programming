@@ -78,6 +78,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 _currentItems.Add((Item)ItemsListBox.SelectedItem);
                 _currentCustomer.Cart.Items = _currentItems.ToList<Item>();
                 AmountCostLabel.Text = _currentCustomer.Cart.Amount.ToString();
+                CartListBox.Refresh();
                 RefreshDiscount();
             }
         }
@@ -108,7 +109,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     Order order = new PriorityOrder(_currentCustomer.Address, _currentCustomer.Cart, OrderStatus.New, DateTime.Now.ToString());
                     order.DiscountAmount = ApplyDiscount();
                     order.Amount = order.Amount - ApplyDiscount();
-                    _currentItems = new BindingList<Item>(); ;
+                    _currentItems = new BindingList<Item>();
                     ClearOrder();
                 }
             }
@@ -121,6 +122,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 _currentItems.Remove((Item)CartListBox.SelectedItem);
                 _currentCustomer.Cart.Items = _currentItems.ToList<Item>();
                 AmountCostLabel.Text = _currentCustomer.Cart.Amount.ToString();
+                CartListBox.Refresh();
                 RefreshDiscount();
             }
         }
@@ -138,7 +140,7 @@ namespace ObjectOrientedPractics.View.Tabs
             CartListBox.DataSource = null;
             RefreshDiscount();
             AmountCostLabel.Text = "0.0";
-
+            CartListBox.Refresh();
             DiscountsCheckedListBox.ClearSelected();
         }
 

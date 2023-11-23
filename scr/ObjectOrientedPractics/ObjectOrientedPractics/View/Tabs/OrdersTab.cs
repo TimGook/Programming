@@ -119,7 +119,7 @@ namespace ObjectOrientedPractics.View.Tabs
                                 order.Id == int.Parse((String)OrdersDataGridView.Rows[OrdersDataGridView.CurrentCell.RowIndex].Cells[0].Value))
                             {
                                 order.OrderStatus = (OrderStatus)StatusComboBox.SelectedItem;
-                                string[] currentOrder = {$"{order.Id}", $"{order.Date}", $"{customer.Fullname}", $"{order.Address}",
+                                string[] currentOrder = {$"{order.Id}", $"{order.Date}", $"{customer.Fullname}", $"{order.Total}", $"{order.Address}",
                                 $"{order.Amount}", $"{order.OrderStatus}"};
                                 OrdersDataGridView.Rows[OrdersDataGridView.CurrentCell.RowIndex].SetValues(currentOrder);
                                 OrdersDataGridView.Refresh();
