@@ -7,7 +7,7 @@ using ObjectOrientedPractics.Services;
 
 namespace ObjectOrientedPractics.Model
 {
-    public class Address
+    public class Address: ICloneable, IEquatable<Address>
     {
         /// <summary>
         /// Почтовый индекс, целое шестизначное число.

@@ -7,7 +7,7 @@ using ObjectOrientedPractics.Services;
 
 namespace ObjectOrientedPractics.Model.Discounts
 {
-    class PercentDiscount : IDiscount
+    class PercentDiscount : IDiscount, IComparable<PercentDiscount>
     {
         /// <summary>
         /// Текущая категория товара.

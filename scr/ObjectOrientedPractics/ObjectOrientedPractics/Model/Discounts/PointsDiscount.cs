@@ -10,7 +10,7 @@ namespace ObjectOrientedPractics.Model.Discounts
     /// <summary>
     /// Содержит информацию для скидки.
     /// </summary>
-    class PointsDiscount : IDiscount
+    class PointsDiscount : IDiscount, IComparable<PointsDiscount>
     {
         /// <summary>
         /// Количество баллов.

@@ -32,8 +32,14 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
+        /// <summary>
+        /// Текущий заказчик.
+        /// </summary>
         private Customer _currentCustomer = new Customer();
 
+        /// <summary>
+        /// Текущие товары в корзине.
+        /// </summary>
         private BindingList<Item> _currentItems;
 
         public CartsTab()
