@@ -50,8 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassesSerialization\CustomersSerializer.cs" />
-    <Compile Include="ClassesSerialization\ItemsSerializer.cs" />
     <Compile Include="DopMission5\MasterTeacher.cs" />
     <Compile Include="DopMission5\Stuff.cs" />
     <Compile Include="DopMission5\Teacher.cs" />

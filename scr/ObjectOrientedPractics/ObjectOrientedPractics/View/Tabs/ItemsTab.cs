@@ -17,6 +17,11 @@ namespace ObjectOrientedPractics.View.Tabs
     public partial class ItemsTab : UserControl
     {
         /// <summary>
+        /// Событие, когда список товаров изменён.
+        /// </summary>
+        public event EventHandler ItemsChanged;
+
+        /// <summary>
         /// Категории товаров.
         /// </summary>
         object[] _categoryValues = Enum.GetValues(typeof(Category)).Cast<object>().ToArray();
@@ -132,6 +137,8 @@ namespace ObjectOrientedPractics.View.Tabs
                     //ApplyItemInfoChangesButton.Visible = false;
                 }
             }
+            ApplyItemInfoChangesButton.Enabled = false;
+            ApplyItemInfoChangesButton.Visible = false;
         }
 
         private void AddItemButton_Click(object sender, EventArgs e)
@@ -311,16 +318,20 @@ namespace ObjectOrientedPractics.View.Tabs
                         (Category)CategoryComboBox.SelectedItem);
                     _itemsList.Add(_currentItem);
                     SortBy();
+                    ItemsChanged?.Invoke(this, EventArgs.Empty);
+                    //return;
                 }
                 else
                 {
                     _itemsList[Items.IndexOf((Item)ItemsListBox.SelectedItem)] = _clonedCurrentItem;
                     _currentItem = _clonedCurrentItem;
+                    ItemsChanged?.Invoke(this, EventArgs.Empty);
                 }
 
                 _displayedItems = new List<Item>();
                 FindItemTextBox.Text = string.Empty;
                 DataTools.FilterNamePrincipleOfVerification = string.Empty;
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
                 SortBy();
                 UpdateItemsInfo();
                 ToggleInputBoxes(false);

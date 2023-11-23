@@ -17,6 +17,11 @@ namespace ObjectOrientedPractics.View.Tabs
     public partial class CustomersTab : UserControl
     {
         /// <summary>
+        /// Событие когда список покупателей изменен.
+        /// </summary>
+        public event EventHandler CustomersChanged;
+
+        /// <summary>
         /// Список покупателей.
         /// </summary>
         private List<Customer> _customers = new List<Customer>();
@@ -61,7 +66,6 @@ namespace ObjectOrientedPractics.View.Tabs
         public CustomersTab()
         {
             InitializeComponent();
-            //ProjectSerializer.CustomerssInfo(ref _customers);
             Sort();
             ClearCustomersInfo();
             CustomersListBox.SelectedIndex = -1;
@@ -110,8 +114,8 @@ namespace ObjectOrientedPractics.View.Tabs
             _currentCustomer = _customers[CustomersListBox.SelectedIndex];
             _customers.Remove(_currentCustomer);
             CustomersListBox.SelectedIndex = -1;
-            //ProjectSerializer.SaveItems(ref CustomersListBox, _customers);
             Sort();
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
             ClearCustomersInfo();
             ApplyCustomerInfoChangesButton.Enabled = false;
         }
@@ -126,6 +130,7 @@ namespace ObjectOrientedPractics.View.Tabs
             _selectedIndex = CustomersListBox.SelectedIndex;
             _copiedCurrentCustomer = (Customer)_customers[_selectedIndex].Clone();
             ToggleInputBoxes(true);
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void SelectedCustomerFullNameTextBox_TextChanged(object sender, EventArgs e)
@@ -182,10 +187,12 @@ namespace ObjectOrientedPractics.View.Tabs
                 Sort();
                 ClearCustomersInfo();
                 ToggleInputBoxes(false);
+                CustomersChanged?.Invoke(this, EventArgs.Empty);
                 //return;
             }
             else
             {
+                CustomersChanged?.Invoke(this, EventArgs.Empty);
                 _customers[_selectedIndex] = _copiedCurrentCustomer;
                 _currentCustomer = _copiedCurrentCustomer;
             }
@@ -284,6 +291,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 addDiscountForm.SelectedIndex = CustomersListBox.SelectedIndex;
                 addDiscountForm.Customers = Customers;
                 addDiscountForm.Show();
+                CustomersChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -296,6 +304,7 @@ namespace ObjectOrientedPractics.View.Tabs
             DiscountsListBox.DataSource = null;
             DiscountsListBox.DataSource = _copiedCurrentCustomer.Discounts;
             DiscountsListBox.DisplayMember = "Info";
+            CustomersChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -44,19 +44,24 @@ namespace ObjectOrientedPractics.View.Tabs
 
                 OrdersDataGridView.DataSource = null;
                 OrdersDataGridView.Rows.Clear();
-                foreach (Customer customer in Customers)
+                RefreshData();
+            }
+        }
+
+        public void RefreshData()
+        {
+            foreach (Customer customer in Customers)
+            {
+                if (customer.Orders != null)
                 {
-                    if (customer.Orders != null)
+                    foreach (Order order in customer.Orders)
                     {
-                        foreach (Order order in customer.Orders)
+                        if (order != null)
                         {
-                            if (order != null)
-                            {
-                                string[] currentOrder = { $"{order.Id}", $"{order.Date}", $"{customer.Fullname}", $"{order.Total}",$"{order.Address}",
+                            string[] currentOrder = { $"{order.Id}", $"{order.Date}", $"{customer.Fullname}", $"{order.Total}",$"{order.Address}",
                                 $"{order.Amount}", $"{order.OrderStatus}"};
-                                OrdersDataGridView.Rows.Add(currentOrder);
-                                OrdersDataGridView.Refresh();
-                            }
+                            OrdersDataGridView.Rows.Add(currentOrder);
+                            OrdersDataGridView.Refresh();
                         }
                     }
                 }
