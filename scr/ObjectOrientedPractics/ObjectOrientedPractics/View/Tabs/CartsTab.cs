@@ -104,8 +104,8 @@ namespace ObjectOrientedPractics.View.Tabs
                     order.DiscountAmount = ApplyDiscount();
                     order.Amount = order.Amount - ApplyDiscount();
                     _currentCustomer.Orders.Add(order);
-                    _currentItems = new BindingList<Item>();
-                    _currentCustomer.Cart.Items = _currentItems.ToList<Item>();
+                    //_currentItems = new BindingList<Item>();
+                    //_currentCustomer.Cart.Items = _currentItems.ToList<Item>();
                     ClearOrder();
                 }
 
@@ -115,7 +115,9 @@ namespace ObjectOrientedPractics.View.Tabs
                     Order order = new PriorityOrder(_currentCustomer.Address, _currentCustomer.Cart, OrderStatus.New, DateTime.Now.ToString());
                     order.DiscountAmount = ApplyDiscount();
                     order.Amount = order.Amount - ApplyDiscount();
-                    _currentItems = new BindingList<Item>();
+                    _currentCustomer.Orders.Add(order);
+                    //_currentItems = new BindingList<Item>();
+                    //_currentCustomer.Cart.Items = _currentItems.ToList<Item>();
                     ClearOrder();
                 }
             }

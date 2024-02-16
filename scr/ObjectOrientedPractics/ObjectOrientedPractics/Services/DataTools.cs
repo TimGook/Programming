@@ -46,7 +46,7 @@ namespace ObjectOrientedPractics.Services
         /// <returns>True - товар стоит выше 200. Иначе False.</returns>
         internal static bool ItemFilterByCost(Item item)
         {
-            return item.Cost > 200;
+            return item.Cost > 5000;
         }
 
         /// <summary>

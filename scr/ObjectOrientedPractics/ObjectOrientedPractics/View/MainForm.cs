@@ -30,8 +30,8 @@ namespace ObjectOrientedPractics
 
         private void MainFormTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //_store.Items = ItemsTab.Items;
-            //_store.Customers = CustomersTab.Customers;
+            _store.Items = ItemsTab.Items;
+            _store.Customers = CustomersTab.Customers;
 
             //if (MainFormTabControl.SelectedIndex == 2)
             //{

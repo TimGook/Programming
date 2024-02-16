@@ -52,7 +52,7 @@ namespace ObjectOrientedPractics.Model.Discounts
                 ValueValidator.AssertDoubleInRange(value, double.MaxValue, 0, "Amount");
                 if (value/1000 >= 1d)
                 {
-                    CurrentDiscount += (value / 1000)/100d;
+                    CurrentDiscount = (value / 1000)/100d;
                 }
                 _amount = value;
             }
@@ -81,7 +81,7 @@ namespace ObjectOrientedPractics.Model.Discounts
         /// <summary>
         /// Метод применяющий скидку для товаров заданной категории.
         /// </summary>
-        /// <param name="items"><Список товаров./param>
+        /// <param name="items">Список товаров.</param>
         /// <returns>Размер скидки.</returns>
         public double Apply(List<Item> items)
         {

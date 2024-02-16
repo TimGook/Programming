@@ -29,6 +29,11 @@ namespace ObjectOrientedPractics.View.Tabs
         private Customer _currentCustomer;
 
         /// <summary>
+        /// Текущий приоритетный заказ.
+        /// </summary>
+        private PriorityOrder _selectedPriorityOrder = new PriorityOrder();
+
+        /// <summary>
         /// Возвращает и задаёт список покупателей. Также создаёт список покупателей с заказами.
         /// </summary>
         internal List<Customer> Customers
@@ -44,24 +49,19 @@ namespace ObjectOrientedPractics.View.Tabs
 
                 OrdersDataGridView.DataSource = null;
                 OrdersDataGridView.Rows.Clear();
-                RefreshData();
-            }
-        }
-
-        public void RefreshData()
-        {
-            foreach (Customer customer in Customers)
-            {
-                if (customer.Orders != null)
+                foreach (Customer customer in Customers)
                 {
-                    foreach (Order order in customer.Orders)
+                    if (customer.Orders != null)
                     {
-                        if (order != null)
+                        foreach (Order order in customer.Orders)
                         {
-                            string[] currentOrder = { $"{order.Id}", $"{order.Date}", $"{customer.Fullname}", $"{order.Total}",$"{order.Address}",
+                            if (order != null)
+                            {
+                                string[] currentOrder = { $"{order.Id}", $"{order.Date}", $"{customer.Fullname}", $"{order.Total}",$"{order.Address}",
                                 $"{order.Amount}", $"{order.OrderStatus}"};
-                            OrdersDataGridView.Rows.Add(currentOrder);
-                            OrdersDataGridView.Refresh();
+                                OrdersDataGridView.Rows.Add(currentOrder);
+                                OrdersDataGridView.Refresh();
+                            }
                         }
                     }
                 }
@@ -76,6 +76,20 @@ namespace ObjectOrientedPractics.View.Tabs
         public OrdersTab()
         {
             InitializeComponent();
+
+            for (int i = 0; i < Enum.GetNames(typeof(DesiredDeliveryTime)).Length; i++)
+            {
+                var enumType = typeof(DesiredDeliveryTime);
+                var memberInfos =
+                enumType.GetMember(Enum.Parse(typeof(DesiredDeliveryTime), i.ToString()).ToString());
+                var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == enumType);
+                var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                var description = ((DescriptionAttribute)valueAttributes[0]).Description;
+                DesiredDeliveryTimeComboBox.Items.Add(description);
+            }
+
+            DesiredDeliveryTimeComboBox.SelectedIndex = 0;
+
             StatusComboBox.Items.AddRange(_categoryvalues);
             StatusComboBox.SelectedItem = _categoryvalues[0];
         }
@@ -93,7 +107,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     foreach (Order order in customer.Orders)
                     {
-                        if (order != null && 
+                        if (order != null &&
                             order.Id == int.Parse((String)OrdersDataGridView.Rows[OrdersDataGridView.CurrentCell.RowIndex].Cells[0].Value))
                         {
                             _currentCustomer = customer;
@@ -103,6 +117,23 @@ namespace ObjectOrientedPractics.View.Tabs
                             DeliveryAddressControl.Address = _currentCustomer.Address;
                             OrderItemsListBox.DataSource = order.Items;
                             AmountCostLabel.Text = order.Amount.ToString();
+
+                            if (order is PriorityOrder)
+                            {
+                                DesiredDeliveryTimeComboBox.SelectedIndex = (int)((PriorityOrder)order).DesiredDeliveryTime;
+                            }
+
+
+                            if (order.GetType() == typeof(Order))
+                            {
+                                _selectedPriorityOrder = null;
+                                DeliveryTimePanel.Visible = false;
+                            }
+                            else
+                            {
+                                _selectedPriorityOrder = new PriorityOrder(order.Address, customer.Cart, OrderStatus.New, DateTime.Now.ToString());
+                                DeliveryTimePanel.Visible = true;
+                            }
                         }
                     }
                 }
@@ -127,6 +158,30 @@ namespace ObjectOrientedPractics.View.Tabs
                                 $"{order.Amount}", $"{order.OrderStatus}"};
                                 OrdersDataGridView.Rows[OrdersDataGridView.CurrentCell.RowIndex].SetValues(currentOrder);
                                 OrdersDataGridView.Refresh();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void DesiredDeliveryTimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedPriorityOrder.DesiredDeliveryTime = (DesiredDeliveryTime)DesiredDeliveryTimeComboBox.SelectedIndex;
+
+            if (StatusComboBox.SelectedIndex != -1 & _currentCustomer != null)
+            {
+                foreach (Customer customer in Customers)
+                {
+                    if (customer.Orders != null)
+                    {
+                        foreach (PriorityOrder order in customer.Orders)
+                        {
+                            if (order != null &&
+                                order.Id == int.Parse((String)OrdersDataGridView.Rows[OrdersDataGridView.CurrentCell.RowIndex].Cells[0].Value))
+                            {
+                                order.DesiredDeliveryTime = (DesiredDeliveryTime)DesiredDeliveryTimeComboBox.SelectedIndex;
+
                             }
                         }
                     }
