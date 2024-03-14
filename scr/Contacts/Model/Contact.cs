@@ -83,5 +83,13 @@ namespace Contacts.Model
             Phone = phone;
             Email = email;
         }
+
+        /// <summary>
+        /// Создаёт пустой экземпляр класса <see cref="Contact"/>.
+        /// </summary>
+        public Contact()
+        {
+
+        }
     }
 }

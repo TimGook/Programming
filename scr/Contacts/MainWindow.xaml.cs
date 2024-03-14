@@ -23,6 +23,9 @@ namespace Contacts
         public MainWindow()
         {
             InitializeComponent();
+
+            //Binding binding = new Binding();
+            //binding.ElementName = "NameTextBox";
         }
     }
 }
