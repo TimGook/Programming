@@ -4,7 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using Contacts.Model;
+using Contacts.Model.Services;
 
 namespace Contacts.ViewModel
 {
@@ -12,9 +15,27 @@ namespace Contacts.ViewModel
     {
         private Contact _contact;
 
+        public ICommand SaveCommand { get; }
+        public ICommand LoadCommand { get; }
+
         public MainVM()
         {
             _contact = new Contact();
+            SaveCommand = new SaveCommand((param)=>SavedContact(param));
+            LoadCommand = new LoadCommand((param) => LoadedContact());
+        }
+
+        private void LoadedContact()
+        {
+            Contact contact = ContactSerializer.LoadFromFile();
+            Name = contact.Name;
+            Phone = contact.Phone;
+            Email = contact.Email;
+        }
+
+        private void SavedContact(object param)
+        {
+            MessageBox.Show($"Контакт {param} сохранён!");
         }
 
         public string Name 
@@ -54,6 +75,11 @@ namespace Contacts.ViewModel
                 _contact.Email = value;
                 OnPropertyChanged(nameof(Email));
             }
+        }
+
+        public Contact GetInfo()
+        {
+            return new Contact(Name, Phone, Email);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
