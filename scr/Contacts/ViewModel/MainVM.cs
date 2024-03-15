@@ -21,20 +21,22 @@ namespace Contacts.ViewModel
         public MainVM()
         {
             _contact = new Contact();
-            SaveCommand = new SaveCommand((param)=>SavedContact(param));
-            LoadCommand = new LoadCommand((param) => LoadedContact());
+            SaveCommand = new SaveCommand((param) => SavedContact(param));
+            LoadCommand = new LoadCommand((param) => LoadedContact(param));
         }
 
-        private void LoadedContact()
+        private void LoadedContact(object param)
         {
             Contact contact = ContactSerializer.LoadFromFile();
             Name = contact.Name;
             Phone = contact.Phone;
             Email = contact.Email;
+            MessageBox.Show($"Контакт {Name} загружен!");
         }
 
         private void SavedContact(object param)
         {
+            ContactSerializer.SaveToFile(new Contact(Name, Phone, Email));
             MessageBox.Show($"Контакт {param} сохранён!");
         }
 

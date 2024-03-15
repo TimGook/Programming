@@ -13,7 +13,7 @@ namespace Contacts.ViewModel
     {
         public readonly Action<object> _executeAction;
 
-        public event EventHandler CanExecuteChanged;
+        //public event EventHandler CanExecuteChanged;
 
         public LoadCommand(Action<object> excutionAction)
         {
@@ -27,8 +27,19 @@ namespace Contacts.ViewModel
 
         public void Execute(object parameter)
         {
-            Contact contact = ContactSerializer.LoadFromFile();
+            _executeAction(parameter);
+        }
 
+        public event EventHandler CanExecuteChanged
+        {
+            add 
+            { 
+                CommandManager.RequerySuggested += value; 
+            }
+            remove 
+            { 
+                CommandManager.RequerySuggested -= value; 
+            }
         }
     }
 }

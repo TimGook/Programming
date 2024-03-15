@@ -38,15 +38,15 @@
 
                 <TextBlock x:Name="NameTextBlock" 
                            Text="Name:"/>
-                <TextBox
+                <TextBox x:Name="NameTextBox"
                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock x:Name="PhoneNumberTextBlock" 
                            Text="Phone Number:"/>
-                <TextBox
+                <TextBox x:Name="PhoneTextBox"
                     Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock x:Name="EmailTextBlock" 
                            Text="Email:"/>
-                <TextBox
+                <TextBox x:Name="EmailTextBox"
                     Text="{Binding Email,UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </GroupBox>
