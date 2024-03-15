@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Contacts" 
         mc:Ignorable="d"
         Title="Contacts" Height="450" Width="800"
+        MinHeight="450" MinWidth="600"
         
         xmlns:viewmodel="clr-namespace:Contacts.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}">

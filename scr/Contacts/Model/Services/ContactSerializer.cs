@@ -9,6 +9,9 @@ using System.Windows.Controls;
 
 namespace Contacts.Model.Services
 {
+    /// <summary>
+    /// Предоставляет методы для сериализации контакта.
+    /// </summary>
     internal class ContactSerializer
     {
         public string Filename { get; set; }

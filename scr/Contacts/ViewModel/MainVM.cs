@@ -11,11 +11,24 @@ using Contacts.Model.Services;
 
 namespace Contacts.ViewModel
 {
+    /// <summary>
+    /// Предоставляет данные для отображения в интерфейс.
+    /// </summary>
     internal class MainVM : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Текущий контакт <see cref="Contact"/>.
+        /// </summary>
         private Contact _contact;
 
+        /// <summary>
+        /// Возвращает команду сохранения.
+        /// </summary>
         public ICommand SaveCommand { get; }
+
+        /// <summary>
+        /// Возвращает команду загрузки.
+        /// </summary>
         public ICommand LoadCommand { get; }
 
         public MainVM()
@@ -25,6 +38,10 @@ namespace Contacts.ViewModel
             LoadCommand = new LoadCommand((param) => LoadedContact(param));
         }
 
+        /// <summary>
+        /// Загружает данные контакта.
+        /// </summary>
+        /// <param name="param">Имя контакта.</param>
         private void LoadedContact(object param)
         {
             Contact contact = ContactSerializer.LoadFromFile();
@@ -34,12 +51,19 @@ namespace Contacts.ViewModel
             MessageBox.Show($"Контакт {Name} загружен!");
         }
 
+        /// <summary>
+        /// Сохраняет контакт.
+        /// </summary>
+        /// <param name="param">Имя контакта.</param>
         private void SavedContact(object param)
         {
             ContactSerializer.SaveToFile(new Contact(Name, Phone, Email));
             MessageBox.Show($"Контакт {param} сохранён!");
         }
 
+        /// <summary>
+        /// Задаёт и возвращает имя текущего контакта.
+        /// </summary>
         public string Name 
         {
             get
@@ -53,6 +77,9 @@ namespace Contacts.ViewModel
             }
         }
 
+        /// <summary>
+        /// Задаёт и возвращает номер текущего контакта.
+        /// </summary>
         public string Phone
         {
             get
@@ -66,6 +93,9 @@ namespace Contacts.ViewModel
             }
         }
 
+        /// <summary>
+        /// Задаёт и возвращает почту текущего контакта.
+        /// </summary>
         public string Email
         {
             get
@@ -79,11 +109,9 @@ namespace Contacts.ViewModel
             }
         }
 
-        public Contact GetInfo()
-        {
-            return new Contact(Name, Phone, Email);
-        }
-
+        /// <summary>
+        /// Событие изменения данных контактаю
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName) 

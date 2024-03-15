@@ -23,18 +23,7 @@ namespace Contacts
     {
         public MainWindow()
         {
-            MainVM currentMainVM = new MainVM()
-            {
-                Name = "Name",
-                Phone = "Phone",
-                Email = "Email"
-            };
-
             InitializeComponent();
-            DataContext = currentMainVM;
-
-            //Binding binding = new Binding();
-            //binding.ElementName = "NameTextBox";
         }
     }
 }
