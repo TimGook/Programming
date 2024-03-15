@@ -6,16 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Contacts.Model;
 
 namespace Contacts.Model.Services
 {
     /// <summary>
     /// Предоставляет методы для сериализации контакта.
     /// </summary>
-    internal class ContactSerializer
+    public class ContactSerializer
     {
-        public string Filename { get; set; }
-
         /// <summary>
         /// Путь к директории.
         /// </summary>

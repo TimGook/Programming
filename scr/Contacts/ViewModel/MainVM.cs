@@ -31,11 +31,14 @@ namespace Contacts.ViewModel
         /// </summary>
         public ICommand LoadCommand { get; }
 
+        /// <summary>
+        /// Создаёт пустой экземпляр класса <see cref="MainVM"/>
+        /// </summary>
         public MainVM()
         {
             _contact = new Contact();
-            SaveCommand = new SaveCommand((param) => SavedContact(param));
-            LoadCommand = new LoadCommand((param) => LoadedContact(param));
+            SaveCommand = new RelayCommand((param) => SavedContact(param));
+            LoadCommand = new RelayCommand((param) => LoadedContact(param));
         }
 
         /// <summary>
@@ -110,10 +113,14 @@ namespace Contacts.ViewModel
         }
 
         /// <summary>
-        /// Событие изменения данных контактаю
+        /// Событие изменения данных контакта.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Вызывает событие <see cref="PropertyChanged"/>.
+        /// </summary>
+        /// <param name="propertyName">Объект, вызвавший событие.</param>
         private void OnPropertyChanged(string propertyName) 
             => PropertyChanged?.Invoke(this, 
                 new PropertyChangedEventArgs(propertyName));

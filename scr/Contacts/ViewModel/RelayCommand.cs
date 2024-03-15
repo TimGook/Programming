@@ -4,26 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Contacts.Model;
-using Contacts.Model.Services;
 
 namespace Contacts.ViewModel
 {
     /// <summary>
-    /// Команда для сохранения данных контакта.
+    /// Команда для сохранения и загрузки контакта.
     /// </summary>
-    internal class SaveCommand : ICommand
+    class RelayCommand : ICommand
     {
         /// <summary>
-        /// Хранит ссылку на метод сохранения.
+        /// Хранит ссылку на метод команды.
         /// </summary>
         public readonly Action<object> _executeAction;
 
         /// <summary>
-        /// Создаёт экземпляр команды <see cref="SaveCommand"/>
+        /// Создаёт экземпляр команды <see cref="RelayCommand"/>
         /// </summary>
-        /// <param name="excutionAction">Метод сохранения.</param>
-        public SaveCommand(Action<object> excutionAction)
+        /// <param name="excutionAction">Метод команды.</param>
+        public RelayCommand(Action<object> excutionAction)
         {
             _executeAction = excutionAction;
         }
@@ -39,9 +37,9 @@ namespace Contacts.ViewModel
         }
 
         /// <summary>
-        /// Хранит логику сохранения.
+        /// Хранит логику команды.
         /// </summary>
-        /// <param name="parameter">Сохраняемый контакт.</param>
+        /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
             _executeAction(parameter);

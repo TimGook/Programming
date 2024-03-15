@@ -9,12 +9,8 @@ namespace Contacts.Model
     /// <summary>
     /// Описывает данные контакта.
     /// </summary>
-    internal class Contact
+    public class Contact
     {
-        /// <summary>
-        /// Имя контакта.
-        /// </summary>
-        private string _name;
 
         /// <summary>
         /// Номер телефона контакта.
@@ -29,17 +25,7 @@ namespace Contacts.Model
         /// <summary>
         /// Задаёт и возвращает имя контакта.
         /// </summary>
-        public string Name 
-        { 
-            get 
-            { 
-                return _name; 
-            } 
-            set 
-            { 
-                _name = value; 
-            }
-        }
+        public string Name { get; set; }
 
         /// <summary>
         /// Задаёт и возвращает номер телефона контакта.
